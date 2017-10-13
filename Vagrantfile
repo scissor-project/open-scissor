@@ -36,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         s.path = "provisioning/" + hostname + "/deployment.sh"
         s.args = ["#{info[:ip]}"]
       end
-
+      host.vm.provision "shell", path: "provisioning/" + hostname + "/reporting.sh"
     end
   end
 end
