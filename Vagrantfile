@@ -29,6 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       host.vm.hostname = hostname
 
+      host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
+
     end
   end
 end
