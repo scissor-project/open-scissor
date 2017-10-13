@@ -32,6 +32,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
       host.vm.provision "shell", path: "provisioning/" + hostname + "/install-packages.sh"
       host.vm.provision "shell", path: "provisioning/" + hostname + "/post-install.sh"
+      host.vm.provision "shell" do |s|
+        s.path = "provisioning/" + hostname + "/deployment.sh"
+        s.args = ["#{info[:ip]}"]
+      end
 
     end
   end
