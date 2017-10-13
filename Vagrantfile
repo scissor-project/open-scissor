@@ -1,5 +1,12 @@
 scissor = {
-
+  "kafka" => {
+    :autostart => true,
+    :box => "boxcutter/ubuntu1604",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "192.168.50.4",
+    :show_gui => false
+  }
 }
 
 VAGRANTFILE_API_VERSION = "2"
