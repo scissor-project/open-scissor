@@ -6,7 +6,6 @@ LOG="/var/log/logstash.log"
 function log() {
     msg="\`date --iso-8601=ns\` \$1"
     echo "\$msg" >> \$LOG
-    ss-display -- "\$msg"
 }
 EOF
 
