@@ -57,5 +57,3 @@ iptables -A INPUT -i ens3 -p tcp ! -s 78.104.175.149 --dport 22 -j DROP
 mkdir -p /etc/iptables
 iptables-save > /etc/iptables/rules.v4
 sed -i '$ i\iptables-restore /etc/iptables/rules.v4' /etc/rc.local
-
-exit 0

@@ -27,7 +27,6 @@ systemctl restart logstash.service
 systemctl enable logstash.service
 log "Started logstash"
 
-
 cd /opt
 git clone https://anc-git.salzburgresearch.at/cbrand/linux-config.git
 /opt/linux-config/deploy/deploy.sh
@@ -45,5 +44,3 @@ echo "/tmp/logstash_output.txt {
 cp /etc/cron.daily/logrotate /etc/cron.hourly
 
 log "Host $NODE_NAME ready (attached to flume on ${FLUME_IP})"
-
-exit 0
