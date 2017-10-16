@@ -14,6 +14,14 @@ scissor = {
     :mem => 1024,
     :ip => "10.10.1.53",
     :show_gui => false
+  },
+  "datasource24" => {
+    :autostart => true,
+    :box => "boxcutter/centos7",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.54",
+    :show_gui => false
   }
 }
 
