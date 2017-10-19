@@ -38,6 +38,14 @@ scissor = {
     :mem => 1024,
     :ip => "10.10.1.59",
     :show_gui => false
+  },
+  "semantics" => {
+    :autostart => true,
+    :box => "boxcutter/centos7",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.65",
+    :show_gui => false
   }
 }
 
