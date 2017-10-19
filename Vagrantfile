@@ -30,6 +30,14 @@ scissor = {
     :mem => 1024,
     :ip => "10.10.1.54",
     :show_gui => false
+  },
+  "logstash24" => {
+    :autostart => true,
+    :box => "boxcutter/ubuntu1604",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.59",
+    :show_gui => false
   }
 }
 
