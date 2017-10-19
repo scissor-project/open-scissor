@@ -20,7 +20,7 @@ scissor = {
     :box => "boxcutter/centos7",
     :cpus => 1,
     :mem => 1024,
-    :ip => "10.10.1.54",
+    :ip => "10.10.1.51",
     :show_gui => false
   }
 }
