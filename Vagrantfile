@@ -54,6 +54,14 @@ scissor = {
     :mem => 1024,
     :ip => "10.10.1.60",
     :show_gui => false
+  },
+  "prelude-correlator-oss" => {
+    :autostart => false,
+    :box => "boxcutter/centos7",
+    :cpus => 1,
+    :mem => 2048,
+    :ip => "10.10.1.61",
+    :show_gui => false
   }
 }
 
