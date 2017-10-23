@@ -1,7 +1,7 @@
 scissor = {
   "kafka" => {
     :autostart => true,
-    :box => "boxcutter/ubuntu1604",
+    :box => "bento/ubuntu-16.04",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.55",
@@ -9,7 +9,7 @@ scissor = {
   },
   "logstash" => {
     :autostart => true,
-    :box => "boxcutter/ubuntu1604",
+    :box => "bento/ubuntu-16.04",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.53",
@@ -17,7 +17,7 @@ scissor = {
   },
   "datasource24" => {
     :autostart => true,
-    :box => "boxcutter/centos7",
+    :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.51",
@@ -25,7 +25,7 @@ scissor = {
   },
   "flume" => {
     :autostart => true,
-    :box => "boxcutter/centos7",
+    :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.54",
@@ -33,7 +33,7 @@ scissor = {
   },
   "logstash24" => {
     :autostart => true,
-    :box => "boxcutter/ubuntu1604",
+    :box => "bento/ubuntu-16.04",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.59",
@@ -41,7 +41,7 @@ scissor = {
   },
   "semantics" => {
     :autostart => true,
-    :box => "boxcutter/centos7",
+    :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.65",
@@ -49,7 +49,7 @@ scissor = {
   },
   "prelude-manager-oss" => {
     :autostart => true,
-    :box => "boxcutter/centos7",
+    :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.60",
