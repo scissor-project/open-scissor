@@ -28,15 +28,7 @@ mysql -u "${MARIADB_PRELUDE_USER}" "${MARIADB_PRELUDE_DBNAME}" -p"${MARIADB_PREL
 
 systemctl restart prelude-manager
 
-# Exposing mariadb root password may be useful for debugging but is not required
-#ss-set mariadb_root_pass ${MARIADB_ROOT_PASS}
-
-#ss-set prelude-manager_user ${MARIADB_PRELUDE_USER}
-#ss-set prelude-manager_passwd ${MARIADB_PRELUDE_PASS}
-#ss-set prelude-manager_dbname ${MARIADB_PRELUDE_DBNAME}
-
-PRELUDE_REGISTRATOR_PASS=`pwgen 13 1`
+PRELUDE_REGISTRATOR_PASS="password"
 
 echo "${PRELUDE_REGISTRATOR_PASS}" > /etc/prelude/prelude-registrator.conf
 systemctl restart prelude-registrator
-#ss-set prelude-registrator_passwd ${PRELUDE_REGISTRATOR_PASS}
