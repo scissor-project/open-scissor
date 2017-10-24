@@ -57,7 +57,7 @@ scissor = {
   },
   "prelude-correlator-oss" => {
     :autostart => false,
-    :box => "boxcutter/centos7",
+    :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 2048,
     :ip => "10.10.1.61",
