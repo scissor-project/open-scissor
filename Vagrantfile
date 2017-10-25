@@ -62,6 +62,14 @@ scissor = {
     :mem => 2048,
     :ip => "10.10.1.61",
     :show_gui => false
+  },
+  "prewikka-oss" => {
+    :autostart => false,
+    :box => "bento/centos-7.4",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.62",
+    :show_gui => false
   }
 }
 
