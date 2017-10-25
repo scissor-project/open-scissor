@@ -64,7 +64,7 @@ scissor = {
     :show_gui => false
   },
   "prewikka-oss" => {
-    :autostart => false,
+    :autostart => true,
     :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 1024,
