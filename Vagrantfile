@@ -78,6 +78,14 @@ scissor = {
     :mem => 1024,
     :ip => "10.10.1.63",
     :show_gui => false
+  },
+  "kafka-prelude-connector" => {
+    :autostart => false,
+    :box => "bento/centos-7.4",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.64",
+    :show_gui => false
   }
 }
 
