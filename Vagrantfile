@@ -70,6 +70,14 @@ scissor = {
     :mem => 1024,
     :ip => "10.10.1.62",
     :show_gui => false
+  },
+  "kafka-idmef-converter" => {
+    :autostart => true,
+    :box => "bento/centos-7.4",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.63",
+    :show_gui => false
   }
 }
 
