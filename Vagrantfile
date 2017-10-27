@@ -94,6 +94,14 @@ scissor = {
     :mem => 1024,
     :ip => "10.10.1.99",
     :show_gui => false
+  },
+  "d-streamon-slave" => {
+    :autostart => true,
+    :box => "bento/ubuntu-16.04",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.66",
+    :show_gui => false
   }
 }
 
