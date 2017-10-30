@@ -11,7 +11,6 @@ sed -i "/^127\.0\.0\.1/ s/\$/ $NODE_NAME/" /etc/hosts
 
 #this is the semantics VM not the other flume VM with ingest agent
 SEMANTICS_IP="10.10.1.65"
-#KAFKA_IP="`ss-get KAFKA_IP`"
 FLUME_IP="10.10.1.54"
 
 #semantics does not using ingest, but it is there for testing
