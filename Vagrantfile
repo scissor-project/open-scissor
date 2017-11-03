@@ -7,28 +7,28 @@ scissor = {
     :ip => "10.10.1.55",
     :show_gui => false
   },
-  "logstash" => {
-    :autostart => true,
-    :box => "bento/ubuntu-16.04",
-    :cpus => 1,
-    :mem => 1024,
-    :ip => "10.10.1.53",
-    :show_gui => false
-  },
-  "datasource24" => {
-    :autostart => true,
-    :box => "bento/centos-7.4",
-    :cpus => 1,
-    :mem => 1024,
-    :ip => "10.10.1.51",
-    :show_gui => false
-  },
   "flume" => {
     :autostart => true,
     :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.54",
+    :show_gui => false
+  },
+  "semantics" => {
+    :autostart => true,
+    :box => "bento/centos-7.4",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.65",
+    :show_gui => false
+  },
+  "logstash" => {
+    :autostart => true,
+    :box => "bento/ubuntu-16.04",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.53",
     :show_gui => false
   },
   "logstash24" => {
@@ -39,12 +39,28 @@ scissor = {
     :ip => "10.10.1.59",
     :show_gui => false
   },
-  "semantics" => {
+  "datasource24" => {
     :autostart => true,
     :box => "bento/centos-7.4",
     :cpus => 1,
     :mem => 1024,
-    :ip => "10.10.1.65",
+    :ip => "10.10.1.51",
+    :show_gui => false
+  },
+  "d-streamon-master" => {
+    :autostart => true,
+    :box => "bento/ubuntu-16.04",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.99",
+    :show_gui => false
+  },
+  "d-streamon-slave" => {
+    :autostart => true,
+    :box => "bento/ubuntu-16.04",
+    :cpus => 1,
+    :mem => 1024,
+    :ip => "10.10.1.66",
     :show_gui => false
   },
   "prelude-manager-oss" => {
@@ -85,22 +101,6 @@ scissor = {
     :cpus => 1,
     :mem => 1024,
     :ip => "10.10.1.64",
-    :show_gui => false
-  },
-  "d-streamon-master" => {
-    :autostart => true,
-    :box => "bento/ubuntu-16.04",
-    :cpus => 1,
-    :mem => 1024,
-    :ip => "10.10.1.99",
-    :show_gui => false
-  },
-  "d-streamon-slave" => {
-    :autostart => true,
-    :box => "bento/ubuntu-16.04",
-    :cpus => 1,
-    :mem => 1024,
-    :ip => "10.10.1.66",
     :show_gui => false
   }
 }
