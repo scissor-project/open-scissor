@@ -8,7 +8,7 @@ up and running with the minimal amount of manual steps.
 
 ## Dependencies
 
-- [Vagrant](https://www.vagrantup.com/) 2.0.0
+- [Vagrant](https://www.vagrantup.com/) 2.0.0+
 - [Virtualbox](https://www.virtualbox.org/) 5.1.30+
 
 ## Run
