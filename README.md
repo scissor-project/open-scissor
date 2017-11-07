@@ -13,8 +13,17 @@ up and running with the minimal amount of manual steps.
 
 ## Run
 
+1. Install the dependencies
 1. Clone this repository
-1. Run `vagrant up`
+1. Run `vagrant up` from the cloned repository directory
+
+## Details
+For each component we have two phases:
+1. Provisioning: Vagrant spins up a VM to host the component
+1. Configuration: Vagrant runs the desired configuration procedures to bring the
+VM in the desired state
+
+We tested this setup on a 8-core CPU and 16 GB of RAM.
 
 # Components
 Each component is deployed in it's own Virtual Machine.
