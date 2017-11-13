@@ -34,7 +34,7 @@ fi
 
 
 echo "Configuring post-up hook to restore iptables configuration for the gateway"
-default_gateway_config="     pre-up sleep 5\n\
+default_gateway_config="      pre-up sleep 5\n\
       post-up iptables-restore < $ip_v4_rules_path\n"
 
 echo "Network configuration for $interface interface:$common_network_config $default_gateway_config"
