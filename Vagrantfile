@@ -1,11 +1,25 @@
 DOMAIN_SUFFIX = "scissor"
 DOMAIN = "." + DOMAIN_SUFFIX
+GATEWAY_IP_ADDRESS = "10.10.0.1"
+GATEWAY_MACHINE_NAME = "gateway"
 INTNET_NAME = DOMAIN_SUFFIX + ".network"
 NETWORK_TYPE_DHCP = "dhcp"
 NETWORK_TYPE_STATIC_IP = "static_ip"
 SUBNET_MASK = "255.0.0.0"
 
 scissor = {
+  GATEWAY_MACHINE_NAME => {
+    :autostart => true,
+    :box => "bento/ubuntu-16.04",
+    :cpus => 1,
+    :ip => GATEWAY_IP_ADDRESS,
+    :mac_address => "0800271F0001",
+    :mem => 512,
+    :net_auto_config => false,
+    :net_type => NETWORK_TYPE_STATIC_IP,
+    :show_gui => false,
+    :subnet_mask => SUBNET_MASK,
+  },
   "kafka" => {
     :autostart => true,
     :box => "bento/ubuntu-16.04",
@@ -176,7 +190,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       elsif(NETWORK_TYPE_STATIC_IP == info[:net_type])
         host.vm.network :private_network, auto_config: info[:net_auto_config], :mac => "#{info[:mac_address]}", ip: "#{info[:ip]}", :netmask => "#{info[:subnet_mask]}", virtualbox__intnet: INTNET_NAME
       end
-
       host.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--cpus", info[:cpus]]
         vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
@@ -185,17 +198,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.gui = info[:show_gui]
         vb.name = hostname
       end
-
       host.vm.hostname = hostname
 
-      host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
-      host.vm.provision "shell", path: "provisioning/" + hostname + "/install-packages.sh"
-      host.vm.provision "shell", path: "provisioning/" + hostname + "/post-install.sh"
-      host.vm.provision "shell" do |s|
-        s.path = "provisioning/" + hostname + "/deployment.sh"
-        s.args = ["#{info[:ip]}"]
+      if(hostname.include? GATEWAY_MACHINE_NAME)
+        host.vm.provision "shell" do |s|
+          s.path = "provisioning/" + hostname + "/configure-gateway-network.sh"
+          s.args = ["#{info[:ip]}", SUBNET_MASK]
+        end
+      else
+        host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
+        host.vm.provision "shell", path: "provisioning/" + hostname + "/install-packages.sh"
+        host.vm.provision "shell", path: "provisioning/" + hostname + "/post-install.sh"
+        host.vm.provision "shell" do |s|
+          s.path = "provisioning/" + hostname + "/deployment.sh"
+          s.args = ["#{info[:ip]}"]
+        end
+        host.vm.provision "shell", path: "provisioning/" + hostname + "/reporting.sh"
       end
-      host.vm.provision "shell", path: "provisioning/" + hostname + "/reporting.sh"
     end
   end
 end
