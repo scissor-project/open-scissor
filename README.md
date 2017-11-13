@@ -35,14 +35,14 @@ Vagrantfile) with a brief description:
 1. `semantics`
 1. `logstash`
 1. `logstash24`
-1. `datasource24`: data producer used in development/test scenarios
+1. `datasource24`: data producer used in development/test scenarios.
 1. `d-streamon-master`
 1. `d-streamon-slave`
-1. `prelude-manager-oss`
-1. `prelude-correlator-oss`
-1. `prewikka-oss`
-1. `kafka-idmef-converter`
-1. `kafka-prelude-connector`
+1. `prelude-manager-oss`: IDMEF database to store IDMEF objects. Can be accessed through libprelude or via mysql direct access. A service (`prelude-registrator`) has been added to enable automatic registration.
+1. `prelude-correlator-oss`: Connects to the prelude database and applies correlation rules to incoming events to detect advanced attacks.
+1. `prewikka-oss`: Web interface that connects to the `prelude-manager` (via direct mysql access) and displays alerts via http.
+1. `kafka-idmef-converter`: Gets messages from kafka coming from the CCL, applies a filter, converts them to IDMEF, serializes them and sends them back to kafka on a dedicated topic (currently named IDMEF).
+1. `kafka-prelude-connector`: Gets messages from kafka on the IDMEF topic, unserializes them and sends them to the `prelude-manager` instance (using libprelude).
 
 # Issues and Contributions
 If you have issue or want to contribute to the project, please create a new
