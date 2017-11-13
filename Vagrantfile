@@ -206,6 +206,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           s.args = ["#{info[:ip]}", SUBNET_MASK]
         end
       else
+        host.vm.provision "shell", run: "always" do |s|
+          s.path = "provisioning/configure-volatile-default-route.sh"
+          s.args = [
+            "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS
+            ]
+        end
         host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/install-packages.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/post-install.sh"
