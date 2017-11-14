@@ -7,7 +7,7 @@ if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
 eval set -- "$TEMP"
 
-interface="$(ls --ignore="lo" /sys/class/net/ | tail -1)"
+interface="$(ls --ignore="lo" /sys/class/net/ | sed -n '2p')"
 ip_v4_gateway_ip_address=
 
 while true; do

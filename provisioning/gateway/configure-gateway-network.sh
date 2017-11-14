@@ -1,6 +1,6 @@
 #!/bin/sh
 
-interface="$(ls --ignore="lo" /sys/class/net/ | tail -1)"
+interface="$(ls --ignore="lo" /sys/class/net/ | sed -n '2p')"
 host_ip_address=$1
 subnet_mask=$2
 
