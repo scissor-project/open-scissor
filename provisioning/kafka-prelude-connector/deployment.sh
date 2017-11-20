@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -xeuo pipefail
-IFS=$'\n\t'
+IFS=$'\\n\t'
 
 kafka_server="$3"
 prelude_manager_host="$4"

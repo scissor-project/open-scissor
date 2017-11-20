@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -ex
 cd /etc
 echo "[cloudera-cdh5]
 # Packages for Cloudera's Distribution for Hadoop, Version 5, on RedHat	or CentOS 6 x86_64
@@ -16,13 +16,14 @@ cat > /tmp/scissor-log.sh << EOF
 LOG="/var/log/flume.log"
 
 function log() {
-    msg="\`date --iso-8601=ns\` \$1"
+    msg="$(date --iso-8601=ns) \"\$1\""
     echo "\$msg" >> \$LOG
 }
 EOF
 
+# shellcheck disable=SC1091
 source /tmp/scissor-log.sh
-rm -f $LOG
+rm -f "$LOG"
 
 cd /opt
 git clone -b master https://anc-git.salzburgresearch.at/gkatzinger/flume-config.git

@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -exe
 
 # Set values with debconf-set-selections to avoid questions during package installation
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections

@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -ex
 
 # get parameters
 export config_name=""
@@ -6,20 +6,19 @@ export config_name=""
 export USER="root"
 export PASSWD="scissorslave"
 export HOME="/${USER}"
-
 export LOG="${HOME}/log"
 
 # create log
-su -c 'touch ${LOG}' ${USER}
+su -c "touch ${LOG}" ${USER}
 
 # root password update
-echo -e "$PASSWD\n$PASSWD\n" | sudo passwd $USER
 
-if [ "$?" = "0" ]; then
-        echo -e "password impostata\n" >> $LOG
-        else
-          echo "errore nell'impostazione della password!" >> $LOG
-          exit 2
+
+if echo -e "$PASSWD\\n$PASSWD\\n" | sudo passwd $USER ; then
+  echo -e "password set\\n" >> $LOG
+else
+  echo "Error while setting the password" >> $LOG
+  exit 2
 fi
 
 # permit ssh password login

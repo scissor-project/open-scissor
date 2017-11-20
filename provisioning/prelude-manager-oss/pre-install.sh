@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -xeuo pipefail
-IFS=$'\n\t'
+IFS=$'\\n\t'
 
 yum install -y epel-release
 

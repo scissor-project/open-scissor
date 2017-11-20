@@ -12,7 +12,7 @@ export NVM_DIR="${HOME}/.nvm"
 export LOG="${HOME}/log"
 
 # root password update
-echo -e "$ROOTPASSWD\n$ROOTPASSWD\n" | sudo passwd root
+echo -e "$ROOTPASSWD\\n$ROOTPASSWD\\n" | sudo passwd root
 
 # permit ssh password login
 sed -i 's/prohibit-password/yes/g' /etc/ssh/sshd_config && /etc/init.d/ssh reload
@@ -21,10 +21,10 @@ sed -i 's/prohibit-password/yes/g' /etc/ssh/sshd_config && /etc/init.d/ssh reloa
 sed -i '/StrictHostKeyChecking/d' /etc/ssh/ssh_config && echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 
 # create log
-su -c 'touch ${LOG}' ${USER}
+su -c "touch ${LOG}" ${USER}
 
 # create public/private rsa key pair
-echo -e "\n\n\n" | ssh-keygen >> ${LOG}
+echo -e "\\n\\n\\n" | ssh-keygen >> ${LOG}
 
 # get the software
 cd ${HOME}
@@ -40,10 +40,12 @@ make >> ${LOG}
 # nvm install
 cd ${HOME}
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash >> ${LOG}
+# shellcheck source=/dev/null
 [ -s "${NVM_DIR}/nvm.sh" ] && . "${NVM_DIR}/nvm.sh" && nvm install v0.10.25 >> ${LOG}
 
 # npm install
 cd ${GIT_REP_NAME}
+# shellcheck source=/dev/null
 [ -s "${NVM_DIR}/nvm.sh" ] && . "${NVM_DIR}/nvm.sh" && npm install --unsafe-perm >> ${LOG}
 
 # npm swagger and gulp
@@ -53,7 +55,7 @@ npm install -g gulp
 
 # ansible configuration
 mv /etc/ansible/ansible.cfg /etc/ansible/ansible.cfg.old
-echo -e "[defaults]\nhost_key_checking = False" > /etc/ansible/ansible.cfg
+echo -e "[defaults]\\nhost_key_checking = False" > /etc/ansible/ansible.cfg
 
 # set a confortable color set to operate in vim
 echo "colo desert" >> /root/.vimrc && echo "set number" >> /root/.vimrc

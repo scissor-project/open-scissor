@@ -1,11 +1,11 @@
 #!/bin/bash
 
 set -euo pipefail
-IFS=$'\n\t'
+IFS=$'\\n\t'
 
 # Set root and prelude password to random passwords
-MARIADB_ROOT_PASS=`pwgen 13 1`
-MARIADB_PRELUDE_PASS=`pwgen 13 1`
+MARIADB_ROOT_PASS="$(pwgen 13 1)"
+MARIADB_PRELUDE_PASS="$(pwgen 13 1)"
 MARIADB_PRELUDE_USER="prelude"
 MARIADB_PRELUDE_DBNAME="prelude"
 

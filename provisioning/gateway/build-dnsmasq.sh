@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 docker_image_tag="scissor/dnsmasq:latest"
 result=$(docker images -q scissor/dnsmasq:latest )

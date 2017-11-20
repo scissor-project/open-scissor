@@ -1,7 +1,8 @@
-#!/bin/bash -x
+#!/bin/bash -ex
 
 umask 022
 
+# shellcheck disable=SC1091
 source /tmp/scissor-log.sh
 
 NODE_NAME="$2"
@@ -10,18 +11,18 @@ DATASOURCE24_IP="$4"
 STREAMON_IP="$5"
 CAMERA_IP="10.10.1.100"
 
-hostnamectl set-hostname $NODE_NAME
+hostnamectl set-hostname "$NODE_NAME"
 # replace default 'ubuntu' name with our new hostname in /etc/hosts
-sed -i "/127\.0\.1\.1/ s/ubuntu\$/$NODE_NAME/" /etc/hosts
+sed -i "/127\\.0\\.1\\.1/ s/ubuntu\$/$NODE_NAME/" /etc/hosts
 
 cd /etc/logstash/conf.d
 git clone -b master https://anc-git.salzburgresearch.at/gkatzinger/logstash-config.git .
 log "Cloned logstash-config"
 
-sed -i "s/10\.0\.1\.12/$FLUME_IP/g" /etc/logstash/conf.d/syslogng.conf
-sed -i "s/10\.0\.1\.9/$STREAMON_IP/g" /etc/logstash/conf.d/syslogng.conf
-sed -i "s/10\.0\.1\.200/$CAMERA_IP/g" /etc/logstash/conf.d/syslogng.conf
-sed -i "s/10\.0\.1\.11/$DATASOURCE24_IP/g" /etc/logstash/conf.d/syslogng.conf
+sed -i "s/10\\.0\\.1\\.12/$FLUME_IP/g" /etc/logstash/conf.d/syslogng.conf
+sed -i "s/10\\.0\\.1\\.9/$STREAMON_IP/g" /etc/logstash/conf.d/syslogng.conf
+sed -i "s/10\\.0\\.1\\.200/$CAMERA_IP/g" /etc/logstash/conf.d/syslogng.conf
+sed -i "s/10\\.0\\.1\\.11/$DATASOURCE24_IP/g" /etc/logstash/conf.d/syslogng.conf
 
 systemctl restart logstash.service
 systemctl enable logstash.service

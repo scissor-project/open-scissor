@@ -1,9 +1,10 @@
 #!/bin/bash
 
 set -xeuo pipefail
-IFS=$'\n\t'
+IFS=$'\\n\t'
 
 prewikka_host="$1"
+hostname="$2"
 preludedb_host="$3"
 
 preludedb_user="prelude"
@@ -11,10 +12,10 @@ preludedb_passwd="preludepasswd"
 preludedb_name="prelude"
 
 prewikka_user="prewikka"
-prewikka_passwd=`pwgen 13 1`
+prewikka_passwd="$(pwgen 13 1)"
 prewikka_name="prewikka"
 
-mariadb_root_passwd=`pwgen 13 1`
+mariadb_root_passwd="$(pwgen 13 1)"
 
 sed \
     -e "s/__PRELUDEDB_HOST__/${preludedb_host}/g" \
@@ -37,8 +38,8 @@ FLUSH PRIVILEGES;
 EOF
 
 # provide a link to the main page through slipstream
-hostname="prewikka"
-link=http://${hostname}/
+
+#link=http://${hostname}/
 #ss-set ss:url.service ${link}
 
 echo "Prewikka ready on ${hostname}!"

@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -exe
 
 yum install -y \
   git \

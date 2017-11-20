@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -exe
 
 apt-get install -y \
   libboost-dev \
