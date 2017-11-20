@@ -12,9 +12,36 @@ UPSTREAM_DNS_SERVER = "8.8.8.8"
 SUBNET_MASK = "255.0.0.0"
 UBUNTU_BOX_ID = "bento/ubuntu-16.04"
 
+# VM names
+D_STREAMON_MASTER_VM_NAME = "d-streamon-master"
+D_STREAMON_SLAVE_VM_NAME = "d-streamon-slave"
+DATASOURCE24_VM_NAME = "datasource24"
+FLUME_VM_NAME = "flume"
+KAFKA_IDMEF_CONVERTER_VM_NAME = "kafka-idmef-converter"
+KAFKA_PRELUDE_CONNECTOR_VM_NAME = "kafka-prelude-connector"
+KAFKA_VM_NAME = "kafka"
+LOGSTASH_VM_NAME = "logstash"
+LOGSTASH_24_VM_NAME = "logstash24"
+PRELUDE_CORRELATOR_VM_NAME = "prelude-correlator-oss"
+PRELUDE_MANAGER_VM_NAME = "prelude-manager-oss"
+PREWIKKA_VM_NAME = "prewikka-oss"
+SEMANTICS_VM_NAME = "semantics"
+
 DNS_SERVER_IP_ADDRESS = GATEWAY_IP_ADDRESS
 DNS_SERVER_MACHINE_NAME = GATEWAY_MACHINE_NAME
 IP_V4_CIDR = IPAddr.new(SUBNET_MASK).to_i.to_s(2).count("1")
+
+dhcp_ips = {}
+# Get IP addresses from DNSmasq configuration
+File.foreach('docker/scissor-dnsmasq/etc/dhcp-hosts/static-ip-leases.conf') {
+  |x|
+  ip_assignment_elements = x.split(",")
+  dhcp_hostname = ip_assignment_elements[1]
+  dhcp_ip = ip_assignment_elements[2]
+  if(ip_assignment_elements.length > 1)
+    dhcp_ips[dhcp_hostname] = dhcp_ip.gsub("\n", "")
+  end
+}
 
 scissor = {
   GATEWAY_MACHINE_NAME => {
@@ -30,7 +57,7 @@ scissor = {
     :show_gui => false,
     :subnet_mask => SUBNET_MASK
   },
-  "kafka" => {
+  KAFKA_VM_NAME => {
     :autostart => true,
     :box => UBUNTU_BOX_ID,
     :cpus => 1,
@@ -40,7 +67,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "flume" => {
+  FLUME_VM_NAME => {
     :autostart => true,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -50,7 +77,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "semantics" => {
+  SEMANTICS_VM_NAME => {
     :autostart => true,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -60,7 +87,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "logstash" => {
+  LOGSTASH_VM_NAME => {
     :autostart => true,
     :box => UBUNTU_BOX_ID,
     :cpus => 1,
@@ -70,7 +97,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "logstash24" => {
+  LOGSTASH_24_VM_NAME => {
     :autostart => true,
     :box => UBUNTU_BOX_ID,
     :cpus => 1,
@@ -80,7 +107,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "datasource24" => {
+  DATASOURCE24_VM_NAME => {
     :autostart => true,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -90,7 +117,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "d-streamon-master" => {
+  D_STREAMON_MASTER_VM_NAME => {
     :autostart => true,
     :box => UBUNTU_BOX_ID,
     :cpus => 1,
@@ -100,7 +127,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "d-streamon-slave" => {
+  D_STREAMON_SLAVE_VM_NAME => {
     :autostart => true,
     :box => UBUNTU_BOX_ID,
     :cpus => 1,
@@ -110,7 +137,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "prelude-manager-oss" => {
+  PRELUDE_MANAGER_VM_NAME => {
     :autostart => true,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -120,7 +147,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "prelude-correlator-oss" => {
+  PRELUDE_CORRELATOR_VM_NAME => {
     :autostart => false,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -130,7 +157,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "prewikka-oss" => {
+  PREWIKKA_VM_NAME => {
     :autostart => true,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -140,7 +167,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "kafka-idmef-converter" => {
+  KAFKA_IDMEF_CONVERTER_VM_NAME => {
     :autostart => true,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -150,7 +177,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  "kafka-prelude-connector" => {
+  KAFKA_PRELUDE_CONNECTOR_VM_NAME => {
     :autostart => false,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -275,11 +302,79 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/install-packages.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/post-install.sh"
+        deployment_args = []
+        if(hostname.include? KAFKA_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname
+          ]
+        elsif(hostname.include? FLUME_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[KAFKA_VM_NAME],
+            dhcp_ips[SEMANTICS_VM_NAME]
+          ]
+        elsif(hostname.include? SEMANTICS_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[FLUME_VM_NAME]
+          ]
+        elsif(hostname.include? LOGSTASH_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[FLUME_VM_NAME],
+            dhcp_ips[DATASOURCE24_VM_NAME],
+            dhcp_ips[D_STREAMON_SLAVE_VM_NAME]
+          ]
+        elsif(hostname.include? LOGSTASH_24_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[FLUME_VM_NAME],
+            dhcp_ips[DATASOURCE24_VM_NAME],
+            dhcp_ips[D_STREAMON_SLAVE_VM_NAME]
+          ]
+        elsif(hostname.include? DATASOURCE24_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[LOGSTASH_24_VM_NAME],
+            dhcp_ips[LOGSTASH_VM_NAME],
+            dhcp_ips[KAFKA_VM_NAME]
+          ]
+        elsif(hostname.include? PRELUDE_CORRELATOR_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[PRELUDE_MANAGER_VM_NAME]
+          ]
+        elsif(hostname.include? PREWIKKA_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[PRELUDE_MANAGER_VM_NAME]
+          ]
+        elsif(hostname.include? KAFKA_IDMEF_CONVERTER_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[KAFKA_VM_NAME]
+          ]
+        elsif(hostname.include? KAFKA_PRELUDE_CONNECTOR_VM_NAME)
+          deployment_args = [
+            dhcp_ips[hostname],
+            hostname,
+            dhcp_ips[KAFKA_VM_NAME],
+            dhcp_ips[PRELUDE_MANAGER_VM_NAME]
+          ]
+        end
         host.vm.provision "shell" do |s|
           s.path = "provisioning/" + hostname + "/deployment.sh"
-          s.args = ["#{info[:ip]}"]
+          s.args = deployment_args
         end
-        host.vm.provision "shell", path: "provisioning/" + hostname + "/reporting.sh"
       end
     end
   end

@@ -4,19 +4,16 @@ umask 022
 
 source /tmp/scissor-log.sh
 
+KAFKA_IP="$1"
+NODE_NAME="$2"
 
-NODE_NAME="kafka"
 hostnamectl set-hostname $NODE_NAME
+
 # replace default 'ubuntu' name with our new hostname in /etc/hosts
 sed -i "/127\.0\.1\.1/ s/ubuntu\$/$NODE_NAME/" /etc/hosts
 
-KAFKA_IP=$1
-
 sed -i "s/#advertised\.host\.name=.*/advertised.host.name=${KAFKA_IP}/g" /opt/kafka/config/server.properties
 sed -i "s/log\.retention\.hours=168/log.retention.hours=4/g" /opt/kafka/config/server.properties
-
-
-
 sed -i "s/172\.16\.96\.104:2131/$KAFKA_IP:2181/g" /opt/zookeeper-master/conf/master.properties
 
 cd /opt

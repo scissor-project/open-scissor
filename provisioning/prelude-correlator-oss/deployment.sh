@@ -3,9 +3,10 @@
 set -xeuo pipefail
 IFS=$'\n\t'
 
+prelude_manager_host="$3"
+
 prelude_profile="prelude-correlator"
 prelude_registrator_passwd="password"
-prelude_manager_host="10.10.1.60"
 
 sed -e "s/^server-addr = 127.0.0.1$/server-addr = ${prelude_manager_host}/" -i /etc/prelude/default/client.conf
 

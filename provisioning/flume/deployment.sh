@@ -4,14 +4,15 @@ umask 022
 
 source /tmp/scissor-log.sh
 
-NODE_NAME="flume"
-hostnamectl set-hostname $NODE_NAME
-#add new hostname to /etc/hosts
-sed -i "/^127\.0\.0\.1/ s/\$/ $NODE_NAME/" /etc/hosts
+FLUME_IP="$1"
+NODE_NAME="$2"
+KAFKA_IP="$3"
+SEMANTICS_IP="$4"
 
-FLUME_IP="10.10.1.54"
-KAFKA_IP="10.10.1.55"
-SEMANTICS_IP="10.10.1.65"
+hostnamectl set-hostname $NODE_NAME
+
+# add new hostname to /etc/hosts
+sed -i "/^127\.0\.0\.1/ s/\$/ $NODE_NAME/" /etc/hosts
 
 sed -i "s/avro_host = 10\.0\.1\.12/avro_host = $SEMANTICS_IP/g" /opt/flume-config/conf/ingest/ingest.conf
 sed -i "s/avro_port = 10000/avro_port = 20000/g" /opt/flume-config/conf/ingest/ingest.conf

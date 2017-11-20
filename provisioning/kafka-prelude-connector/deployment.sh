@@ -3,12 +3,13 @@
 set -xeuo pipefail
 IFS=$'\n\t'
 
-kafka_server="10.10.1.50"
+kafka_server="$3"
+prelude_manager_host="$4"
+
 kafka_port="9092"
 consumer_topic="IDMEF"
 prelude_profile="connector"
 prelude_registrator_passwd="password"
-prelude_manager_host="10.10.1.60"
 
 sed \
     -e "s/__KAFKA_SERVER__/${kafka_server}/g" \

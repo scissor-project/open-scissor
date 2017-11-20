@@ -4,14 +4,20 @@ umask 022
 
 source /tmp/scissor-log.sh
 
-NODE_NAME="semantics"
+SEMANTICS_IP="$1"
+NODE_NAME="$2"
+
+# this is the semantics VM not the other flume VM with ingest agent
+FLUME_IP="$3"
+
 hostnamectl set-hostname $NODE_NAME
-#add new hostname to /etc/hosts
+
+# add new hostname to /etc/hosts
 sed -i "/^127\.0\.0\.1/ s/\$/ $NODE_NAME/" /etc/hosts
 
-#this is the semantics VM not the other flume VM with ingest agent
-SEMANTICS_IP="10.10.1.65"
-FLUME_IP="10.10.1.54"
+
+
+
 
 #semantics does not using ingest, but it is there for testing
 #sed -i "s/10\.0\.1\.67/$FLUME_IP/g" /opt/flume-config/conf/ingest/ingest.conf

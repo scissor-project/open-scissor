@@ -1,12 +1,6 @@
 #!/bin/bash -xe
 
-# get parameters
-
-# We don't need to login to clone from a public repo
-#export bitbucket_username=""
-#export bitbucket_password=""
 export config_name=""
-
 export ROOTPASSWD="scissormaster"
 export USER="root"
 export GIT_USER="Nofx"
@@ -34,8 +28,8 @@ echo -e "\n\n\n" | ssh-keygen >> ${LOG}
 
 # get the software
 cd ${HOME}
-#git clone https://${bitbucket_username}:${bitbucket_password}@bitbucket.org/${GIT_USER}/${GIT_REP_NAME}.git >> ${LOG}
-# Clone the repository without logging in
+
+# Clone the repository
 git clone https://bitbucket.org/${GIT_USER}/${GIT_REP_NAME}.git >> ${LOG}
 
 # build/install

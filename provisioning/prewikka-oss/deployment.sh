@@ -3,12 +3,13 @@
 set -xeuo pipefail
 IFS=$'\n\t'
 
-preludedb_host="10.10.1.60"
+prewikka_host="$1"
+preludedb_host="$3"
+
 preludedb_user="prelude"
 preludedb_passwd="preludepasswd"
 preludedb_name="prelude"
 
-prewikka_host="127.0.0.1"
 prewikka_user="prewikka"
 prewikka_passwd=`pwgen 13 1`
 prewikka_name="prewikka"

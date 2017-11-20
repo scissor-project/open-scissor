@@ -3,7 +3,8 @@
 set -xeuo pipefail
 IFS=$'\n\t'
 
-kafka_server="10.10.1.50"
+kafka_server="$3"
+
 kafka_port="9092"
 consumer_topics="cam, env, net, scada"
 producer_topic="IDMEF"

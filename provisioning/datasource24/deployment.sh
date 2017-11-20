@@ -4,14 +4,14 @@ umask 022
 
 source /tmp/scissor-log.sh
 
-NODE_NAME="datasource"
+NODE_NAME="$2"
+LOGSTASH24_IP="$3"
+LOGSTASH_IP="$4"
+KAFKA_IP="$5"
+
 hostnamectl set-hostname $NODE_NAME
 # add new hostname to /etc/hosts
 sed -i "/^127\.0\.0\.1/ s/\$/$NODE_NAME/" /etc/hosts
-
-LOGSTASH24_IP="10.10.1.59"
-LOGSTASH_IP="10.10.1.53"
-KAFKA_IP="10.10.1.55"
 
 cd /opt/zmq-bash-push
 sed -i "s/10\.0\.1\.10/$LOGSTASH_IP/g" play_camfile.sh
