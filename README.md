@@ -1,4 +1,8 @@
 # OpenSCISSOR
+
+* Development branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=development)](https://travis-ci.org/scissor-project/open-scissor)
+* Master branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=master)](https://travis-ci.org/scissor-project/open-scissor)
+
 This is an open implementation of the SCISSOR project.
 
 The goal of this project is to have a fully functional virtualized environment
