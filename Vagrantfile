@@ -1,11 +1,10 @@
 require 'ipaddr'
 
 CENTOS_BOX_ID = "bento/centos-7.4"
-DOMAIN_SUFFIX = "scissor-project.com"
-DOMAIN = "." + DOMAIN_SUFFIX
+DOMAIN = "scissor-project.com"
 GATEWAY_MACHINE_NAME = "gateway"
 GATEWAY_IP_ADDRESS = "10.10.0.1"
-INTNET_NAME = DOMAIN_SUFFIX + ".network"
+INTNET_NAME = DOMAIN + ".network"
 NETWORK_TYPE_DHCP = "dhcp"
 NETWORK_TYPE_STATIC_IP = "static_ip"
 UPSTREAM_DNS_SERVER = "8.8.8.8"
@@ -220,7 +219,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.gui = info[:show_gui]
         vb.name = hostname
       end
-      host.vm.hostname = hostname
+      host.vm.hostname = hostname + "." + DOMAIN
 
       # Let's use the upstream server in the machine that will host our DNS
       # server because we cannot start the Dnsmasq container (with the
@@ -238,7 +237,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       if(GATEWAY_IP_ADDRESS == "#{info[:ip]}")
         host.vm.provision "shell" do |s|
           s.path = "provisioning/" + hostname + "/configure-gateway-network.sh"
-          s.args = ["#{info[:ip]}", "#{info[:dns_server_address]}", SUBNET_MASK, DOMAIN_SUFFIX]
+          s.args = ["#{info[:ip]}", "#{info[:dns_server_address]}", SUBNET_MASK, DOMAIN]
         end
       else
         host.vm.provision "shell" do |s|
@@ -276,7 +275,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           host.vm.provision "shell" do |s|
             s.path = "provisioning/networking/configure-network-manager.sh"
             s.args = [
-              "--domain", DOMAIN_SUFFIX,
+              "--domain", DOMAIN,
               "--ip-v4-dns-nameserver", ip_v4_dns_server_address,
               "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS,
               "--ip-v4-host-cidr", IP_V4_CIDR,
