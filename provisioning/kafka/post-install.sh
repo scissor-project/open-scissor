@@ -28,7 +28,7 @@ log "Restarted zookeeper"
 cd /opt
 mkdir kafka
 cd kafka
-wget "http://www.eu.apache.org/dist/kafka/0.8.2.2/kafka_2.10-0.8.2.2.tgz"
+wget "https://archive.apache.org/dist/kafka/0.8.2.2/kafka_2.10-0.8.2.2.tgz"
 tar -xvzf kafka_2.10-0.8.2.2.tgz --strip 1
 log "Downloaded and extracted kafka"
 
