@@ -22,7 +22,7 @@ KAFKA_VM_NAME = "kafka"
 LOGSTASH_VM_NAME = "logstash"
 LOGSTASH_24_VM_NAME = "logstash24"
 PRELUDE_CORRELATOR_VM_NAME = "prelude-correlator-oss"
-CNIT_CORRELATOR_VM_NAME = "cnit-correlator"
+EVENT_CORRELATOR_VM_NAME = "event-correlator"
 PRELUDE_MANAGER_VM_NAME = "prelude-manager-oss"
 PREWIKKA_VM_NAME = "prewikka-oss"
 SEMANTICS_VM_NAME = "semantics"
@@ -157,7 +157,7 @@ scissor = {
     :net_type => NETWORK_TYPE_DHCP,
     :show_gui => false
   },
-  CNIT_CORRELATOR_VM_NAME => {
+  EVENT_CORRELATOR_VM_NAME => {
     :autostart => false,
     :box => CENTOS_BOX_ID,
     :cpus => 1,
@@ -361,7 +361,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             hostname,
             dhcp_ips[PRELUDE_MANAGER_VM_NAME]
           ]
-        elsif(hostname.include? CNIT_CORRELATOR_VM_NAME)
+        elsif(hostname.include? EVENT_CORRELATOR_VM_NAME)
           deployment_args = [
             dhcp_ips[hostname],
             hostname,
