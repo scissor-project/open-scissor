@@ -34,12 +34,12 @@ Each component is deployed in it's own Virtual Machine.
 
 Here is a list of all the managed components (as you can see from the
 Vagrantfile) with a brief description:
-1. `kafka`
-1. `flume`
-1. `semantics`
-1. `logstash`
-1. `logstash24`
-1. `datasource24`: data producer used in development/test scenarios.
+1. `kafka`: provides an Apache Kafka message broker (the SMI component of SCISSOR) as well as Apache Zookeeper (needed by the Edge Agent Controller (see flume VM) and the Control and Coordination Agent (in this kafka VM)).
+1. `flume`: provides parse, filter and output components of the Command and Control Layer (CCL) processing chain.
+1. `semantics`: provides enrich and transform components of the CCL processing chain.
+1. `logstash`: provides endpoints for the data handover between Monitoring Layer (ML) entities and the CCL (e.g. via filebeat and ZeroMQ)
+1. `logstash24`: provides endpoints for the data handover between Monitoring Layer (ML) entities and the CCL (e.g. via filebeat and ZeroMQ)
+1. `datasource24`: This machine is used exclusively for testing, generating artificial loads and replaying previously recorded data.
 1. `d-streamon-master`
 1. `d-streamon-slave`
 1. `prelude-manager-oss`: IDMEF database to store IDMEF objects. Can be accessed through libprelude or via mysql direct access. A service (`prelude-registrator`) has been added to enable automatic registration.
