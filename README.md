@@ -47,7 +47,7 @@ Vagrantfile) with a brief description:
 1. `prewikka-oss`: Web interface that connects to the `prelude-manager` (via direct mysql access) and displays alerts via http.
 1. `kafka-idmef-converter`: Gets messages from kafka coming from the CCL, applies a filter, converts them to IDMEF, serializes them and sends them back to kafka on a dedicated topic (currently named IDMEF).
 1. `kafka-prelude-connector`: Gets messages from kafka on the IDMEF topic, unserializes them and sends them to the `prelude-manager` instance (using libprelude).
-1. `gateway`: VM that act as a gateway to the outside world. All traffic is routed through this VM.
+1. `gateway`: VM that act as a gateway to the outside world. All traffic is routed through this VM. It also hosts DHCP and DNS servers.
 
 # Issues and Contributions
 If you have issue or want to contribute to the project, please create a new
