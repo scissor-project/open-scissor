@@ -41,7 +41,7 @@ git clone https://anc-git.salzburgresearch.at/cbrand/linux-config.git
 /opt/linux-config/deploy/deploy-scissor.sh
 log "Deployed linux-config"
 
-cd ../zookeeper-agent
+cd /opt/zookeeper-agent
 chmod u+x bin/*.sh
 ./bin/runAgent.sh start
 
