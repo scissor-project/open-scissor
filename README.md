@@ -52,3 +52,6 @@ Vagrantfile) with a brief description:
 # Issues and Contributions
 If you have issue or want to contribute to the project, please create a new
 GitHub issue or pull request.
+
+Note that collaborators cannot push directly to `development` and `master` branches
+but should open a pull request against these branches.
