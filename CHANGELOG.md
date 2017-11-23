@@ -12,6 +12,7 @@
 - Improve network interface selection with sed [\#18](https://github.com/scissor-project/open-scissor/issues/18)
 - Configure the default route through the gateway [\#17](https://github.com/scissor-project/open-scissor/issues/17)
 - Configure a gateway VM [\#15](https://github.com/scissor-project/open-scissor/issues/15)
+- Choose a license for OpenSCISSOR [\#14](https://github.com/scissor-project/open-scissor/issues/14)
 - Configure an "internal only" network interface for each VM [\#11](https://github.com/scissor-project/open-scissor/issues/11)
 - Configure dnsmasq [\#10](https://github.com/scissor-project/open-scissor/issues/10)
 - Remove unneeded commands from configuration scripts [\#5](https://github.com/scissor-project/open-scissor/issues/5)
