@@ -10,7 +10,7 @@ domain=$4
 gateway_ip_address=$1
 subnet_mask=$3
 
-echo "Configuring $interface interface with static IP address"
+echo "Configuring $interface interface with static IP address. Vagrant is managing $vagrant_interface interface"
 
 # We need to configure IP forwarding and iptables
 echo "Enable IPv4 forwarding"
@@ -26,9 +26,17 @@ echo "Saving iptables rules"
 mkdir -p /etc/iptables
 iptables-save > /etc/iptables/rules.v4
 
+printf "/etc/network/interfaces contents before any edit:\\n\
+%s\\n\\n" "$(cat /etc/network/interfaces)"
+
+interfaces_bk_path="/etc/network/interfaces.backup"
+echo "Backing up /etc/network/interfaces to $interfaces_bk_path"
+cp /etc/network/interfaces $interfaces_bk_path
+
 # We are configuring the gateway network interface
 # so don't add the default route via the gateway itself, otherwise we lose
 # internet connettivity.
+echo "Editing /etc/network/interfaces"
 grep -q -F "auto $interface" /etc/network/interfaces \
 || printf "\\n\
 auto %s\\n\
