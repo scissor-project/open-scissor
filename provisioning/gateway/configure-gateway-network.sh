@@ -31,7 +31,7 @@ printf "/etc/network/interfaces contents before any edit:\\n\
 
 interfaces_bk_path="/etc/network/interfaces.backup"
 echo "Backing up /etc/network/interfaces to $interfaces_bk_path"
-cp /etc/network/interfaces $interfaces_bk_path
+cp /etc/network/interfaces "$interfaces_bk_path"
 
 # We are configuring the gateway network interface
 # so don't add the default route via the gateway itself, otherwise we lose
