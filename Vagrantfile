@@ -214,7 +214,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # integrated DNS server) if we don't first install Docker and run a
       # container running DNSMasq. The name resolution will be
       # reconfigured to use our DNS server after such server is available
-      ip_v4_dns_server_address = (hostname.include? DNS_SERVER_MACHINE_NAME) ? UPSTREAM_DNS_SERVER : DNS_SERVER_IP_ADDRESS
+      ip_v4_dns_server_address = (DNS_SERVER_IP_ADDRESS == ip_address || GATEWAY_IP_ADDRESS == ip_address) ? UPSTREAM_DNS_SERVER : DNS_SERVER_IP_ADDRESS
+
       host.vm.provision "shell" do |s|
         s.path = "provisioning/networking/configure-name-resolution.sh"
         s.args = [
@@ -222,21 +223,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           ]
       end
 
-      if(GATEWAY_IP_ADDRESS == ip_address)
-        host.vm.provision "shell" do |s|
-          s.path = "provisioning/" + hostname + "/configure-gateway-network.sh"
-          s.args = [ip_address, ip_v4_dns_server_address, SUBNET_MASK, DOMAIN]
-        end
-      else
-        host.vm.provision "shell" do |s|
-          s.path = "provisioning/networking/configure-volatile-network-interface.sh"
-          s.args = [
-            "--ip-v4-host-address", ip_address,
-            "--ip-v4-host-cidr", IP_V4_CIDR,
-            "--network-type", "#{info[:net_type]}"
-            ]
-        end
+      host.vm.provision "shell" do |s|
+        s.path = "provisioning/networking/configure-volatile-network-interface.sh"
+        s.args = [
+          "--ip-v4-host-address", ip_address,
+          "--ip-v4-host-cidr", IP_V4_CIDR,
+          "--network-type", "#{info[:net_type]}"
+          ]
+      end
 
+      if(GATEWAY_IP_ADDRESS != ip_address)
         # Ensure we are temporarily going through the gateway
         host.vm.provision "shell" do |s|
           s.path = "provisioning/networking/configure-volatile-default-route.sh"
@@ -244,12 +240,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS
             ]
         end
+      else
+        host.vm.provision "shell", path: "provisioning/gateway/configure-routing.sh"
+      end
 
-        # Install NetworkManager on Ubuntu
-        if (UBUNTU_BOX_ID == info[:box])
-          host.vm.provision "shell", path: "provisioning/networking/install-network-manager.sh"
-        end
+      # Install NetworkManager on Ubuntu
+      if (UBUNTU_BOX_ID == info[:box])
+        host.vm.provision "shell", path: "provisioning/networking/install-network-manager.sh"
+      end
 
+      if(GATEWAY_IP_ADDRESS != ip_address)
         # Ensure we are going through the gateway
         host.vm.provision "shell" do |s|
           s.path = "provisioning/networking/configure-default-route.sh"
@@ -257,27 +257,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS
             ]
         end
+      end
 
-        # Configure network interfaces with NetworkManager
-        if(NETWORK_TYPE_STATIC_IP == "#{info[:net_type]}")
-          host.vm.provision "shell" do |s|
-            s.path = "provisioning/networking/configure-network-manager.sh"
-            s.args = [
-              "--domain", DOMAIN,
-              "--ip-v4-dns-nameserver", ip_v4_dns_server_address,
-              "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS,
-              "--ip-v4-host-cidr", IP_V4_CIDR,
-              "--ip-v4-host-address", ip_address,
-              "--network-type", "#{info[:net_type]}"
-            ]
-          end
-        elsif(NETWORK_TYPE_DHCP == "#{info[:net_type]}")
-          host.vm.provision "shell" do |s|
-            s.path = "provisioning/networking/configure-network-manager.sh"
-            s.args = [
-              "--network-type", "#{info[:net_type]}"
-            ]
-          end
+      if(NETWORK_TYPE_STATIC_IP == "#{info[:net_type]}")
+        host.vm.provision "shell" do |s|
+          s.path = "provisioning/networking/configure-network-manager.sh"
+          s.args = [
+            "--domain", DOMAIN,
+            "--ip-v4-dns-nameserver", ip_v4_dns_server_address,
+            "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS,
+            "--ip-v4-host-cidr", IP_V4_CIDR,
+            "--ip-v4-host-address", ip_address,
+            "--network-type", "#{info[:net_type]}"
+          ]
+        end
+      elsif(NETWORK_TYPE_DHCP == "#{info[:net_type]}")
+        host.vm.provision "shell" do |s|
+          s.path = "provisioning/networking/configure-network-manager.sh"
+          s.args = [
+            "--network-type", "#{info[:net_type]}"
+          ]
         end
       end
 
@@ -287,7 +286,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         host.vm.provision "file", source: "docker/scissor-dnsmasq", destination: "/tmp/"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/build-dnsmasq.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/start-dnsmasq.sh"
+      end
 
+      if(DNS_SERVER_IP_ADDRESS == ip_address || GATEWAY_IP_ADDRESS == ip_address)
         # Reconfigure name resolution to use our DNS server
         host.vm.provision "shell" do |s|
           s.path = "provisioning/networking/configure-name-resolution.sh"
@@ -296,6 +297,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             ]
         end
       end
+
       unless(DNS_SERVER_IP_ADDRESS == ip_address || GATEWAY_IP_ADDRESS == ip_address)
         host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/install-packages.sh"
