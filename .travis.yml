@@ -8,15 +8,9 @@ services:
 
 before_install:
   - docker pull koalaman/shellcheck
-  - wget -O vagrant.deb -nv https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.deb
-
-install:
-  - sudo dpkg -i vagrant.deb
 
 script:
  - find . -name '*.sh' | xargs docker run -v $(pwd):/mnt --rm koalaman/shellcheck-alpine
- - vagrant validate
-
 
 matrix:
   fast_finish: true
