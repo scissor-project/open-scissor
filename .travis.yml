@@ -11,6 +11,8 @@ before_install:
 
 script:
  - find . -name '*.sh' | xargs docker run -v $(pwd):/mnt --rm koalaman/shellcheck-alpine
+ - find . -name 'Dockerfile' | xargs docker run -v $(pwd):/mnt --rm -w="/mnt" lukasmartinelli/hadolint hadolint
+ - find . -name 'Dockerfile' | xargs docker run -v $(pwd):/mnt --rm -w="/mnt" redcoolbeans/dockerlint
 
 matrix:
   fast_finish: true
