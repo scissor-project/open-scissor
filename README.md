@@ -1,7 +1,7 @@
 # OpenSCISSOR
 
-* Development branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=development)](https://travis-ci.org/scissor-project/open-scissor)
-* Master branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=master)](https://travis-ci.org/scissor-project/open-scissor)
+* Development branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=development)](https://travis-ci.org/scissor-project/open-scissor) [![Build status](https://ci.appveyor.com/api/projects/status/9vmd89riib7akp79/branch/development?svg=true)](https://ci.appveyor.com/project/scissor-project/open-scissor/branch/development)
+* Master branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=master)](https://travis-ci.org/scissor-project/open-scissor) [![Build status](https://ci.appveyor.com/api/projects/status/9vmd89riib7akp79/branch/master?svg=true)](https://ci.appveyor.com/project/scissor-project/open-scissor/branch/master)
 
 This is an open implementation of the SCISSOR project.
 
