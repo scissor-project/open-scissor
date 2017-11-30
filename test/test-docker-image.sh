@@ -22,7 +22,7 @@ test_id="$docker_container_name"
 test_path="test/inspec/docker/$test_id/"
 echo "Running test on $docker_context_path. Container name: $docker_container_name, Image id: $docker_image_id, Test path: $test_path"
 
-if [ "$(docker ps -q -f name=$docker_container_name)" ]; then
+if [ "$(docker ps -q -f name="$docker_container_name")" ]; then
   echo "Killing $docker_container_name container"
   docker kill "$docker_container_name" > /dev/null 2>&1
   docker rm "$docker_container_name" > /dev/null 2>&1
