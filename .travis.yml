@@ -10,7 +10,7 @@ before_install:
   - docker pull koalaman/shellcheck
   - docker pull lukasmartinelli/hadolint
   - docker pull redcoolbeans/dockerlint
-  - "./test/install-inspec.sh"
+  - sudo ./test/install-inspec.sh
 
 script:
  - find . -name '*.sh' | xargs docker run -v $(pwd):/mnt --rm koalaman/shellcheck-alpine
