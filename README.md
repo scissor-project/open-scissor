@@ -49,6 +49,10 @@ Vagrantfile) with a brief description:
 1. `kafka-prelude-connector`: Gets messages from kafka on the IDMEF topic, unserializes them and sends them to the `prelude-manager` instance (using libprelude).
 1. `gateway`: VM that act as a gateway to the outside world. All traffic is routed through this VM. It also hosts DHCP and DNS servers.
 
+# Known Issues
+
+Currently a couple of Vagrant issues prevent this environment from starting with a single `vagrant up` command. As a workaround you can start each VM separately by running `vagrant up <machine-name>` for each machine. To get a list of all the machines in the environment run `vagrant status`.
+
 # Issues and Contributions
 If you have issue or want to contribute to the project, please create a new
 GitHub issue or pull request.
