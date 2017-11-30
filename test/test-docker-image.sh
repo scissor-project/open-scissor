@@ -35,4 +35,4 @@ fi
 
 docker build -t "$docker_image_id" "$docker_context_path"
 docker run -d --hostname="$docker_container_name" --name="$docker_container_name" "$docker_image_id"
-inspec exec $test_path -t docker://"$docker_container_name"
+inspec exec "$test_path" -t docker://"$docker_container_name"
