@@ -22,8 +22,17 @@ test_id="$docker_container_name"
 test_path="test/inspec/docker/$test_id/"
 echo "Running test on $docker_context_path. Image id: $docker_image_id, Test path: $test_path"
 
-docker kill "$docker_container_name"
-docker rm "$docker_container_name"
+name="dnsmasq"
+
+if [ "$(docker ps -q -f name=$name)" ]; then
+  docker kill "$docker_container_name"
+fi
+
+result=$(docker images -q "$docker_image_id" )
+if [ -n "$result" ]; then
+  docker rm "$docker_container_name"
+fi
+
 docker build -t "$docker_image_id" "$docker_context_path"
 docker run -d --hostname="$docker_container_name" --name="$docker_container_name" "$docker_image_id"
 inspec exec $test_path -t docker://"$docker_container_name"
