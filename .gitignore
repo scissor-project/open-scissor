@@ -3,3 +3,5 @@
 *.retry
 
 *.log
+
+inspec.lock
