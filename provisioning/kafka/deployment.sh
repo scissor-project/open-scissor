@@ -47,11 +47,3 @@ chmod u+x bin/*.sh
 log "Started zookeeper-master"
 
 log "Host $NODE_NAME ready on ${KAFKA_IP}"
-
-iptables -A INPUT -i ens3 -p tcp ! -s 78.104.175.149 --dport 22 -j LOG --log-prefix "SSH A: "
-iptables -A INPUT -i ens3 -p tcp  -s 10.10.1.0/24 --dport 22 -j ACCEPT
-iptables -A INPUT -i ens3 -p tcp  -s 10.10.1.152 --dport 22 -j ACCEPT
-iptables -A INPUT -i ens3 -p tcp ! -s 78.104.175.149 --dport 22 -j DROP
-mkdir -p /etc/iptables
-iptables-save > /etc/iptables/rules.v4
-sed -i '$ i\iptables-restore /etc/iptables/rules.v4' /etc/rc.local
