@@ -8,6 +8,8 @@ services:
 
 before_install:
   - docker pull koalaman/shellcheck
+  - docker pull lukasmartinelli/hadolint
+  - docker pull redcoolbeans/dockerlint
 
 script:
  - find . -name '*.sh' | xargs docker run -v $(pwd):/mnt --rm koalaman/shellcheck-alpine
