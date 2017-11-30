@@ -21,7 +21,7 @@ control "scissor-dnsmasq" do
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
     it { should be_readable.by_user('root') }
-    its('mode') { should cmp '0644' }
+    its('mode') { should cmp '0664' }
   end
 
   describe file('/etc/dnsmasq_static_hosts.conf') do
@@ -29,7 +29,7 @@ control "scissor-dnsmasq" do
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
     it { should be_readable.by_user('root') }
-    its('mode') { should cmp '0644' }
+    its('mode') { should cmp '0664' }
     its('content') { should match(%r{gateway}) }
   end
 
@@ -38,7 +38,7 @@ control "scissor-dnsmasq" do
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
     it { should be_readable.by_user('root') }
-    its('mode') { should cmp '0644' }
+    its('mode') { should cmp '0664' }
     its('content') { should match(%r{gateway}) }
     its('content') { should match(%r{kafka}) }
     its('content') { should match(%r{flume}) }
