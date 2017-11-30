@@ -1,0 +1,40 @@
+h1
+	span(ng-if="!job.data._id || job.data._id == 'new'") Add Probe to "{{ playbook.data.name }}"
+	span(ng-if="job.data._id.length > 0 && job.data._id != 'new'") Edit Probe
+
+.row
+	div(ng-class="{ 'col-md-6': !job.data._id || job.data._id == 'new', 'col-md-12': job.data._id.length > 0 && job.data._id != 'new'}")
+		.panel.panel-default
+			.panel-body
+				form.form-horizontal
+					.form-group
+						label.control-label.col-sm-4 Name
+						.col-sm-7
+							input.form-control(type="text" placeholder="Probe Name" ng-model="job.data.name")
+
+					.form-group
+						//label.control-label.col-sm-4 Play
+						label.control-label.col-sm-4 Xml File
+						.col-sm-7
+							//input.form-control(type="text" placeholder="myplay.yml" ng-model="job.data.play_file")
+							//- input.form-control( id="xmlConfig" type="file" ng-model="job.data.play_file")
+							select#xmlConfig.form-control(ng-model="job.data.play_file" )
+								option(value="") ---Please select---
+								option(ng-repeat="option in job.data.available_play_file", value="{{option.name}}") {{option.name}}
+
+					//- .form-group
+					//- 	label.control-label.col-sm-4 Extra vars
+					//- 	.col-sm-7
+					//- 		input.form-control(type="text" placeholder="env=prod" ng-model="job.data.extra_vars")
+					//- 
+					//- .form-group
+					//- 	.col-sm-7.col-sm-offset-4
+					//- 		.checkbox
+					//- 			label
+					//- 				input(type="checkbox" ng-model="job.data.use_vault")
+					//- 				| Use Vault
+
+					.form-group
+						.col-sm-7.col-sm-offset-4
+							button.btn.btn-default( ng-if="!job.data._id || job.data._id == 'new'" ng-click="add()") Add Probe
+							button.btn.btn-default( ng-if="job.data._id.length > 0 && job.data._id != 'new'" ng-click="edit()") Edit Probe

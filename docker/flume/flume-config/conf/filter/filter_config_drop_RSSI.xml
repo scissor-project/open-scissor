@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<filter>
+	<config>
+		<period>5</period>
+		<fields>
+			<TagID>string</TagID>
+			<Reader>string</Reader>
+			<hostdevice>string</hostdevice>
+			<confidence>number</confidence>
+			<Text>string</Text>
+			<end_Port>number</end_Port>
+			<attacker_IP>string</attacker_IP>
+			<RSSI>number</RSSI>
+		</fields>
+		
+		<WhiteList>
+			<field name="filter_delay"/>
+			<field name="ts_in_filter"/>
+			<field name="ts_in_ingest"/>
+			<field name="ts_in_ingest_sink"/>
+			<field name="ts_in_logstash"/>
+			<field name="ts_in_morphline"/>
+			<field name="ts_in_morphline_end"/>
+		</WhiteList>
+	</config>
+	
+	<ID condition="RSSI &lt;= -47">
+		<sensor type="RSSI">
+			<operation op="fwd" param="50"/>
+		</sensor>
+	</ID>
+
+</filter>

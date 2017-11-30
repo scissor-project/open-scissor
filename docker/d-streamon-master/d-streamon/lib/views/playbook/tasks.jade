@@ -1,0 +1,86 @@
+h1(ng-if="tasks.tasks.length") Dashboard of "{{ playbook.data.name }}"
+	small(ng-if="status.length > 0" ng-bind="installation")
+
+table.table.table-hover(ng-if="tasks.tasks.length")
+	thead
+		tr
+			th Probe Name
+			th Xml File
+			//th Play File
+			th Installation
+			th Status
+			th Host
+			th &nbsp;
+	tbody
+		tr(ng-repeat="task in tasks.tasks")
+			td {{ task.data.job.name }}
+			td {{ task.data.job.play_file }}
+			td
+				i.fa.fa-fw.fa-spin.fa-cog(ng-if="task.data.installation == 'Uninstalling...'")
+				i.fa.fa-fw.fa-spin.fa-cog(ng-if="task.data.installation == 'Running'")
+				i.fa.fa-fw.fa-check(ng-if="task.data.installation == 'Completed'")
+				i.fa.fa-fw.fa-times(ng-if="task.data.installation == 'Failed'")
+				i.fa.fa-fw.fa-hand-paper-o(ng-if="task.data.installation == 'Queued'")
+				|  {{ task.data.installation }}
+			td(ng-if="task.data.installation == 'Completed'")
+				i.fa.fa-fw.fa-circle.green(ng-if="task.data.status == 'Running'")
+				i.fa.fa-fw.fa-circle.yellow(ng-if="task.data.status == 'Unreachable'")
+				i.fa.fa-fw.fa-circle.red(ng-if="task.data.status == 'Stopped'")
+				|  {{ task.data.status }}
+			td(ng-if="task.data.installation == 'Failed'")
+				i.fa.fa-fw.fa-times
+				|  Failed
+			td(ng-if="task.data.installation == 'Running'")
+				i.fa.fa-fw.fa-spin.fa-circle-o-notch
+			td(ng-if="task.data.installation == 'Queued'")
+				i.fa.fa-fw.fa-hand-paper-o
+				|  Queued
+			td {{ task.data.hostname }}
+			td
+				.btn-group.pull-right
+					button.btn.btn-default.btn-xs(ng-click="openOutputZmq(task)" ng-if="task.data.installation == 'Completed'")
+						i.fa.fa-fw.fa-exclamation-triangle
+						|  Probe Messages
+					button.btn.btn-default.btn-xs(ng-click="openConfig(task)" ng-if="task.data.installation == 'Completed'")
+						i.fa.fa-fw.fa-edit
+						|  Edit Config
+					button.btn.btn-default.btn-xs(ng-click="openOutput(task)" ng-if="task.data.installation != 'Queued'")
+						i.fa.fa-fw.fa-file-code-o
+						|  Log
+					button.btn.btn-danger.btn-xs(ng-click="removeTask(task)" ng-if="task.data.installation != 'Running' &&  task.data.installation != 'Uninstalling...'")
+						i.fa.fa-fw.fa-times
+						|  Remove Probe
+
+#taskOutput.modal.fade
+	.modal-dialog.modal-lg
+		.modal-content
+			.modal-header
+				button(data-dismiss="modal").close: span &times;
+				h4.modal-title Log
+			.modal-body
+				pre: code {{ openTask.data.output }}
+
+#taskOutputZmq.modal.fade
+	.modal-dialog.modal-lg
+		.modal-content
+			.modal-header
+				button(data-dismiss="modal").close: span &times;
+				h4.modal-title Probe Message
+			.modal-body
+				pre: code {{ openTask.data.outputZmq }}
+
+#fileConfig.modal.fade
+	.modal-dialog.modal-lg
+		.modal-content
+			.modal-header
+				button(data-dismiss="modal").close: span &times;
+				h4.modal-title Edit Config
+			.modal-body
+				textarea#config(style='width: 100%; height: 350px;')
+				button.btn.btn-success(ng-click="runEdit()" style="margin-top: 10px")
+					i.fa.fa-fw.fa-edit
+					| SAVE
+
+h4.text-center.text-muted(ng-if="!tasks.tasks.length" style="margin-top: 15px;") It seems no&nbsp;
+	a(ui-sref="playbook.jobs") probes
+	| &nbsp;have been run yet.

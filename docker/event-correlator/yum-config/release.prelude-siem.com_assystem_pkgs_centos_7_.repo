@@ -1,0 +1,7 @@
+[release.prelude-siem.com_assystem_pkgs_centos_7_]
+name=added from: https://release.prelude-siem.com/assystem/pkgs/centos/7/
+baseurl=https://assystem:48c9AyFfU8@release.prelude-siem.com/assystem/pkgs/centos/7/
+enabled=1
+sslverify=0
+sslclientcert=/root/assystem-prelude.pub.pem
+sslclientkey=/root/assystem-prelude.priv.pem

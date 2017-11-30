@@ -1,0 +1,11 @@
+Jan 18 15:17:07 fav-001 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-002 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-003 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-004 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-005 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-006 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-007 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-008 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-009 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:07 fav-010 generator: "SCISSOR_TEST_SENSOR_SCADA Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+

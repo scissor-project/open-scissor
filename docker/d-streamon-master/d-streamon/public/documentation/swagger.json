@@ -1,0 +1,519 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "D-streamon API"
+  },
+  "host": "localhost:9999",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/createProbes": {
+      "post": {
+        "description": "Adds a new probe model to the models list",
+        "parameters": [
+          {
+            "name": "model",
+            "description": "New model probe",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelProbe"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "412": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseCreateProbes"
+            }
+          }
+        }
+      }
+    },
+    "/networks": {
+      "get": {
+        "description": "Get the networks",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetNetworksResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/network/{id}/hosts": {
+      "get": {
+        "description": "Get the hosts of network",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Network id",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetHostsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/network/{id}/probes": {
+      "get": {
+        "description": "Get the probes of network",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Network id",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetProbesResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/network/{id}/createProbe": {
+      "post": {
+        "description": "Add a model of probe in the network",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Network id",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "probe",
+            "description": "Probe properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Probe"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PostCreateProbeResponse"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "412": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseCreateProbes"
+            }
+          }
+        }
+      }
+    },
+    "/network/{id}/deployProbe": {
+      "post": {
+        "description": "Deploy a probe inside the host",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Deploy a probe inside the host",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "ProbeAndHost",
+            "description": "Probe and host properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProbeAndHost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PostCreateDeployProbeResponse"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/network/{id}/createDeployProbe": {
+      "post": {
+        "description": "Add a model of probe in the network and deploy this probe inside the host",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Network id",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "ModelProbeAndHost",
+            "description": "Model of probe and host properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelProbeAndHost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PostCreateDeployProbeResponse"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    }
+  },
+  "definitions": {
+    "ModelProbe": {
+      "type": "object",
+      "properties": {
+        "play_file": {
+          "type": "string",
+          "description": "File name"
+        },
+        "xml_data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Contents in \"base64\" of the file"
+        },
+        "force_override": {
+          "type": "boolean",
+          "default": false,
+          "description": "Force overwrite the file if it exists"
+        }
+      },
+      "required": [
+        "play_file",
+        "xml_data"
+      ]
+    },
+    "Probe": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of probe"
+        },
+        "play_file": {
+          "type": "string",
+          "description": "File name associated with the probe"
+        },
+        "xml_data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Contents in \"base64\" of the file associated with the probe"
+        },
+        "force_override": {
+          "type": "boolean",
+          "default": false,
+          "description": "Force overwrite the file if it exists"
+        }
+      },
+      "required": [
+        "name",
+        "play_file",
+        "xml_data"
+      ]
+    },
+    "ProbeAndHost": {
+      "type": "object",
+      "properties": {
+        "id_probe": {
+          "type": "string",
+          "description": "Probe id"
+        },
+        "id_host": {
+          "type": "string",
+          "description": "Host id"
+        }
+      },
+      "required": [
+        "id_probe",
+        "id_host"
+      ]
+    },
+    "ModelProbeAndHost": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of probe"
+        },
+        "play_file": {
+          "type": "string",
+          "description": "File name associated with the probe"
+        },
+        "host_id": {
+          "type": "string",
+          "description": "Id of host to deploy"
+        },
+        "xml_data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Contents in \"base64\" of the file associated with the probe"
+        },
+        "force_override": {
+          "type": "boolean",
+          "default": false,
+          "description": "Force overwrite the file if it exists"
+        }
+      },
+      "required": [
+        "name",
+        "play_file",
+        "host_id",
+        "xml_data"
+      ]
+    },
+    "GetNetworksResponse": {
+      "description": "The array of networks",
+      "properties": {
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetHostsResponse": {
+      "description": "The array of hosts in the network",
+      "properties": {
+        "probes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "number"
+              },
+              "created": {
+                "type": "string",
+                "format": "date"
+              },
+              "name": {
+                "type": "string"
+              },
+              "hostname": {
+                "type": "string"
+              },
+              "vars": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "group": {
+                "type": "string"
+              },
+              "playbook": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetProbesResponse": {
+      "description": "The array of probes in the network",
+      "properties": {
+        "probes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "number"
+              },
+              "created": {
+                "type": "string",
+                "format": "date"
+              },
+              "playbook": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "play_file": {
+                "type": "string"
+              },
+              "extra_vars": {
+                "type": "string"
+              },
+              "use_vault": {
+                "type": "boolean"
+              },
+              "tmp": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PostCreateProbeResponse": {
+      "description": "The probe created",
+      "properties": {
+        "probe": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "__v": {
+              "type": "number"
+            },
+            "created": {
+              "type": "string",
+              "format": "date"
+            },
+            "playbook": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "play_file": {
+              "type": "string"
+            },
+            "extra_vars": {
+              "type": "string"
+            },
+            "use_vault": {
+              "type": "boolean"
+            },
+            "tmp": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "PostCreateDeployProbeResponse": {
+      "description": "The probe created and deployed"
+    },
+    "ErrorResponseCreateProbes": {
+      "description": "File already exist"
+    },
+    "ErrorResponse": {
+      "description": "Error"
+    }
+  }
+}

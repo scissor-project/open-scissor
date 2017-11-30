@@ -1,0 +1,33 @@
+<botstream>
+  <source type="live" name="ens3"/>
+  <publisher protocol="tcp" ip="10.10.1.62" port="5560" />
+
+  <statedef id="default" />
+  <statedef id="suspicious" />
+  <statedef id="detected" />
+
+  <variable type="int" name="$prova1" initial_value="2"   comment="Commento 1"/>
+	<variable type="int" name="$prova2" initial_value="5"  comment="Commento 2"/>
+
+  <metrics>
+    <metric name="m1">
+      <variation_detector status="on"/>
+      <variation_monitor status="on" type="dleft" />
+    </metric>
+  </metrics>
+
+  <features>
+    <feature name="ports" body="m1"/>
+  </features>
+
+  <event type="packet" selector="proto tcp and flags tcp-syn" primary-key="ip_src-ip_dst">
+    <state id="default" level="INFO" code="D0" description="Port Scan Monitoring">
+      <use-metric id="m1" vd_update="ip_src-ip_dst-dst_port" vm_update="ip_src-ip_dst"/>
+      <condition expression="ports > $prova1" action='Publish(log, %ts %probe.id %state.code %state.level \"%state.description\" ip_src=%ip_src ip_dst=%ip_dst)' next_state="suspicious"/>
+    </state>
+    <state id="suspicious" level="WARN" code="D1" description="Port Scan Detected">
+      <use-metric id="m1" vd_update="ip_src-ip_dst-dst_port" vm_update="ip_src-ip_dst"/>
+      <condition expression="ports > $prova2" action='Publish(log, %ts %probe.id %state.code %state.level \"%state.description\" ip_src=%ip_src ip_dst=%ip_dst);m1.reset(ip_src-ip_dst)' next_state='default' />
+    </state>
+  </event>
+</botstream>

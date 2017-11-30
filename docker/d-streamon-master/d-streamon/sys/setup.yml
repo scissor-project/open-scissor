@@ -1,0 +1,18 @@
+---
+- hosts: all
+  tasks:
+    - name: Setup
+      shell: mkdir -p /root/streamon
+
+    - name: Send
+      unarchive: src=../streamon/packet/alone.tar dest=/root/streamon/
+
+    - copy: src=install.sh dest=/etc/init.d/streamon mode="777"
+
+    - name: Install
+      shell: update-rc.d streamon defaults
+
+    - name: Exec
+      shell: /etc/init.d/streamon start
+
+    - shell: cp /etc/init.d/streamon /root/streamon/service

@@ -1,0 +1,73 @@
+style(type='text/css', media='screen').
+	#editor {
+		margin: 0;
+		height: 600px;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+	.modal-dialog{
+		width: 90%;
+	}
+
+
+h1 Probes of "{{ playbook.data.name }}"
+	a.btn.btn-default.pull-right(ui-sref="playbook.newjob") Add Probe
+
+table.table.table-hover
+	thead
+		tr
+			th Probe Name
+			th Xml File
+			th &nbsp;
+	tbody
+		tr(ng-repeat="job in jobs.jobs" ng-if="!job.data.tmp")
+			td {{ job.data.name }}
+			td {{ job.data.play_file }}
+			td
+				.btn-group.pull-right
+					//button.btn.btn-default(ng-click="runJob(job)"): i.fa.fa-fw.fa-play
+					button.btn.btn-default(ng-click="openRunProbesPanel(job,jobs.hosts.length)"): i.fa.fa-fw.fa-play
+					a.btn.btn-default(ui-sref="playbook.job({job_id:job.data._id})"): i.fa.fa-pencil-square-o.fa-fw
+					button.btn.btn-danger(ng-click="deleteJob(job)"): i.fa.fa-trash-o.fa-fw
+					//#runProbesPanel.modal.fade
+					
+.modal.fade(id='runProbesPanel')
+	.modal-dialog.modal-lg
+		.modal-content
+			.modal-header
+				button(data-dismiss="modal").close: span &times;
+				h4.modal-title Run Probe Panel
+			.modal-body
+				.row
+					//- div(class="col-md-1")
+					//- div(class="col-md-10")
+					div(class="col-md-12")
+						.panel.panel-default
+							.panel-body
+								label.control-label.col-sm-12(ng-if="jobs.hosts == undefined || jobs.hosts.length == 0",style='text-align: center;') You have to add some hosts before running probe!
+								form.form-horizontal(ng-if="jobs.hosts != undefined && jobs.hosts.length != 0")
+								
+									label File name: 
+									input#nameFileXml(type='text', name='fname', disabled="disabled")
+									br
+									br
+									pre(id='editor').
+									br
+									.form-group
+										label.control-label.col-sm-4 Where to Run
+										.col-sm-2
+											select#whereToRun.form-control
+												option(value='{"type": 0}') ---Please select---
+												option(value='{"type": 1}') All
+												option(ng-repeat="option in jobs.HostGroups", value='{"type": 2, "group_id": "{{option.data._id}}"}') {{option.data.name}}
+												option(ng-repeat="option in jobs.hosts", value='{"type": 3, "host_id": "{{option.data._id}}"}') {{option.data.hostname}}
+												
+									.form-group
+										.col-sm-7.col-sm-offset-4
+											//- button.btn.btn-default(ng-click="runJob(job)") Run !
+											input#update(type='hidden', value="false")
+											input#save(type='checkbox', disabled="disabled")
+											|  SAVE
+											button#btnRun.btn.btn-default(style='margin-left: 50px;') Run !

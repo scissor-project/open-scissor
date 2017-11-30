@@ -1,0 +1,12 @@
+Jan 18 15:17:07 fav-023 generator: Power generation - SubProduction,17:39:05,15:17:18,0,0:00:00,6
+Jan 18 15:17:26 fav-023 generator: Power generation - OverProduction,17:39:05,15:17:30,0,0:00:00,6
+Jan 18 17:18:18 fav-023 generator: Power generation - SubProduction,17:39:05,17:18:31,0,0:00:00,6
+Jan 18 17:18:35 fav-023 generator: Power generation - OverProduction,17:39:05,17:18:54,0,0:00:00,6
+Jan 18 17:19:06 fav-023 generator: Power generation - SubProduction,17:39:05,17:19:18,0,0:00:00,6
+Jan 18 17:21:08 fav-022 turbine: Generating Station - Turbines - General Default,17:39:05,17:21:45,0,0:00:00,3
+Jan 18 17:21:08 fav-040 system: Generating Station - General Default,17:39:05,17:21:45,0,0:00:00,7
+Jan 18 17:21:08 fav-022 turbine: Generating Station - Turbine 1 - Default,17:39:05,17:21:45,0,0:00:00,2
+Jan 18 17:21:22 fav-022 turbine: Generating Station - Turbine 3 - Default,17:39:05,17:21:26,0,0:00:00,2
+Jan 18 17:21:34 fav-010 hiperlan: Generation Station - Hiperlan antenna - Data Corrupted,17:39:05,17:21:36,0,0:00:00,7
+Jan 18 17:21:36 fav-010 hiperlan: Generation Station - Hiperlan antenna - Connection Lost,17:39:05,17:21:38,0,0:00:00,5
+Jan 18 17:21:36 fav-010 hiperlan: Generation Station - Hiperlan antenna - Default,17:39:05,17:21:38,0,0:00:00,5

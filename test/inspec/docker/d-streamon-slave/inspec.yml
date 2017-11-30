@@ -1,0 +1,8 @@
+name: docker-d-streamon-slave
+title: d-streamon-master container InSpec Profile
+maintainer: ferrari.marco@gmail.com
+copyright: scissor-project.com
+copyright_email: ferrari.marco@gmail.com
+license: Apache-2.0
+summary: Compliance Profile
+version: 1.0.0

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<filter>
+	<config>
+		<period>5</period>
+		<fields>
+			<TagID>string</TagID>
+			<Reader>string</Reader>
+			<hostdevice>string</hostdevice>
+			<confidence>number</confidence>
+			<Text>string</Text>
+			<end_Port>number</end_Port>
+			<attacker_IP>string</attacker_IP>
+		</fields>
+		
+		<WhiteList>
+			<field name="filter_delay"/>
+			<field name="ts_in_filter"/>
+			<field name="ts_in_ingest"/>
+			<field name="ts_in_ingest_sink"/>
+			<field name="ts_in_logstash"/>
+			<field name="ts_in_morphline"/>
+			<field name="ts_in_morphline_end"/>
+		</WhiteList>
+	</config>
+	
+	<ID condition="TagID == '22222222222222222222' &amp;&amp; Reader=='Ant1'">
+		<sensor type="T">
+			<operation op="max" param="6"/>
+		</sensor>
+		<sensor type="RSSI">
+			<operation op="min" param="12"/>
+		</sensor>
+	</ID>
+	
+        <ID condition="TagID == '0022222222222222222222'">
+		<sensor type="T">
+			<operation op="avg" param="12"/>
+			<operation op="fwd" param="5"/>
+		</sensor>
+	</ID>
+	
+	
+	
+	<ID condition="TagID=='666666666666666666666'">
+		<sensor type="S1">
+			<operation op="min" param="6"/>
+		</sensor>
+		<sensor type="S2">
+			<operation op="max" param="6"/>
+		</sensor>
+	</ID>
+`	
+	<ID condition="Reader == 'Ant1' &amp;&amp; Reader=='Ant3'">
+		<sensor type="RSSI">
+			<operation op="min" param="18"/>
+		</sensor>
+	</ID>
+	
+        <ID condition="TagID == '00F3F3F3F3F3F3F3F3F3F3F3F3'">
+		<sensor type="RSSI">
+			<operation op="min" param="6"/>
+		</sensor>
+	</ID>
+	<ID condition="Text == 'Light on' &amp;&amp; confidence &lt;= 0.5">
+		<sensor type="rotation">
+			<operation op="fwd" param="0"/>
+		</sensor>
+	</ID>
+        <ID condition="TagID == 'F3F3F3F3F3F3F3F3F3F3F3F3' &amp;&amp; Reader=='Ant1'">
+		<sensor type="RSSI">
+			<operation op="min" param="6"/>
+			<operation op="max" param="12"/>
+		</sensor>
+		<sensor type="T">
+			<operation op="fwd" param="4"/>
+		</sensor>
+	</ID>
+	<ID condition="attacker_IP == '192.168.1.1' &amp;&amp; end_Port &lt;= 20000">
+		<sensor type="start_Port">
+			<operation op="fwd" param="0"/>
+		</sensor>
+	</ID>
+
+	<ID condition="Reader == 'Ant5'">
+		<sensor type="RSSI">
+			<operation op="min" param="12"/>
+			<operation op="avg" param="18"/>
+			<operation op="max" param="6"/>
+			<operation op="fwd" param="45"/>
+		</sensor>
+	</ID>
+	<ID condition="TagID == '22222222222222222222'  &amp;&amp; Reader == 'Ant2'">
+		<sensor type="T">
+			<operation op="fwd" param="3"/>
+			<operation op="max" param="1"/>
+
+		</sensor>
+	</ID>
+</filter>

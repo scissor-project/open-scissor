@@ -3,5 +3,6 @@
 *.retry
 
 *.log
+!docker/datasource24/zmq-bash-push/**/*.log
 
 inspec.lock

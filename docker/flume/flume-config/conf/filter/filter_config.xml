@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<filter>
+	<config>
+		<period>5</period>
+		<fields>
+			<string>TagID</string>
+			<string>Reader</string>
+			<string>hostdevice</string>
+			<string>confidence</string>
+			<string>Text</string>
+			<number>end_Port</number>
+			<string>attacker_IP</string>
+			<string>identity.antenna</string>
+			<string>topic</string>
+		</fields>
+		<BlackList>
+			<fields name="remove_field_example" />
+		</BlackList>
+	</config>
+	
+
+	<ID condition="identity.antenna == 'ANT1' || identity.antenna == 'ANT2' || identity.antenna == 'ANT3' || identity.antenna == 'ANT4'">
+		<sensor type="RSSI">
+			<operation op="fwd" param="1" />
+		</sensor>
+		<sensor type="Light">
+                        <operation op="fwd" param="1" />
+                </sensor>
+		<sensor type="Temp">
+                        <operation op="fwd" param="1" />
+                </sensor>
+		<sensor type="Pt1000">
+                        <operation op="fwd" param="1" />
+                </sensor>
+		<sensor type="Humidity">
+                        <operation op="fwd" param="1" />
+                </sensor>
+	</ID>
+
+	
+</filter>
+

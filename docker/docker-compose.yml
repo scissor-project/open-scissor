@@ -1,0 +1,160 @@
+version: '3.4'
+services:
+  zookeeper:
+    build: ./zookeeper
+    container_name: scissorproject-zookeeper
+    domainname: scissor-project.com
+    hostname: zookeeper
+    image: scissorproject/zookeeper:latest
+    ports:
+      - "2181:2181"
+  kafka:
+    build: ./kafka
+    container_name: scissorproject-kafka
+    depends_on:
+      - zookeeper
+    domainname: scissor-project.com
+    environment:
+      ADVERTISED_HOST: kafka
+      ADVERTISED_PORT: 9092
+      LOG_RETENTION_HOURS: 4
+      TOPICS: cam,env,net,scada
+      ZOOKEEPER_HOST: zookeeper:2181
+    hostname: kafka
+    image: scissorproject/kafka:latest
+    ports:
+      - "9092:9092"
+  flume:
+    build: ./flume
+    container_name: scissorproject-flume
+    depends_on:
+      - kafka
+      - zookeeper
+    domainname: scissor-project.com
+    hostname: flume
+    image: scissorproject/flume:latest
+    ports:
+      - "5445:5445"
+      - "5446:5446"
+      - "5447:5447"
+      - "10000:10000"
+      - "15222:15222"
+      - "20000:20000"
+      - "44444:44444"
+  semantics:
+    build: ./semantics
+    container_name: scissorproject-semantics
+    depends_on:
+      - flume
+    domainname: scissor-project.com
+    hostname: semantics
+    image: scissorproject/semantics:latest
+    ports:
+      - "5467:5467"
+      - "5067:5067"
+      - "30000:30000"
+  logstash:
+    build: ./logstash
+    container_name: scissorproject-logstash
+    depends_on:
+      - datasource24
+      - flume
+      # - streamon
+    domainname: scissor-project.com
+    hostname: logstash
+    image: scissorproject/logstash:latest
+    ports:
+      - "8892:8892"
+      - "8893:8893"
+  logstash24:
+    build: ./logstash24
+    container_name: scissorproject-logstash24
+    depends_on:
+      - flume
+    domainname: scissor-project.com
+    hostname: logstash24
+    image: scissorproject/logstash24:latest
+    ports:
+      - "8895:8895"
+      - "8896:8896"
+      - "8897:8897"
+      - "8899:8899"
+  datasource24:
+    build: ./datasource24
+    container_name: scissorproject-datasource24
+    domainname: scissor-project.com
+    hostname: datasource24
+    image: scissorproject/datasource24:latest
+  d-streamon-master:
+    build: ./d-streamon-master
+    container_name: scissorproject-d-streamon-master
+    domainname: scissor-project.com
+    hostname: d-streamon-master
+    image: scissorproject/d-streamon-master:latest
+    ports:
+      - "3000:3000"
+      - "5570:5570"
+      - "9999:9999"
+      - "27017:27017"
+  d-streamon-slave:
+    build: ./d-streamon-slave
+    container_name: scissorproject-d-streamon-slave
+    domainname: scissor-project.com
+    hostname: d-streamon-slave
+    image: scissorproject/d-streamon-slave:latest
+  prelude-manager-db:
+    container_name: scissorproject-prelude-manager-db
+    domainname: scissor-project.com
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    hostname: prelude-manager-db
+    image: mariadb
+    ports:
+      - "3306:3306"
+  prelude-manager:
+    build: ./prelude-manager
+    container_name: scissorproject-prelude-manager
+    depends_on:
+      - prelude-manager-db
+    domainname: scissor-project.com
+    hostname: prelude-manager
+    image: scissorproject/prelude-manager:latest
+    ports:
+      - "4690:4690"
+      - "5553:5553"
+  event-correlator:
+    build: ./event-correlator
+    container_name: scissorproject-event-correlator
+    depends_on:
+      - prelude-manager
+    domainname: scissor-project.com
+    hostname: event-correlator
+    image: scissorproject/event-correlator:latest
+  prewikka:
+    build: ./prewikka
+    container_name: scissorproject-prewikka
+    depends_on:
+      - prelude-manager
+      - prelude-manager-db
+    domainname: scissor-project.com
+    hostname: prewikka
+    image: scissorproject/prewikka:latest
+    ports:
+      - "80:80"
+  kafka-idmef-converter:
+    build: ./kafka-idmef-converter
+    container_name: scissorproject-kafka-idmef-converter
+    depends_on:
+      - kafka
+    domainname: scissor-project.com
+    hostname: kafka-idmef-converter
+    image: scissorproject/kafka-idmef-converter:latest
+  kafka-prelude-connector:
+    build: ./kafka-prelude-connector
+    container_name: scissorproject-kafka-prelude-connector
+    depends_on:
+      - kafka
+      - prelude-manager
+    domainname: scissor-project.com
+    hostname: kafka-prelude-connector
+    image: scissorproject/kafka-prelude-connector:latest

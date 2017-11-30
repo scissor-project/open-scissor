@@ -1,0 +1,359 @@
+
+****************************************************************************
+********************3S - Smart Software Solutions GmbH**********************
+****************************************************************************
+********************CoDeSys SP SoftPLC for Linux****************************
+**************running on Linux 3.6.11-pfc200-01.02.19_00_2-rt30 on a armv7l system**************
+****************************************************************************
+****************************************************************************
+*** Version 2.4.7.0  build  Jun 24 2015 ***
+*** press Ctrl-C to exit ***
+
+CtrlInitRts entry
+NVRAM Initilized: 131072Bytes
+started: ipcMsgComTask
+CstInit:                                                        [  OK  ]
+Begin Dump Custom Settings
+pbyMemoryRetain: B689A000, offset 0
+ulSizeRetain: 131072, offset 4
+ulRetainCycleTime: 0, offset 8
+sRetainSaveType: 8, offset 12
+ulFileNumberOfBlocks: 0, offset 16
+ulFileBlockSize: 0, offset 20
+bWatchdogEnable: 1, offset 24
+ulWatchdogInterval: 0, offset 28
+ulWatchdogCycleTime: 200, offset 32
+ulWatchdogMultiplier: 10, offset 36
+ulEventCycleTime: 5, offset 40
+sFileSystem: 3, offset 44
+byIECBasePriority: 0, offset 46
+bBasicIO: 1, offset 48
+ulSizeInput: 4096, offset 52
+ulSizeOutput: 4096, offset 56
+ulSizeMemory: 0, offset 60
+ulSizeCode: 2097152, offset 64
+ulSizeData: 2424832, offset 68
+bCodeAndDataSizeDynamic: 1, offset 72
+bNoBootProject: 0, offset 74
+End Dump Custom Settings
+RtsFileInit:                                                    [  OK  ]
+SysInit:                                                        [  OK  ]
+EvtInit:                                                        [  OK  ]
+DbgInit:                                                        [  OK  ]
+SrvInit:                                                        [  OK  ]
+TrcInit:                                                        [  OK  ]
+CltInit:                                                        [  OK  ]
+SysLibInit:                                                     [  OK  ]
+CfgInit:                                                        [  OK  ]
+SymInit:                                                        [  OK  ]
+CmInit:                                                         [  OK  ]
+Device: 07508202  0750-8202  PFC200 CS 2ETH RS
+ApplicationState_Unconfigured -> ApplicationState_Unconfigured
+IOItfInit:                                                      [  OK  ]
+CstIOInit:                                                      [  OK  ]
+resolution of CLOCK_MONOTONIC: 0sec,1nsec
+TASK_SCHEDULEINTERVAL:1ms
+started: CtrlTask
+TskInit:                                                        [  OK  ]
+Loading boot project...
+Realloc data area new size 67289096
+ApplicationState_Unconfigured -> ApplicationState_Stopped
+started: PRG
+started: ALARM_TASK
+started: TREND_TASK
+started: InputUpdateTask
+...Boot project loaded
+started: tTCPSrv
+->TCP/IP SERVER started listening at Port 2455
+SysInitCommunications:                                          [  OK  ]
+Program running
+ApplicationState_Stopped -> ApplicationState_Running
+Runtime system init done
+Program stopped
+ApplicationState_Running -> ApplicationState_Stopped
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.36, Port 2455
+SRV: RTS_CHECKTARGETID
+SRV: RTS_LOGIN
+SRV: Login: pAppl=0xb5001230, pAppl->ulApplId=1
+SRV: Application logged out
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.36, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.36, Port 2455
+SRV: RTS_CHECKTARGETID
+SRV: RTS_LOGIN
+SRV: Login: pAppl=0xb5001230, pAppl->ulApplId=1
+SRV: Application logged in
+SRV: RTS_READ_IDENTITY
+SRVSub: RTS_READ_BP_LIST
+SRV: RTS_DEFINEDEBUGTASK
+SRV: Debug Task defined
+SRV: RTS_FILE_WRITE_START: "visu_ini.xml"
+SRVSub: RTS_DEFINE_VARLIST
+SRV: LZS_FILE_TRANSFER_DONE, File=visu_ini.xml
+SRV: RTS_FILE_WRITE_START: "webvisu.htm"
+SRV: LZS_FILE_TRANSFER_DONE, File=webvisu.htm
+SRVSub: RTS_START_STEP
+SRVSub: RTS_START_STEP
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.154, Port 2455
+SRVSub: RTS_START_STEP
+SRV: RTS_BP_DEL_ALL
+SRV: RTS_RESET, 1
+started: PRG
+started: ALARM_TASK
+started: TREND_TASK
+started: InputUpdateTask
+Cold reset performed
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.154, Port 2455
+SRVSub: RTS_DELETE_VARLIST
+SRVSub: RTS_RELEASE_VARIABLES
+SRV: RTS_LOGOUT
+SRV: Application logged out
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.36, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.36, Port 2455
+SRV: RTS_CHECKTARGETID
+SRV: RTS_LOGIN
+SRV: Login: pAppl=0xb5001230, pAppl->ulApplId=1
+SRV: Application logged in
+SRV: RTS_READ_IDENTITY
+SRVSub: RTS_READ_BP_LIST
+SRV: RTS_DEFINEDEBUGTASK
+SRV: Debug Task defined
+SRVSub: RTS_DEFINE_VARLIST
+SRV: RTS_FILE_WRITE_START: "webvisu.htm"
+SRV: LZS_FILE_TRANSFER_DONE, File=webvisu.htm
+SRVSub: RTS_START_STEP
+**** Task Continue received, but task is not in WAIT_STATE ***
+Program running
+ApplicationState_Stopped -> ApplicationState_Running
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.154, Port 2455
+SRV: Application logged out
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.36, Port 2455
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.154, Port 2455
+PFC200 NVRAM mapped size 128KiB
+ipcMsgCom_Thread started - max count of msg types:30 - max msg content size:2560
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libpackbus.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libmbs.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libdps.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libcanopens.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libcanopenm.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libcanlayer2.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing ..
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing .
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libwidepackbus.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libwideoms.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libwidecpulimit.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libwidecanopens.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libwidecanopenm.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libwidecanlayer2.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libwagolibkbus.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libterminaldiag.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libsercomm.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libplcsnmp_manager.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libplcsnmp_agent.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libmodcom.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libmbswide.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libiecssl.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libiecled.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libiecdiagnostic.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libdpsWide.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing libconfigtoollib.so
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing ..
+DEBUG: source/LibraryLoader.c:300:LibraryLoader_ScanDirectory(): Processing .
+MinTaskInterval=100000
+SysTaskSetPriority->pthread_setschedparam() failed:Invalid argument
+MinTaskInterval=100000
+MinTaskInterval=100000
+MinTaskInterval=100000
+rem_socket_fd_entry_by_ptid: tmp = -1237072928
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1237072928
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1237138464
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1237138464
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1355500576
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1355566112
+rem_socket_fd_entry_by_ptid: tmp = 0xb4e01370
+rem_socket_fd_entry_by_ptid: tmp = 0xb4e004b0
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1355631648
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1355697184
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+SysTaskSetPriority->pthread_setschedparam() failed:Invalid argument
+MinTaskInterval=100000
+MinTaskInterval=100000
+MinTaskInterval=100000
+rem_socket_fd_entry_by_ptid: tmp = -1237138464
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1237072928
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1237138464
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_fd_entry_by_ptid: tmp = -1237072928
+rem_socket_fd_entry_by_ptid: tmp = (nil)
+rem_socket_started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+**** SOCKET ERROR: Writing message failed ****
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+<-Socket closed of CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 0: IP-Address 192.168.1.154, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.29, Port 2455
+SRV: RTS_CHECKTARGETID
+SRV: RTS_LOGIN
+SRV: Login: pAppl=0xb5001230, pAppl->ulApplId=1
+SRV: Application logged out
+<-Socket closed of CLIENT 1: IP-Address 192.168.1.29, Port 2455
+started: tTCPClt0
+->Accepting CLIENT 1: IP-Address 192.168.1.29, Port 2455
+SRV: RTS_CHECKTARGETID
+SRV: RTS_LOGIN
+SRV: Login: pAppl=0xb5001230, pAppl->ulApplId=1
+SRV: Application logged in
+SRV: RTS_READ_IDENTITY
+SRVSub: RTS_READ_BP_LIST
+SRV: RTS_DEFINEDEBUGTASK
+SRV: Debug Task defined
+SRVSub: RTS_DEFINE_VARLIST
+SRV: RTS_FILE_WRITE_START: "webvisu.htm"
+SRV: LZS_FILE_TRANSFER_DONE, File=webvisu.htm
+SRV: RTS_STOP
+Program stopped
+ApplicationState_Running -> ApplicationState_Stopped
+SRVSub: RTS_START_STEP
+**** Task Continue received, but task is not in WAIT_STATE ***
+Program running
+ApplicationState_Stopped -> ApplicationState_Running
