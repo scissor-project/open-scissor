@@ -10,11 +10,13 @@ before_install:
   - docker pull koalaman/shellcheck
   - docker pull lukasmartinelli/hadolint
   - docker pull redcoolbeans/dockerlint
+  - "./test/install-inspec.sh"
 
 script:
  - find . -name '*.sh' | xargs docker run -v $(pwd):/mnt --rm koalaman/shellcheck-alpine
  - find . -name 'Dockerfile' | xargs docker run -v $(pwd):/mnt --rm -w="/mnt" lukasmartinelli/hadolint hadolint
  - find . -name 'Dockerfile' | xargs docker run -v $(pwd):/mnt --rm -w="/mnt" redcoolbeans/dockerlint
+ - find docker -maxdepth 1 \! -path docker -type d | xargs -I '{}' test/test-docker-image.sh --docker-context-path={}
 
 matrix:
   fast_finish: true
