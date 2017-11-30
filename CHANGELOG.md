@@ -8,6 +8,7 @@
 - Configure Vagrantfile validation during CI builds [\#31](https://github.com/scissor-project/open-scissor/issues/31)
 - Remove prelude-correlator-oss VM from Vagrantfile [\#28](https://github.com/scissor-project/open-scissor/issues/28)
 - Rename cnit-correlator to event-correlator and add its description to README [\#25](https://github.com/scissor-project/open-scissor/issues/25)
+- Configure camera IP and hostname via DHCP [\#24](https://github.com/scissor-project/open-scissor/issues/24)
 - Set domain in Vagrantfile [\#23](https://github.com/scissor-project/open-scissor/issues/23)
 - Use parameters in provisioning scripts [\#21](https://github.com/scissor-project/open-scissor/issues/21)
 - Configure Travis CI to run shellcheck [\#19](https://github.com/scissor-project/open-scissor/issues/19)
