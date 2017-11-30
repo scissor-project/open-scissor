@@ -9,7 +9,7 @@ NODE_NAME="$2"
 FLUME_IP="$3"
 DATASOURCE24_IP="$4"
 STREAMON_IP="$5"
-CAMERA_IP="10.10.1.100"
+CAMERA_IP="$6"
 
 hostnamectl set-hostname "$NODE_NAME"
 # replace default 'ubuntu' name with our new hostname in /etc/hosts

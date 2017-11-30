@@ -42,6 +42,7 @@ GATEWAY_MACHINE_NAME = "gateway"
 GATEWAY_IP_ADDRESS = dhcp_ips[GATEWAY_MACHINE_NAME]
 DNS_SERVER_IP_ADDRESS = GATEWAY_IP_ADDRESS
 DNS_SERVER_MACHINE_NAME = GATEWAY_MACHINE_NAME
+CAMERA_IP_ADDRESS = dhcp_ips["camera"]
 
 scissor = {
   GATEWAY_MACHINE_NAME => {
@@ -327,7 +328,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             hostname,
             dhcp_ips[FLUME_VM_NAME],
             dhcp_ips[DATASOURCE24_VM_NAME],
-            dhcp_ips[D_STREAMON_SLAVE_VM_NAME]
+            dhcp_ips[D_STREAMON_SLAVE_VM_NAME],
+            CAMERA_IP_ADDRESS
           ]
         elsif(hostname.include? LOGSTASH_24_VM_NAME)
           deployment_args = [
@@ -335,7 +337,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             hostname,
             dhcp_ips[FLUME_VM_NAME],
             dhcp_ips[DATASOURCE24_VM_NAME],
-            dhcp_ips[D_STREAMON_SLAVE_VM_NAME]
+            dhcp_ips[D_STREAMON_SLAVE_VM_NAME],
+            CAMERA_IP_ADDRESS
           ]
         elsif(hostname.include? DATASOURCE24_VM_NAME)
           deployment_args = [

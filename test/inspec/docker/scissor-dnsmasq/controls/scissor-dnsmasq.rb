@@ -39,6 +39,7 @@ control "scissor-dnsmasq" do
     it { should be_grouped_into 'root' }
     it { should be_readable.by_user('root') }
     its('mode') { should cmp '0664' }
+    its('content') { should match(%r{camera}) }
     its('content') { should match(%r{gateway}) }
     its('content') { should match(%r{kafka}) }
     its('content') { should match(%r{flume}) }
