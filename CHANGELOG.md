@@ -4,6 +4,8 @@
 
 **Implemented enhancements:**
 
+- Configure Appveyor CI [\#32](https://github.com/scissor-project/open-scissor/issues/32)
+- Configure Vagrantfile validation during CI builds [\#31](https://github.com/scissor-project/open-scissor/issues/31)
 - Remove prelude-correlator-oss VM from Vagrantfile [\#28](https://github.com/scissor-project/open-scissor/issues/28)
 - Rename cnit-correlator to event-correlator and add its description to README [\#25](https://github.com/scissor-project/open-scissor/issues/25)
 - Set domain in Vagrantfile [\#23](https://github.com/scissor-project/open-scissor/issues/23)
@@ -13,15 +15,19 @@
 - Configure the default route through the gateway [\#17](https://github.com/scissor-project/open-scissor/issues/17)
 - Configure a gateway VM [\#15](https://github.com/scissor-project/open-scissor/issues/15)
 - Choose a license for OpenSCISSOR [\#14](https://github.com/scissor-project/open-scissor/issues/14)
+- Configure a testing framework for the infrastructure [\#13](https://github.com/scissor-project/open-scissor/issues/13)
 - Configure an "internal only" network interface for each VM [\#11](https://github.com/scissor-project/open-scissor/issues/11)
 - Configure dnsmasq [\#10](https://github.com/scissor-project/open-scissor/issues/10)
 - Remove unneeded commands from configuration scripts [\#5](https://github.com/scissor-project/open-scissor/issues/5)
 - Avoid using SlipStream commands [\#4](https://github.com/scissor-project/open-scissor/issues/4)
+- Add GitHub templates for contributions, pull requests and issues [\#30](https://github.com/scissor-project/open-scissor/pull/30) ([ferrarimarco](https://github.com/ferrarimarco))
 - cnit-correlator VM [\#20](https://github.com/scissor-project/open-scissor/pull/20) ([agil3b3ast](https://github.com/agil3b3ast))
 
 **Fixed bugs:**
 
+- Gateway networking service fails during "vagrant up" [\#29](https://github.com/scissor-project/open-scissor/issues/29)
 - kafka VM configuration fails during post-install \(404 on kafka URL\) [\#26](https://github.com/scissor-project/open-scissor/issues/26)
+- Kafka VM deployment.sh script uses an hardcoded network interface and IPs [\#16](https://github.com/scissor-project/open-scissor/issues/16)
 
 **Merged pull requests:**
 
