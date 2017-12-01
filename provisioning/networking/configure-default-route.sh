@@ -27,6 +27,7 @@ else
 INTERFACE=\$1\\n\
 EVENT=\$2\\n\
 default_gateway=\"%s\"
+echo \"Received event: \$EVENT, interface: \$INTERFACE\"
 if [ \"\$INTERFACE\" = \"%s\" ]; then\\n\
   case \"\$EVENT\" in\\n\
     up)\\n\
@@ -39,6 +40,7 @@ if [ \"\$INTERFACE\" = \"%s\" ]; then\\n\
       echo \"Configuring the default route for \$INTERFACE interface via \$default_gateway gateway\"
       ip route add \"\$default_gateway\" dev \"\$INTERFACE\"
       ip route add default via \"\$default_gateway\" dev \"\$INTERFACE\"
+      echo \"Current IP routes: \$(ip route)\"
       ;;\\n\
     *)\\n\
       ;;\\n\

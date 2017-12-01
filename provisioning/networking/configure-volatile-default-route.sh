@@ -29,6 +29,7 @@ if [ "$current_default_gateway" != "$ip_v4_gateway_ip_address" ]; then
   echo "Configuring the default route for $interface interface via $ip_v4_gateway_ip_address gateway"
   ip route add "$ip_v4_gateway_ip_address" dev "$interface"
   ip route add default via "$ip_v4_gateway_ip_address" dev "$interface"
+  echo "Current IP routes: $(ip route)"
 fi
 
 current_default_gateway="$(ip route | awk '/default/ { print $3 }')"
