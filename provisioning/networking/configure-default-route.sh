@@ -53,3 +53,6 @@ fi\\n" \
   chmod a+x "$up_event_script_path"
   chmod u+rw "$up_event_script_path"
 fi
+
+echo "Restarting NetworkManager service to let it pick up configuration changes"
+systemctl restart NetworkManager.service
