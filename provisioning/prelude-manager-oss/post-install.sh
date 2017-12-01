@@ -16,10 +16,8 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 EOF
 
-#adduser --system prelude-manager
-
 # Create prelude-manager profile
-#prelude-admin add "prelude-manager" --uid $(id -u prelude-manager) --gid $(id -g prelude-manager)
+prelude-admin add "prelude-manager" --uid 0 --gid 0
 
 cat << "EOF" > /etc/prelude-manager/prelude-manager.conf
 # Prelude Manager configuration file.
@@ -449,3 +447,8 @@ WantedBy=multi-user.target
 EOF
 
 systemctl enable prelude-registrator
+
+iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 4690 -j ACCEPT
+iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 5553 -j ACCEPT
+
+mkdir -p /var/run/prelude-manager

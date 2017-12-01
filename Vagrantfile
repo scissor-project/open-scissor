@@ -8,6 +8,7 @@ NETWORK_TYPE_STATIC_IP = "static_ip"
 UPSTREAM_DNS_SERVER = "8.8.8.8"
 SUBNET_MASK = "255.0.0.0"
 UBUNTU_BOX_ID = "bento/ubuntu-16.04"
+FEDORA_BOX_ID = "bento/fedora-26"
 
 # VM names
 D_STREAMON_MASTER_VM_NAME = "d-streamon-master"
@@ -137,7 +138,7 @@ scissor = {
   },
   PRELUDE_MANAGER_VM_NAME => {
     :autostart => true,
-    :box => CENTOS_BOX_ID,
+    :box => FEDORA_BOX_ID,
     :cpus => 1,
     :mac_address => "0800271F9D09",
     :mem => 1024,
