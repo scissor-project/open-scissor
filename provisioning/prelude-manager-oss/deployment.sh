@@ -24,7 +24,7 @@ GRANT ALL PRIVILEGES ON ${MARIADB_PRELUDE_DBNAME}.* TO '${MARIADB_PRELUDE_USER}'
 UPDATE mysql.user SET Password=PASSWORD('${MARIADB_ROOT_PASS}') WHERE User='root';
 FLUSH PRIVILEGES;
 EOF
-mysql -u "${MARIADB_PRELUDE_USER}" "${MARIADB_PRELUDE_DBNAME}" -p"${MARIADB_PRELUDE_PASS}" < /usr/share/libpreludedb/classic/mysql.sql
+mysql -u "${MARIADB_PRELUDE_USER}" --password="${MARIADB_PRELUDE_PASS}" --database="${MARIADB_PRELUDE_DBNAME}" < /usr/share/libpreludedb/classic/mysql.sql
 
 systemctl restart prelude-manager
 
