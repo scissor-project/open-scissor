@@ -4,6 +4,7 @@
 
 **Implemented enhancements:**
 
+- Comment Requirements section contents in PULL\_REQUEST\_TEMPLATE.md [\#36](https://github.com/scissor-project/open-scissor/issues/36)
 - Configure Appveyor CI [\#32](https://github.com/scissor-project/open-scissor/issues/32)
 - Configure Vagrantfile validation during CI builds [\#31](https://github.com/scissor-project/open-scissor/issues/31)
 - Remove prelude-correlator-oss VM from Vagrantfile [\#28](https://github.com/scissor-project/open-scissor/issues/28)
@@ -26,9 +27,13 @@
 
 **Fixed bugs:**
 
+- NetworkManager does not run the dispatcher.d scripts for DHCP network interfaces on the first up event [\#33](https://github.com/scissor-project/open-scissor/issues/33)
 - Gateway networking service fails during "vagrant up" [\#29](https://github.com/scissor-project/open-scissor/issues/29)
 - kafka VM configuration fails during post-install \(404 on kafka URL\) [\#26](https://github.com/scissor-project/open-scissor/issues/26)
 - Kafka VM deployment.sh script uses an hardcoded network interface and IPs [\#16](https://github.com/scissor-project/open-scissor/issues/16)
+- Prelude Correlator and Prelude Connector cannot connect to the Prelude Manager [\#6](https://github.com/scissor-project/open-scissor/issues/6)
+- Changed prelude-manager-oss provisioning to bento/fedora-26 [\#37](https://github.com/scissor-project/open-scissor/pull/37) ([agil3b3ast](https://github.com/agil3b3ast))
+- Restart NetworkManager after dispatcher scripts creation [\#34](https://github.com/scissor-project/open-scissor/pull/34) ([ferrarimarco](https://github.com/ferrarimarco))
 
 **Merged pull requests:**
 
