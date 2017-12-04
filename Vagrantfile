@@ -263,7 +263,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           end
         elsif(FEDORA_BOX_ID == info[:box])
           # In Fedora ip route commands have no effect for this configuration
-          # so we have to explicitely disable the default route of the network
+          # so we have to explicitly disable the default route of the network
           # interface managed by Vagrant
           host.vm.provision "shell", path: "provisioning/networking/configure-default-route-fedora.sh"
         end
