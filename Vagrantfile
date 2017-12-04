@@ -253,11 +253,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       if(GATEWAY_IP_ADDRESS != ip_address)
         # Ensure we are going through the gateway
-        host.vm.provision "shell" do |s|
-          s.path = "provisioning/networking/configure-default-route.sh"
-          s.args = [
-            "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS
-            ]
+
+        if(UBUNTU_BOX_ID == info[:box])
+          host.vm.provision "shell" do |s|
+            s.path = "provisioning/networking/configure-default-route.sh"
+            s.args = [
+              "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS
+              ]
+          end
+        elsif(FEDORA_BOX_ID == info[:box])
+          # In Fedora ip route commands have no effect for this configuration
+          # so we have to explicitely disable the default route of the network
+          # interface managed by Vagrant
+          host.vm.provision "shell", path: "provisioning/networking/configure-default-route-fedora.sh"
         end
       end
 
