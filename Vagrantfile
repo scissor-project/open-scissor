@@ -1,8 +1,6 @@
 require 'ipaddr'
 
 CENTOS_BOX_ID = "bento/centos-7.4"
-DOMAIN = "scissor-project.com"
-INTNET_NAME = DOMAIN + ".network"
 NETWORK_TYPE_DHCP = "dhcp"
 NETWORK_TYPE_STATIC_IP = "static_ip"
 UPSTREAM_DNS_SERVER = "8.8.8.8"
@@ -44,6 +42,23 @@ GATEWAY_IP_ADDRESS = dhcp_ips[GATEWAY_MACHINE_NAME]
 DNS_SERVER_IP_ADDRESS = GATEWAY_IP_ADDRESS
 DNS_SERVER_MACHINE_NAME = GATEWAY_MACHINE_NAME
 CAMERA_IP_ADDRESS = dhcp_ips["camera"]
+
+domain = ""
+
+# Get domain from DNSmasq configuration
+File.open('docker/scissor-dnsmasq/etc/dnsmasq.conf').each_line do |li|
+  domain_prefix = "domain="
+  if (li[/#{domain_prefix}\b/])
+    li = li.gsub(domain_prefix, "")
+    domain_elements = li.split(",")
+    domain = domain_elements[0]
+    break
+  end
+end
+
+raise "Cannot initialize domain" unless ! domain.to_s.empty?
+
+INTNET_NAME = domain + ".network"
 
 scissor = {
   GATEWAY_MACHINE_NAME => {
@@ -209,7 +224,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.gui = info[:show_gui]
         vb.name = hostname
       end
-      host.vm.hostname = hostname + "." + DOMAIN
+      host.vm.hostname = hostname + "." + domain
 
       # Let's use the upstream server in the machine that will host our DNS
       # server because we cannot start the Dnsmasq container (with the
@@ -273,7 +288,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         host.vm.provision "shell" do |s|
           s.path = "provisioning/networking/configure-network-manager.sh"
           s.args = [
-            "--domain", DOMAIN,
+            "--domain", domain,
             "--ip-v4-dns-nameserver", ip_v4_dns_server_address,
             "--ip-v4-gateway-ip-address", GATEWAY_IP_ADDRESS,
             "--ip-v4-host-cidr", IP_V4_CIDR,

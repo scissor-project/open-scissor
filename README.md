@@ -59,3 +59,7 @@ GitHub issue or pull request.
 
 Note that collaborators cannot push directly to `development` and `master` branches
 but should open a pull request against these branches.
+
+# Configuration
+
+* DNS Domain: DNSMasq manages a local DNS domain that can be specified in the DNSMasq configuration file (`dnsmasq.conf`)
