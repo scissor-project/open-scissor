@@ -448,7 +448,18 @@ EOF
 
 systemctl enable prelude-registrator
 
+systemctl mask firewalld.service
+systemctl enable iptables.service
+systemctl enable ip6tables.service
+
 iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 4690 -j ACCEPT
 iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 5553 -j ACCEPT
+
+#saving iptables rules
+iptables-save > /etc/sysconfig/iptables
+
+systemctl stop firewalld.service
+systemctl start iptables.service
+systemctl start ip6tables.service
 
 mkdir -p /var/run/prelude-manager
