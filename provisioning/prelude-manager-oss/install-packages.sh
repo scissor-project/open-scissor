@@ -1,6 +1,7 @@
 #!/bin/bash -exe
 
 dnf install -y \
+  iptables-services \
   libpreludedb \
   mariadb-server \
   prelude-manager \
