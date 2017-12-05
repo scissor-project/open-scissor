@@ -433,6 +433,19 @@ hook = reporting
 # 90 seconds.
 EOF
 
+cat << EOF > /etc/systemd/system/prelude-manager.service
+[Unit]
+Description=Prelude Manager
+Documentation=man:prelude-manager(1)
+After=mariadb.service
+
+[Service]
+ExecStart=/usr/sbin/prelude-manager
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl enable prelude-manager
 
 cat << EOF > /etc/systemd/system/prelude-registrator.service
@@ -462,4 +475,4 @@ systemctl stop firewalld.service
 systemctl start iptables.service
 systemctl start ip6tables.service
 
-mkdir -p /var/run/prelude-manager
+echo "d /var/run/prelude-manager 755 root root -" > /usr/lib/tmpfiles.d/prelude-manager.conf
