@@ -4,7 +4,7 @@ set -xeuo pipefail
 IFS=$'\\n\t'
 
 pip install --upgrade pip
-pip install kafka
+pip install kafka pyyaml
 
 cat <<EOF > /etc/converter.conf
 kafka_server: __KAFKA_SERVER__
