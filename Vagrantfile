@@ -41,7 +41,7 @@ GATEWAY_MACHINE_NAME = "gateway"
 GATEWAY_IP_ADDRESS = dhcp_ips[GATEWAY_MACHINE_NAME]
 DNS_SERVER_IP_ADDRESS = GATEWAY_IP_ADDRESS
 DNS_SERVER_MACHINE_NAME = GATEWAY_MACHINE_NAME
-CAMERA_IP_ADDRESS = dhcp_ips["camera"]
+CAMERA_MACHINE_NAME = "camera"
 
 domain = ""
 
@@ -327,77 +327,52 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         host.vm.provision "shell", path: "provisioning/" + hostname + "/pre-install.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/install-packages.sh"
         host.vm.provision "shell", path: "provisioning/" + hostname + "/post-install.sh"
-        deployment_args = []
-        if(hostname.include? KAFKA_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname
-          ]
-        elsif(hostname.include? FLUME_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[KAFKA_VM_NAME],
-            dhcp_ips[SEMANTICS_VM_NAME]
-          ]
+        deployment_args = [
+          dhcp_ips[hostname],
+          hostname
+        ]
+
+        deployment_args_initial_size = deployment_args.length
+        deployment_args_keys = []
+
+        if(hostname.include? FLUME_VM_NAME)
+          deployment_args_keys.push(KAFKA_VM_NAME)
+          deployment_args_keys.push(SEMANTICS_VM_NAME)
         elsif(hostname.include? SEMANTICS_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[FLUME_VM_NAME]
-          ]
+          deployment_args_keys.push(FLUME_VM_NAME)
         elsif(hostname.include? LOGSTASH_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[FLUME_VM_NAME],
-            dhcp_ips[DATASOURCE24_VM_NAME],
-            dhcp_ips[D_STREAMON_SLAVE_VM_NAME],
-            CAMERA_IP_ADDRESS
-          ]
+          deployment_args_keys.push(FLUME_VM_NAME)
+          deployment_args_keys.push(DATASOURCE24_VM_NAME)
+          deployment_args_keys.push(D_STREAMON_SLAVE_VM_NAME)
+          deployment_args_keys.push(CAMERA_MACHINE_NAME)
         elsif(hostname.include? LOGSTASH_24_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[FLUME_VM_NAME],
-            dhcp_ips[DATASOURCE24_VM_NAME],
-            dhcp_ips[D_STREAMON_SLAVE_VM_NAME],
-            CAMERA_IP_ADDRESS
-          ]
+          deployment_args_keys.push(FLUME_VM_NAME)
+          deployment_args_keys.push(DATASOURCE24_VM_NAME)
+          deployment_args_keys.push(D_STREAMON_SLAVE_VM_NAME)
+          deployment_args_keys.push(CAMERA_MACHINE_NAME)
         elsif(hostname.include? DATASOURCE24_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[LOGSTASH_24_VM_NAME],
-            dhcp_ips[LOGSTASH_VM_NAME],
-            dhcp_ips[KAFKA_VM_NAME]
-          ]
+          deployment_args_keys.push(LOGSTASH_24_VM_NAME)
+          deployment_args_keys.push(LOGSTASH_VM_NAME)
+          deployment_args_keys.push(KAFKA_VM_NAME)
         elsif(hostname.include? EVENT_CORRELATOR_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[PRELUDE_MANAGER_VM_NAME]
-          ]
+          deployment_args_keys.push(PRELUDE_MANAGER_VM_NAME)
         elsif(hostname.include? PREWIKKA_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[PRELUDE_MANAGER_VM_NAME]
-          ]
+          deployment_args_keys.push(PRELUDE_MANAGER_VM_NAME)
         elsif(hostname.include? KAFKA_IDMEF_CONVERTER_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[KAFKA_VM_NAME]
-          ]
+          deployment_args_keys.push(KAFKA_VM_NAME)
         elsif(hostname.include? KAFKA_PRELUDE_CONNECTOR_VM_NAME)
-          deployment_args = [
-            dhcp_ips[hostname],
-            hostname,
-            dhcp_ips[KAFKA_VM_NAME],
-            dhcp_ips[PRELUDE_MANAGER_VM_NAME]
-          ]
+          deployment_args_keys.push(KAFKA_VM_NAME)
+          deployment_args_keys.push(PRELUDE_MANAGER_VM_NAME)
         end
+
+        deployment_args_keys.each do |key|
+          value = dhcp_ips[key]
+          raise "value is empty for #{key}" unless ! value.to_s.empty?
+          deployment_args.push(value)
+        end
+
+        raise "Error while initializing deployment_args" unless deployment_args.length == deployment_args_initial_size + deployment_args_keys.length
+
         host.vm.provision "shell" do |s|
           s.path = "provisioning/" + hostname + "/deployment.sh"
           s.args = deployment_args
