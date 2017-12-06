@@ -27,12 +27,18 @@
 
 **Fixed bugs:**
 
+- Cannot ping gitlab.scissor-project.com from VM [\#43](https://github.com/scissor-project/open-scissor/issues/43)
+- prelude-manager should be resilient to reboots [\#41](https://github.com/scissor-project/open-scissor/issues/41)
+- prelude-manager-oss iptables configuration is not persisted [\#38](https://github.com/scissor-project/open-scissor/issues/38)
 - Default route configuration does not work in Fedora. The connectivity is broken [\#35](https://github.com/scissor-project/open-scissor/issues/35)
 - NetworkManager does not run the dispatcher.d scripts for DHCP network interfaces on the first up event [\#33](https://github.com/scissor-project/open-scissor/issues/33)
 - Gateway networking service fails during "vagrant up" [\#29](https://github.com/scissor-project/open-scissor/issues/29)
 - kafka VM configuration fails during post-install \(404 on kafka URL\) [\#26](https://github.com/scissor-project/open-scissor/issues/26)
 - Kafka VM deployment.sh script uses an hardcoded network interface and IPs [\#16](https://github.com/scissor-project/open-scissor/issues/16)
 - Prelude Correlator and Prelude Connector cannot connect to the Prelude Manager [\#6](https://github.com/scissor-project/open-scissor/issues/6)
+- Add a prefix to the locally managed domain [\#44](https://github.com/scissor-project/open-scissor/pull/44) ([ferrarimarco](https://github.com/ferrarimarco))
+- Make prelude-manager service resilient to reboots by configuring it as a service [\#42](https://github.com/scissor-project/open-scissor/pull/42) ([agil3b3ast](https://github.com/agil3b3ast))
+- Saved prelude-manager-oss iptables rules after reload [\#40](https://github.com/scissor-project/open-scissor/pull/40) ([agil3b3ast](https://github.com/agil3b3ast))
 - Disable Vagrant interface default route in fedora [\#39](https://github.com/scissor-project/open-scissor/pull/39) ([ferrarimarco](https://github.com/ferrarimarco))
 - Changed prelude-manager-oss provisioning to bento/fedora-26 [\#37](https://github.com/scissor-project/open-scissor/pull/37) ([agil3b3ast](https://github.com/agil3b3ast))
 - Restart NetworkManager after dispatcher scripts creation [\#34](https://github.com/scissor-project/open-scissor/pull/34) ([ferrarimarco](https://github.com/ferrarimarco))
