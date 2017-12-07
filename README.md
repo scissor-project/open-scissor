@@ -1,5 +1,6 @@
 # OpenSCISSOR
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dfe7a776e70040c38984a06b5ad3b225)](https://www.codacy.com/app/ferrarimarco/open-scissor?utm_source=github.com&utm_medium=referral&utm_content=scissor-project/open-scissor&utm_campaign=badger)
 * Development branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=development)](https://travis-ci.org/scissor-project/open-scissor) [![Build status](https://ci.appveyor.com/api/projects/status/9vmd89riib7akp79/branch/development?svg=true)](https://ci.appveyor.com/project/scissor-project/open-scissor/branch/development)
 * Master branch: [![Build Status](https://travis-ci.org/scissor-project/open-scissor.svg?branch=master)](https://travis-ci.org/scissor-project/open-scissor) [![Build status](https://ci.appveyor.com/api/projects/status/9vmd89riib7akp79/branch/master?svg=true)](https://ci.appveyor.com/project/scissor-project/open-scissor/branch/master)
 
