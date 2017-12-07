@@ -43,3 +43,9 @@ mkdir zookeeper-master
 cd zookeeper-master
 git clone -b master https://anc-git.salzburgresearch.at/ppaiva/zookeeper-master.git .
 log "Cloned zookeeper-master"
+
+iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 9092 -j ACCEPT
+iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 2181 -j ACCEPT
+
+mkdir -p /etc/iptables
+iptables-save > /etc/iptables/rules.v4
