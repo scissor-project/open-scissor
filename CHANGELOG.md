@@ -27,6 +27,7 @@
 
 **Fixed bugs:**
 
+- NoBrokersAvailable in kafka-idmef-converter [\#53](https://github.com/scissor-project/open-scissor/issues/53)
 - Bad configuration syntax in kafka-idmef-converter [\#49](https://github.com/scissor-project/open-scissor/issues/49)
 - Missing pyyaml in kafka-idmef-converter [\#48](https://github.com/scissor-project/open-scissor/issues/48)
 - kafka-idmef-converter "unbound variable" in deployment [\#45](https://github.com/scissor-project/open-scissor/issues/45)
@@ -39,6 +40,7 @@
 - kafka VM configuration fails during post-install \(404 on kafka URL\) [\#26](https://github.com/scissor-project/open-scissor/issues/26)
 - Kafka VM deployment.sh script uses an hardcoded network interface and IPs [\#16](https://github.com/scissor-project/open-scissor/issues/16)
 - Prelude Correlator and Prelude Connector cannot connect to the Prelude Manager [\#6](https://github.com/scissor-project/open-scissor/issues/6)
+- New iptables rules to open 2181 and  9092 in kafka VM [\#54](https://github.com/scissor-project/open-scissor/pull/54) ([agil3b3ast](https://github.com/agil3b3ast))
 - Modified configuration syntax in kafka-idmef-converter [\#51](https://github.com/scissor-project/open-scissor/pull/51) ([agil3b3ast](https://github.com/agil3b3ast))
 - Add pyyaml dependency in kafka-idmef-converter [\#50](https://github.com/scissor-project/open-scissor/pull/50) ([agil3b3ast](https://github.com/agil3b3ast))
 - Dynamically validate deployment script parameters [\#46](https://github.com/scissor-project/open-scissor/pull/46) ([ferrarimarco](https://github.com/ferrarimarco))
