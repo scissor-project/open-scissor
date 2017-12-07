@@ -27,6 +27,9 @@
 
 **Fixed bugs:**
 
+- Bad configuration syntax in kafka-idmef-converter [\#49](https://github.com/scissor-project/open-scissor/issues/49)
+- Missing pyyaml in kafka-idmef-converter [\#48](https://github.com/scissor-project/open-scissor/issues/48)
+- kafka-idmef-converter "unbound variable" in deployment [\#45](https://github.com/scissor-project/open-scissor/issues/45)
 - Cannot ping gitlab.scissor-project.com from VM [\#43](https://github.com/scissor-project/open-scissor/issues/43)
 - prelude-manager should be resilient to reboots [\#41](https://github.com/scissor-project/open-scissor/issues/41)
 - prelude-manager-oss iptables configuration is not persisted [\#38](https://github.com/scissor-project/open-scissor/issues/38)
@@ -36,6 +39,9 @@
 - kafka VM configuration fails during post-install \(404 on kafka URL\) [\#26](https://github.com/scissor-project/open-scissor/issues/26)
 - Kafka VM deployment.sh script uses an hardcoded network interface and IPs [\#16](https://github.com/scissor-project/open-scissor/issues/16)
 - Prelude Correlator and Prelude Connector cannot connect to the Prelude Manager [\#6](https://github.com/scissor-project/open-scissor/issues/6)
+- Modified configuration syntax in kafka-idmef-converter [\#51](https://github.com/scissor-project/open-scissor/pull/51) ([agil3b3ast](https://github.com/agil3b3ast))
+- Add pyyaml dependency in kafka-idmef-converter [\#50](https://github.com/scissor-project/open-scissor/pull/50) ([agil3b3ast](https://github.com/agil3b3ast))
+- Dynamically validate deployment script parameters [\#46](https://github.com/scissor-project/open-scissor/pull/46) ([ferrarimarco](https://github.com/ferrarimarco))
 - Add a prefix to the locally managed domain [\#44](https://github.com/scissor-project/open-scissor/pull/44) ([ferrarimarco](https://github.com/ferrarimarco))
 - Make prelude-manager service resilient to reboots by configuring it as a service [\#42](https://github.com/scissor-project/open-scissor/pull/42) ([agil3b3ast](https://github.com/agil3b3ast))
 - Saved prelude-manager-oss iptables rules after reload [\#40](https://github.com/scissor-project/open-scissor/pull/40) ([agil3b3ast](https://github.com/agil3b3ast))
