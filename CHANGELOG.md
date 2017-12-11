@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased](https://github.com/scissor-project/open-scissor/tree/HEAD)
+## [1.0.0](https://github.com/scissor-project/open-scissor/tree/1.0.0) (2017-12-11)
 
 **Implemented enhancements:**
 
