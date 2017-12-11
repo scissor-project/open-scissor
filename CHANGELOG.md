@@ -4,6 +4,7 @@
 
 **Implemented enhancements:**
 
+- Prepare 1.0.0 release [\#47](https://github.com/scissor-project/open-scissor/issues/47)
 - Comment Requirements section contents in PULL\_REQUEST\_TEMPLATE.md [\#36](https://github.com/scissor-project/open-scissor/issues/36)
 - Configure Appveyor CI [\#32](https://github.com/scissor-project/open-scissor/issues/32)
 - Configure Vagrantfile validation during CI builds [\#31](https://github.com/scissor-project/open-scissor/issues/31)
