@@ -61,3 +61,7 @@ Run `test/test-docker-images.sh --docker-context-path=.` from the root of the pr
 1. Build each image
 1. Start all the containers
 1. Test all the containers for compliance
+
+# Legacy Version
+
+You can find what we consider the unmatained legacy version (Virtual Machines managed by Vagrant) by checking out the `1.0.0` git tag.
