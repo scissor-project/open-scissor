@@ -22,8 +22,8 @@ RUN \
 RUN \
   apt-get update \
   && apt-get install -y --no-install-recommends \
-    flume-ng=1.6.0+cdh5.13.1+174-1.cdh5.13.1.p0.3~xenial-cdh5.13.1 \
-    flume-ng-agent=1.6.0+cdh5.13.1+174-1.cdh5.13.1.p0.3~xenial-cdh5.13.1 \
+    flume-ng=1.6.0+cdh5.14.0+181-1.cdh5.14.0.p0.47~xenial-cdh5.14.0 \
+    flume-ng-agent=1.6.0+cdh5.14.0+181-1.cdh5.14.0.p0.47~xenial-cdh5.14.0 \
   && apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 

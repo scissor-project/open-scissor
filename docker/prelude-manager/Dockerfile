@@ -8,8 +8,8 @@ RUN \
     hostname-3.18-2.fc26 \
     iproute-4.11.0-1.fc26 \
     libpreludedb-3.1.0-2.fc26 \
-    mariadb-10.1.29-1.fc26 \
-    net-tools-2.0-0.43.20160912git.fc26 \
+    mariadb-10.1.30-2.fc26 \
+    net-tools-2.0-0.44.20160912git.fc26 \
     nmap-ncat-7.40-8.fc26 \
     prelude-manager-3.1.0-2.fc26 \
     prelude-manager-db-plugin-3.1.0-2.fc26 \
@@ -17,7 +17,7 @@ RUN \
     preludedb-mysql-3.1.0-2.fc26 \
     preludedb-tools-3.1.0-2.fc26 \
     procps-ng-3.3.10-13.fc26 \
-    wget-1.19.2-2.fc26 \
+    wget-1.19.4-1.fc26 \
   && dnf clean all \
 	&& rm -rf /var/cache/dnf
 
