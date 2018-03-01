@@ -94,7 +94,7 @@ If you prefer a manual setup to the development box described above, here are th
 - [InSpec](https://www.inspec.io) 1.50.1+
 
 ### Running the Test Suite
-Run `test/test-docker-images.sh --docker-context-path=.` from the root of the project. This script will:
+Run `test/test-docker-images.sh --docker-context-path=docker/` from the root of the project. This script will:
 
 1. Lint Dockerfiles and shell scripts
 1. Build each image
