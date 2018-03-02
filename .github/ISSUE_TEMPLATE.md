@@ -7,7 +7,6 @@ Have you read OpenSCISSOR Code of Conduct? By filing an Issue, you are expected 
 ### Prerequisites
 
 * [ ] Put an X between the brackets on this line if you have done all of the following:
-    * Reproduced after disabling all Vagrant plugins you installed
     * Checked that your issue isn't already filed: https://github.com/scissor-project/open-scissor/issues
 
 ### Description
@@ -16,8 +15,9 @@ Have you read OpenSCISSOR Code of Conduct? By filing an Issue, you are expected 
 
 ### Host Environment
 - Host operating system and version:
-- Vagrant version:
+- Vagrant version (output of `vagrant --version`):
 - Hypervisor version:
+- Docker version (output of `docker --version`):
 
 ### Output
 
