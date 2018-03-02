@@ -73,7 +73,7 @@ Note that collaborators cannot push directly to `development` and `master` branc
 
 ## Development Tooling
 If you want to setup a development environment for this project, you may follow one of the following paths:
-1. Use an automatically managed (vritual) development box
+1. Use an automatically managed (virtual) development box
 1. Manually setup your workstation
 
 ### Development Box
