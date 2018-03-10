@@ -149,6 +149,14 @@ services:
     domainname: scissor-project.com
     hostname: kafka-idmef-converter
     image: scissorproject/kafka-idmef-converter:latest
+  raw-data-analyzer:
+    build: ./raw-data-analyzer
+    container_name: scissorproject-raw-data-analyzer
+    depends_on:
+      - kafka
+    domainname: scissor-project.com
+    hostname: raw-data-analyzer
+    image: scissorproject/raw-data-analyzer:latest
   kafka-prelude-connector:
     build: ./kafka-prelude-connector
     container_name: scissorproject-kafka-prelude-connector
