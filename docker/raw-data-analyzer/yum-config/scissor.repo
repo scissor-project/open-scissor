@@ -1,0 +1,10 @@
+[SCISSOR]
+name=SCISSOR
+baseurl=https://yum.sixsq.com/scissor/yum
+enabled=1
+protect=0
+gpgcheck=0
+metadata_expire=300s
+autorefresh=1
+type=rpm-md
+sslverify=0
