@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0.1](https://github.com/scissor-project/open-scissor/tree/1.0.1) (2018-03-26)
+
+**Fixed bugs:**
+
+- logstash24 deployment script: IP address parameter is set to the hostname [\#59](https://github.com/scissor-project/open-scissor/issues/59)
+
 ## [1.0.0](https://github.com/scissor-project/open-scissor/tree/1.0.0) (2017-12-11)
 
 **Implemented enhancements:**

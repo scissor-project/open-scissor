@@ -34,7 +34,7 @@ mkdir ca
 
 # Renew TLS keys and certs using PKCS8 format
 project="/root/pd"
-ipAdd=$NODE_NAME
+ipAdd="$1"
 
 # CA BUILD
 # private key generation
