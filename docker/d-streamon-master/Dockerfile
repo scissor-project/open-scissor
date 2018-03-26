@@ -19,7 +19,7 @@ RUN \
     ansible=2.0.0.2-2ubuntu1 \
     build-essential=12.1ubuntu2 \
     cmake=3.5.1-1ubuntu3 \
-    curl=7.47.0-1ubuntu2.6 \
+    curl=7.47.0-1ubuntu2.7 \
     g++=4:5.3.1-1ubuntu1 \
     git=1:2.7.4-0ubuntu1.3 \
     libboost-dev=1.58.0.1ubuntu1 \
