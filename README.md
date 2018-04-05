@@ -25,7 +25,7 @@ The goal of this project is to have a fully functional virtualized environment u
 ## Docker Containers
 Each architectural component is deployed in it's own Docker container.
 
-Here is a list of all the managed components (as you can see from the Vagrantfile) with a brief description:
+Here is a list of all the managed components with a brief description:
 1. `kafka`: provides an Apache Kafka message broker (the SMI component of SCISSOR) as well as Apache Zookeeper (needed by the Edge Agent Controller (see flume VM) and the Control and Coordination Agent (in this kafka VM)).
 1. `flume`: provides parse, filter and output components of the Command and Control Layer (CCL) processing chain.
 1. `semantics`: provides enrich and transform components of the CCL processing chain.
