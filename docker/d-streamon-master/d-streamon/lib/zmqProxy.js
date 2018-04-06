@@ -26,9 +26,8 @@ xsub.on('message', function() {
 
   for (var i = 0; i < arguments.length; i++){
     msg[i] = arguments[i].toString();
-    //console.log("message = "+msg[i]);
+   //console.log("message = "+msg[i]);
   }
-
   zmqQueue.queue.push(msg, function (err) {
       //console.log("salvato nel mio");
       var yourMsg = "["+msg[1]+"]"+msg[2];

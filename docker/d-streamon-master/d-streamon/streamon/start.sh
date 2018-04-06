@@ -1,14 +1,15 @@
-#! /bin/bash -e
+#! /bin/bash
 
-input=$1
-id=$2
+input="$1"
+
+#id="$2"
 
 if [ -z "$input" ]; then
     echo "No input file specified."
     exit 1
 fi
 
-cd scripts
+cd scripts || exit
 
 prefix=""
 
@@ -19,7 +20,7 @@ fi
 
 rm -f botstream.xml values.txt
 
-python2 moin.py "$prefix$input" "$id"
+python2 moin.py "$prefix$input" "$2"
 
 res=$?
 
@@ -47,11 +48,11 @@ res=$?
 
 if [ $res != 0  ]
 then
-    echo "Compile error, check $input file"
+    echo 'Compile error, check ' "$input" 'file'
     exit 1
 fi
 
-cd packet
+cd packet || exit
 
 if [ -e alone.tar ]
 then

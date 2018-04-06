@@ -1,0 +1,24 @@
+<botstream>
+  <source type="live" name="ens3"/>
+  <publisher protocol="tcp" ip="10.10.1.42" port="5560" />
+  <statedef id="default" />
+
+  <metrics>
+    <metric name="m1">
+      <variation_detector status="off"/>
+      <variation_monitor status="on" type="dleft" />
+    </metric>
+  </metrics>
+
+  <features>
+    <feature name="fc_s" body="m1"/>
+  </features>
+
+  <event type="packet" selector="proto tcp and dst_port 502 and modbus_fc 8" primary-key="ip_dst">
+    <state id="default" level="WARN" code="S0" description="Modbus Device Scan Monitoring">
+      <use-metric id="m1" vd_update="ip_dst"/>
+      <condition expression="true" action='Publish(log, %ts %probe.id %state.code %state.level \"%state.description\" ip_src=%ip_src ip_dst=%ip_dst modbus_fc=%modbus_fc modbus_ti=%modbus_ti)' next_state=""/>
+    </state>
+  </event>
+
+</botstream>

@@ -108,7 +108,7 @@ app.use(bugsnag.errorHandler);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
-	console.log('Semaphore listening on port ' + app.get('port'));
+	console.log('D-streamon listening on port ' + app.get('port'));
 });
 exports.io = io = require('socket.io').listen(server);
 

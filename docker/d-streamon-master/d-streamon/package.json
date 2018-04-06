@@ -1,40 +1,26 @@
 {
-  "name": "semaphore",
+  "name": "d-streamon",
   "version": "0.0.0",
-  "description": "Open Source Alternative to Ansible Tower",
-  "main": "bin/semaphore.js",
+  "description": "Distributed framework for network monitoring",
+  "main": "bin/server.js",
   "scripts": {
     "test": "mocha -R spec",
-    "start": "node bin/semaphore.js",
+    "start": "node bin/server.js",
     "prepublish": "./node_modules/.bin/bower --allow-root install"
   },
   "repository": {
-    "type": "git",
-    "url": "git://github.com/ansible-semaphore/semaphore.git"
+    "type": "git"
   },
   "keywords": [
-    "ansible"
+    "d-streamon","streamon"
   ],
-  "author": "Matej Kramny",
+  "author": "Pad",
+  "email": "davide.palmisano@uniroma2.it",
   "contributors": [
     {
-      "name": "Matej Kramny",
-      "email": "github@matej.me"
-    },
-    {
-      "name": "tjheeta",
-      "email": ""
-    },
-    {
-      "name": "Alan Campbell",
-      "email": "alan.campbell@castawaylabs.com"
+      "name": "Giulio Picierro"
     }
   ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ansible-semaphore/semaphore/issues"
-  },
-  "homepage": "https://github.com/ansible-semaphore/semaphore",
   "dependencies": {
     "async": "2.1.4",
     "bcrypt": "0.8.7",
