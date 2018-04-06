@@ -1,13 +1,37 @@
 # Change Log
 
-## [1.0.1](https://github.com/scissor-project/open-scissor/tree/1.0.1) (2018-03-26)
+## [Unreleased](https://github.com/scissor-project/open-scissor/tree/HEAD)
+
+[Full Changelog](https://github.com/scissor-project/open-scissor/compare/1.0.1...HEAD)
 
 **Fixed bugs:**
 
+- problem with vagrant up in development branch [\#60](https://github.com/scissor-project/open-scissor/issues/60)
+
+**Implemented enhancements:**
+
+- Upgrade Docker Compose to 1.20.1 [\#61](https://github.com/scissor-project/open-scissor/issues/61)
+
+## [1.0.1](https://github.com/scissor-project/open-scissor/tree/1.0.1) (2018-03-26)
+[Full Changelog](https://github.com/scissor-project/open-scissor/compare/1.0.0...1.0.1)
+
+**Implemented enhancements:**
+
+- Move configuration from external sources in this project [\#55](https://github.com/scissor-project/open-scissor/issues/55)
+- Ensure script portabilty [\#22](https://github.com/scissor-project/open-scissor/issues/22)
+- Dockerize all the components [\#12](https://github.com/scissor-project/open-scissor/issues/12)
+- Reduce the number of VMs [\#8](https://github.com/scissor-project/open-scissor/issues/8)
+- Use the same operating system image as a base Vagrant box [\#7](https://github.com/scissor-project/open-scissor/issues/7)
+- Do not assume fixed IPs for VMs [\#3](https://github.com/scissor-project/open-scissor/issues/3)
+- Make configuration scripts idempotent [\#2](https://github.com/scissor-project/open-scissor/issues/2)
+
+**Fixed bugs:**
+
+- Unspecified dependency versions and upgrade commands may lead to unreproducible builds [\#9](https://github.com/scissor-project/open-scissor/issues/9)
+- vagrant up does not work for some CentOS VMs or with more than 8 VMs [\#1](https://github.com/scissor-project/open-scissor/issues/1)
 - logstash24 deployment script: IP address parameter is set to the hostname [\#59](https://github.com/scissor-project/open-scissor/issues/59)
 
 ## [1.0.0](https://github.com/scissor-project/open-scissor/tree/1.0.0) (2017-12-11)
-
 **Implemented enhancements:**
 
 - Prepare 1.0.0 release [\#47](https://github.com/scissor-project/open-scissor/issues/47)
