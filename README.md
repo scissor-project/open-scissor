@@ -12,7 +12,7 @@ The goal of this project is to have a fully functional virtualized environment u
 ## Dependencies
 
 - [Docker](https://www.docker.com/) 17.12+
-- [Docker Compose](https://docs.docker.com/compose/) 1.18.0
+- [Docker Compose](https://docs.docker.com/compose/) 1.17.1+
 
 ## Run
 
