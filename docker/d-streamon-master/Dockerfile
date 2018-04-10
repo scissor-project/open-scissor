@@ -25,7 +25,7 @@ RUN \
     libboost-dev=1.58.0.1ubuntu1 \
     libpcap-dev=1.7.4-2 \
     libpugixml-dev=1.7-2 \
-    libssl-dev=1.0.2g-1ubuntu4.10 \
+    libssl-dev=1.0.2g-1ubuntu4.11 \
     libzmq3-dev=4.1.4-7 \
     mongodb-server=1:2.6.10-0ubuntu1 \
     redis-server=2:3.0.6-1 \
