@@ -36,5 +36,10 @@ node_modules
 #D-Streamon
 running
 streamon/zmq-client/zmq_client
+streamon/zmq-client/client
 streamon/packet/*
 values.txt
+bin/app_err
+bin/app_log
+example.cache
+new.pcap

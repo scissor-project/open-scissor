@@ -53,6 +53,7 @@ WORKDIR $D_STREAMON_PATH
 RUN \
   . "$NVM_DIR"/nvm.sh \
   && nvm install v0.10.25 \
+  && npm config set registry="http://registry.npmjs.org/" \
   && npm install --unsafe-perm \
   && npm install --global gulp@3.9.1 \
   && npm install --global swagger@0.6.0
