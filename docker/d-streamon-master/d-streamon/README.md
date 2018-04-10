@@ -62,8 +62,8 @@ Network data:
 | Variable Name | Description            | Value                           |
 | ------------- | ---------------------- | ------------------------------- |
 | PORT          | Web Port               | `9999`                          |
-| Master IP     | Internal IP            | `10.0.0.100`                    |
-| Slave1 IP     | Internal IP            | `10.0.0.101`                    |
-| Slave2 IP     | Internal IP            | `10.0.0.102`                    |
-| Slave3 IP     | Internal IP            | `10.0.0.103`                    |
-| Slave4 IP     | Internal IP            | `10.0.0.104`                    |
+| Master IP     | Internal IP            | `10.10.1.100`                    |
+| Slave1 IP     | Internal IP            | `10.10.1.101`                    |
+| Slave2 IP     | Internal IP            | `10.10.1.102`                    |
+| Slave3 IP     | Internal IP            | `10.10.1.103`                    |
+| Slave4 IP     | Internal IP            | `10.10.1.104`                    |

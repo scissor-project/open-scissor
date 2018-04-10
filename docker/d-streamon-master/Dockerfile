@@ -29,6 +29,7 @@ RUN \
     libzmq3-dev=4.1.4-7 \
     mongodb-server=1:2.6.10-0ubuntu1 \
     redis-server=2:3.0.6-1 \
+    openssh-client=1:7.2p2-4ubuntu2.4 \
   && apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -58,8 +59,14 @@ RUN \
   && npm install --global gulp@3.9.1 \
   && npm install --global swagger@0.6.0
 
-RUN \
-  echo -e "[defaults]\\nhost_key_checking = False" > /etc/ansible/ansible.cfg
+RUN apt update && apt install -y sshpass
+
+RUN echo -e "[defaults]\\nhost_key_checking = False" > /etc/ansible/ansible.cfg
+
+RUN ssh-keygen -N "" -f "$HOME"/.ssh/id_rsa
+
+RUN sed -ie 's/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g' /etc/ssh/ssh_config
+
 
 ENV INIT_SCRIPT_PATH /opt/start-d-streamon-master.sh
 COPY start-d-streamon-master.sh $INIT_SCRIPT_PATH

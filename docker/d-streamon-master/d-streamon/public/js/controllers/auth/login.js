@@ -41,9 +41,9 @@ define([
 		};
 
 		//---Autologin---
-		$timeout(function() {
-        angular.element(document.getElementById('bar')).trigger('click');
-    });
+		// $timeout(function() {
+    //     angular.element(document.getElementById('bar')).trigger('click');
+    // });
 		//---Autologin---
 
 	}]);

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+/etc/init.d/ssh start
+
 sleep infinity
 tail -F \
   "$SCISSOR_LOG_DIR"/streamon.log \

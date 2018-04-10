@@ -28,7 +28,7 @@ exports.router = function(app) {
 	templates.setup();
 
 	app.get('/', layout);
-	app.all('*', util.authorized);
+	//app.all('*', util.authorized);
 	app.post('/createProbes', createProbes)
 
 	// Handle HTTP reqs
@@ -66,11 +66,12 @@ exports.router = function(app) {
 };
 
 function layout (req, res) {
-	if (res.locals.loggedIn && res.locals.user !== undefined) {
-		res.render('layout');
-	} else {
-		res.render('auth');
-	}
+	// if (res.locals.loggedIn && res.locals.user !== undefined) {
+	// 	res.render('layout');
+	// } else {
+	// 	res.render('auth');
+	// }
+	res.render('layout');
 }
 //---- REST ----
 function createProbes(req, res){
