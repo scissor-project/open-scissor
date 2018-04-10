@@ -5,11 +5,11 @@ define([
 		var self = this;
 
 		self.getUser = function(cb) {
-			$http.get('/profile').success(function(data) {
-				$rootScope.user = self.user = data.user;
-
-				cb();
-			});
+			// $http.get('/profile').success(function(data) {
+			// 	$rootScope.user = self.user = data.user;
+			//
+			// 	cb();
+			// });
 		};
 	});
 });

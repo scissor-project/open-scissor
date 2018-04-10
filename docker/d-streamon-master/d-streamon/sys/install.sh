@@ -11,7 +11,8 @@
 ### END INIT INFO
 
 # Using the lsb functions to perform the operations.
-./lib/lsb/init-functions
+# shellcheck disable=SC1091
+. /lib/lsb/init-functions
 # Process name ( For display )
 NAME=Streamon
 # Daemon name, where is the actual executable
