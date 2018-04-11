@@ -6,13 +6,42 @@ language: shell
 services:
   - docker
 
-before_install:
-  - gem install inspec -v 1.49.2
-  - sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-
-script:
- - find . -type f -iname "*.sh" | while read -r line; do echo "Linting $line"; docker run -v "$(pwd)":/mnt --rm koalaman/shellcheck:v0.4.7 "$line"; done
- - test/test-docker-images.sh --docker-context-path=./docker
-
 matrix:
   fast_finish: true
+
+jobs:
+  include:
+    - stage: lint all shell scripts
+      script: find . -type f -iname "*.sh" | while read -r line; do echo "Linting $line"; docker run -v "$(pwd)":/mnt --rm koalaman/shellcheck:v0.4.7 "$line"; done
+    - stage: lint dockerfiles
+      script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
+    - stage: lint docker shell scripts
+      script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
+    - stage: build images
+      script: docker-compose --file "$docker_context_path"/docker-compose.yml build zookeeper
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build flume
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build semantics
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build logstash
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build logstash24
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build datasource24
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build d-streamon-master
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build d-streamon-slave
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build prelude-manager-db
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build prelude-manager
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build event-correlator
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build prewikka
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka-idmef-converter
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka-prelude-connector 
+    - stage: run integration tests
+      before_install:
+        - gem install inspec -v 2.1.30
+        - sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+      script: test/test-docker-images.sh --docker-context-path=./docker --only=integration
+
+stages:
+  - lint shell scripts
+  - lint dockerfiles
+  - lint docker shell scripts
+  - build images
+  - run integration tests
