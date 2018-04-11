@@ -9,61 +9,60 @@ services:
 matrix:
   fast_finish: true
 
-env:
-  - DOCKER_CONTEXT_PATH=docker
-
 jobs:
   include:
     - stage: lint all shell scripts
       script: find . -type f -iname "*.sh" | while read -r line; do echo "Linting $line"; docker run -v "$(pwd)":/mnt --rm koalaman/shellcheck:v0.4.7 "$line"; done
     - stage: lint dockerfiles
-      script: test/test-docker-images.sh --docker-context-path=$DOCKER_CONTEXT_PATH --only=lint-dockerfile
+      script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
     - stage: lint docker shell scripts
-      script: test/test-docker-images.sh --docker-context-path=$DOCKER_CONTEXT_PATH --only=lint-dockerfile
+      script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
     - stage:   build images
       env:
+        - DOCKER_CONTEXT_PATH=docker
         - IMAGE_NAME="zookeeper"
-      script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+      script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
+        - DOCKER_CONTEXT_PATH=docker
         - IMAGE_NAME="kafka"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="flume"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="semantics"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="logstash"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="logstash24"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="datasource24"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="d-streamon-master"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="d-streamon-slave"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prelude-manager-db"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prelude-manager"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="event-correlator"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prewikka"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="kafka-idmef-converter"
-    - script:  docker-compose --file "$DOCKER_CONTEXT_PATH"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="kafka-prelude-connector"
     - stage: run integration tests
