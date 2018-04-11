@@ -17,22 +17,52 @@ jobs:
       script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
     - stage: lint docker shell scripts
       script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
-    - stage: build images
-      script: docker-compose --file "$docker_context_path"/docker-compose.yml build zookeeper
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build flume
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build semantics
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build logstash
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build logstash24
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build datasource24
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build d-streamon-master
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build d-streamon-slave
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build prelude-manager-db
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build prelude-manager
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build event-correlator
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build prewikka
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka-idmef-converter
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka-prelude-connector
+    - stage:   build images
+      env:
+        - IMAGE_NAME="zookeeper"
+      script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="kafka"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="flume"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="semantics"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="logstash"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="logstash24"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="datasource24"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="d-streamon-master"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="d-streamon-slave"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="prelude-manager-db"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="prelude-manager"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="event-correlator"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="prewikka"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="kafka-idmef-converter"
+    - script:  docker-compose --file "$docker_context_path"/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="kafka-prelude-connector"
     - stage: run integration tests
       before_install:
         - gem install inspec -v 2.1.30
