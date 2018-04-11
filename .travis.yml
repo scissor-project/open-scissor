@@ -32,7 +32,7 @@ jobs:
     - script: docker-compose --file "$docker_context_path"/docker-compose.yml build event-correlator
     - script: docker-compose --file "$docker_context_path"/docker-compose.yml build prewikka
     - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka-idmef-converter
-    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka-prelude-connector 
+    - script: docker-compose --file "$docker_context_path"/docker-compose.yml build kafka-prelude-connector
     - stage: run integration tests
       before_install:
         - gem install inspec -v 2.1.30
@@ -40,7 +40,7 @@ jobs:
       script: test/test-docker-images.sh --docker-context-path=./docker --only=integration
 
 stages:
-  - lint shell scripts
+  - lint all shell scripts
   - lint dockerfiles
   - lint docker shell scripts
   - build images
