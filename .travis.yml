@@ -18,13 +18,11 @@ jobs:
     - stage: lint docker shell scripts
       script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
     - stage:   build images
-      env:
-        - DOCKER_CONTEXT_PATH=docker
-        - IMAGE_NAME="zookeeper"
       script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+      env:
+        - IMAGE_NAME="zookeeper"
     - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
-        - DOCKER_CONTEXT_PATH=docker
         - IMAGE_NAME="kafka"
     - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
