@@ -16,6 +16,12 @@ service mongodb restart
 . "$NVM_DIR"/nvm.sh \
 && swagger project edit -s --host 0.0.0.0 -p 3000 > "$SCISSOR_LOG_DIR"/swagger.log 2>&1 &
 
+# Wait for node to start
+echo "Waiting for node to be ready"
+while ! nc localhost 3000 </dev/null; do echo "Wating 10 secs..."; sleep 10; done
+while ! nc localhost 5570 </dev/null; do echo "Wating 10 secs..."; sleep 10; done
+while ! nc localhost 9999 </dev/null; do echo "Wating 10 secs..."; sleep 10; done
+
 tail -F \
   "$SCISSOR_LOG_DIR"/streamon.log \
   "$SCISSOR_LOG_DIR"/gulp.log \
