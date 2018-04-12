@@ -8,6 +8,11 @@ services:
 
 matrix:
   fast_finish: true
+env:
+  global:
+    - export TRAVIS_BUILD_NUMBER
+    - export TAG="$(if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" == "master" ]]; then echo "latest"; else echo $"TRAVIS_PULL_REQUEST_BRANCH"; fi)"
+    - export REPO=scissorproject/openscissor
 
 jobs:
   include:
@@ -18,13 +23,13 @@ jobs:
     - stage: lint docker shell scripts
       script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
     - stage: build images
+      after_success:
+        - test/tag-push-docker.sh
       script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="zookeeper"
     - script:
         - docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker push scissorproject/openscissor
       env:
         - IMAGE_NAME="kafka"
     - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
