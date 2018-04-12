@@ -10,12 +10,13 @@ test_docker_container () (
 
 set -e
 
-if ! TEMP="$(getopt -o vdm: --long docker-context-path:,only:,skip-build,skip-start -n 'test-docker-image' -- "$@")" ; then echo "Terminating..." >&2 ; exit 1 ; fi
+if ! TEMP="$(getopt -o vdm: --long docker-context-path:,only:,skip-build,skip-pull,skip-start -n 'test-docker-image' -- "$@")" ; then echo "Terminating..." >&2 ; exit 1 ; fi
 eval set -- "$TEMP"
 
 docker_context_path=
 only=
 skip_build=false
+skip_pull=false
 skip_start=false
 
 while true; do
@@ -23,6 +24,7 @@ while true; do
     -b | --skip-build ) skip_build=true; shift 1 ;;
     -c | --docker-context-path ) docker_context_path="$2"; shift 2 ;;
     -o | --only ) only="$2"; shift 2 ;;
+    -p | --skip-pull ) skip_pull=true; shift 1 ;;
     -s | --skip-start ) skip_start=true; shift 1 ;;
     -- ) shift; break ;;
     * ) break ;;
@@ -51,18 +53,34 @@ fi;
 if [ "$only" = "integration" ] || [ -z "$only" ]; then
   echo "Running docker-compose from $docker_context_path"
 
+  docker_compose_file_name="docker-compose.yml"
+  docker_compose_file_name_travis="docker-compose.travis.yml"
+
+  if [ "$TRAVIS" = "true" ]; then
+    sed "s/latest/$TRAVIS_BUILD_NUMBER/g" "$docker_context_path"/"$docker_compose_file_name" > "$docker_context_path"/"$docker_compose_file_name_travis"
+    docker_compose_file_name="$docker_compose_file_name_travis"
+  fi
+  echo "Using $docker_compose_file_name file"
+
   if [ "$skip_build" = true ] ; then
     echo "Skipping image building phase"
   else
     echo "Building images"
-    docker-compose --file "$docker_context_path"/docker-compose.yml build
+    docker-compose --file "$docker_context_path"/"$docker_compose_file_name" build
+  fi
+
+  if [ "$skip_pull" = true ] ; then
+    echo "Skipping image pulling phase"
+  else
+    echo "Pulling images from the registry"
+    docker-compose --file "$docker_context_path"/"$docker_compose_file_name" pull
   fi
 
   if [ "$skip_start" = true ] ; then
     echo "Skipping container start phase"
   else
     echo "Starting services"
-    docker-compose --file "$docker_context_path"/docker-compose.yml up -d --force-recreate
+    docker-compose --file "$docker_context_path"/"$docker_compose_file_name" up -d --force-recreate --no-build
 
     echo "Waiting for containers to start"
     sleep 60
@@ -70,7 +88,7 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
 
   echo "Running tests on containers"
   test_path_prefix="test/inspec/docker"
-  docker-compose --file "$docker_context_path"/docker-compose.yml ps -q | while read -r container_id; do
+  docker-compose --file "$docker_context_path"/"$docker_compose_file_name" ps -q | while read -r container_id; do
     container_full_name="$(docker inspect --format='{{.Name}}' "$container_id" | tr --delete "/")"
     container_name_prefix="scissorproject-"
     container_name="${container_full_name#"$container_name_prefix"}"
@@ -78,5 +96,5 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
   done
 
   echo "Stopping and removing services"
-  docker-compose --file "$docker_context_path"/docker-compose.yml down --volumes --remove-orphans
+  docker-compose --file "$docker_context_path"/"$docker_compose_file_name" down --volumes --remove-orphans
 fi;
