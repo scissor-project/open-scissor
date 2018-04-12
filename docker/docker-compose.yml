@@ -5,7 +5,7 @@ services:
     container_name: scissorproject-zookeeper
     domainname: scissor-project.com
     hostname: zookeeper
-    image: scissorproject/zookeeper:latest
+    image: scissorproject/openscissor:zookeeper-latest
     ports:
       - "2181:2181"
   kafka:
@@ -21,7 +21,7 @@ services:
       TOPICS: cam,env,net,scada
       ZOOKEEPER_HOST: zookeeper:2181
     hostname: kafka
-    image: scissorproject/kafka:latest
+    image: scissorproject/openscissor:kafka-latest
     ports:
       - "9092:9092"
   flume:
@@ -32,7 +32,7 @@ services:
       - zookeeper
     domainname: scissor-project.com
     hostname: flume
-    image: scissorproject/flume:latest
+    image: scissorproject/openscissor:flume-latest
     ports:
       - "5445:5445"
       - "5446:5446"
@@ -48,7 +48,7 @@ services:
       - flume
     domainname: scissor-project.com
     hostname: semantics
-    image: scissorproject/semantics:latest
+    image: scissorproject/openscissor:semantics-latest
     ports:
       - "5467:5467"
       - "5067:5067"
@@ -62,7 +62,7 @@ services:
       # - streamon
     domainname: scissor-project.com
     hostname: logstash
-    image: scissorproject/logstash:latest
+    image: scissorproject/openscissor:logstash-latest
     ports:
       - "8892:8892"
       - "8893:8893"
@@ -73,7 +73,7 @@ services:
       - flume
     domainname: scissor-project.com
     hostname: logstash24
-    image: scissorproject/logstash24:latest
+    image: scissorproject/openscissor:logstash24-latest
     ports:
       - "8895:8895"
       - "8896:8896"
@@ -84,13 +84,13 @@ services:
     container_name: scissorproject-datasource24
     domainname: scissor-project.com
     hostname: datasource24
-    image: scissorproject/datasource24:latest
+    image: scissorproject/openscissor:datasource24-latest
   d-streamon-master:
     build: ./d-streamon-master
     container_name: scissorproject-d-streamon-master
     domainname: scissor-project.com
     hostname: d-streamon-master
-    image: scissorproject/d-streamon-master:latest
+    image: scissorproject/openscissor:d-streamon-master-latest
     ports:
       - "3000:3000"
       - "5570:5570"
@@ -101,7 +101,7 @@ services:
     container_name: scissorproject-d-streamon-slave
     domainname: scissor-project.com
     hostname: d-streamon-slave
-    image: scissorproject/d-streamon-slave:latest
+    image: scissorproject/openscissor:d-streamon-slave-latest
   prelude-manager-db:
     container_name: scissorproject-prelude-manager-db
     domainname: scissor-project.com
@@ -118,7 +118,7 @@ services:
       - prelude-manager-db
     domainname: scissor-project.com
     hostname: prelude-manager
-    image: scissorproject/prelude-manager:latest
+    image: scissorproject/openscissor:prelude-manager-latest
     ports:
       - "4690:4690"
       - "5553:5553"
@@ -129,7 +129,7 @@ services:
       - prelude-manager
     domainname: scissor-project.com
     hostname: event-correlator
-    image: scissorproject/event-correlator:latest
+    image: scissorproject/openscissor:event-correlator-latest
   prewikka:
     build: ./prewikka
     container_name: scissorproject-prewikka
@@ -138,7 +138,7 @@ services:
       - prelude-manager-db
     domainname: scissor-project.com
     hostname: prewikka
-    image: scissorproject/prewikka:latest
+    image: scissorproject/openscissor:prewikka-latest
     ports:
       - "80:80"
   kafka-idmef-converter:
@@ -148,7 +148,7 @@ services:
       - kafka
     domainname: scissor-project.com
     hostname: kafka-idmef-converter
-    image: scissorproject/kafka-idmef-converter:latest
+    image: scissorproject/openscissor:kafka-idmef-converter-latest
   raw-data-analyzer:
     build: ./raw-data-analyzer
     container_name: scissorproject-raw-data-analyzer
@@ -156,7 +156,7 @@ services:
       - kafka
     domainname: scissor-project.com
     hostname: raw-data-analyzer
-    image: scissorproject/raw-data-analyzer:latest
+    image: scissorproject/openscissor:raw-data-analyzer-latest
   kafka-prelude-connector:
     build: ./kafka-prelude-connector
     container_name: scissorproject-kafka-prelude-connector
@@ -165,4 +165,4 @@ services:
       - prelude-manager
     domainname: scissor-project.com
     hostname: kafka-prelude-connector
-    image: scissorproject/kafka-prelude-connector:latest
+    image: scissorproject/openscissor:kafka-prelude-connector-latest

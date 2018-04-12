@@ -16,52 +16,65 @@ jobs:
     - script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
     - script: test/test-docker-images.sh --docker-context-path=docker --only=lint-shell
     - stage: build images
-      after_success:
-        - test/tag-push-docker.sh
+      after_success: test/tag-push-docker.sh
       script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="zookeeper"
-    - script:
+    - after_success: test/tag-push-docker.sh
+      script:
         - docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="kafka"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="flume"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="semantics"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="logstash"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="logstash24"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="datasource24"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="d-streamon-master"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="d-streamon-slave"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prelude-manager-db"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prelude-manager"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="event-correlator"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prewikka"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="kafka-idmef-converter"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="raw-data-analyzer"
     - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
@@ -71,7 +84,7 @@ jobs:
       before_install:
         - gem install inspec -v 2.1.30
         - sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-      script: test/test-docker-images.sh --docker-context-path=./docker --only=integration
+      script: test/test-docker-images.sh --docker-context-path=./docker --only=integration --skip-build
 
 stages:
   - linting
