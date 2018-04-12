@@ -12,58 +12,33 @@ architectures. It relies on the StreaMon platform, a solution
 for network monitoring originally designed for traditional
 middleboxes.
 
-## Vagrant quickstart
+## Test
 
-### Run Master
+### Run test probe
 
+To perform a simple D-streamon test use open-scissor.xml
+
+The configuration file uses the default IP addresses and creates a probe capable of detecting the portscan on the slave machine.
+
+### Probe alert
+
+To see the probes' alerts, for example, you can use the command:
 ```
-cd d-streamon/vagrant/master
-
-vagrant up
-
-...(wait installation)...
-
-vagrant ssh
-
-cd d-streamon/bin
-```
-
-To launch the server
-```
-node server.js
-```
-
-To launch the server in the background
-```
-./runBg.sh
-```
-
-### Run Slave
-
-In the vagrant file, you can launch up to 4 slave machines called slave1, slave2, slave3, slave4.
-
-To launch a single machine, for example slave3
-```
-cd d-streamon/vagrant/slaves
-
-vagrant up slave3
-```
-To launch all four
-```
-vagrant up
+nmap 172.18.0.3
 ```
 
 ## Network informations
 
-The master machine and the slave machines have two network interfaces, one for outbound and one used to create an internal network between the master machine and slave machines.
+The Master machine and the Slave machine have one network interface (eth0).
+The ZMQ PROXY run inside the Master machine.
 
 Network data:
 
-| Variable Name | Description            | Value                           |
-| ------------- | ---------------------- | ------------------------------- |
-| PORT          | Web Port               | `9999`                          |
-| Master IP     | Internal IP            | `10.10.1.100`                    |
-| Slave1 IP     | Internal IP            | `10.10.1.101`                    |
-| Slave2 IP     | Internal IP            | `10.10.1.102`                    |
-| Slave3 IP     | Internal IP            | `10.10.1.103`                    |
-| Slave4 IP     | Internal IP            | `10.10.1.104`                    |
+| Variable Name | Description                 | Value        |
+| ------------- | --------------------------- | ------------ |
+| PORT          | Web Port                    | `9999`       |
+| PORT          | Swagger Port                | `3000`       |
+| PORT          | ZMQ PROXY Port to subscribe | `5570`       |
+| ZMQ PROXY IP  | IP Address                  | `172.18.0.2` |
+| Master IP     | IP Address                  | `172.18.0.2` |
+| Slave  IP     | IP Address                  | `172.18.0.3` |
