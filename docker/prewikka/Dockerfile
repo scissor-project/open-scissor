@@ -9,7 +9,7 @@ RUN \
     httpd-2.4.25-8.fc26 \
     iproute-4.11.0-1.fc26 \
     libpreludedb-3.1.0-2.fc26 \
-    mariadb-mariadb-10.1.32-1.fc26 \
+    mariadb-10.1.32-1.fc26 \
     mod_wsgi-4.5.13-3.fc26 \
     net-tools-2.0-0.44.20160912git.fc26 \
     nmap-ncat-7.40-8.fc26 \
