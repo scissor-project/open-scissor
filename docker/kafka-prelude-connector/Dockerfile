@@ -64,6 +64,6 @@ COPY prelude-config/client.conf /etc/prelude/default/client.conf
 
 ENV PRELUDE_PROFILE connector
 
-RUN useradd connector -g prelude --shell /sbin/nologin --system
+RUN useradd connector -G prelude --shell /sbin/nologin --system
 
 ENTRYPOINT ["/opt/start-kafka-prelude-connector.sh"]

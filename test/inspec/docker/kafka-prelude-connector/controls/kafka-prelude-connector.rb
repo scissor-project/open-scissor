@@ -154,7 +154,7 @@ control "kafka-prelude-connector" do
 
   describe user('connector') do
     it { should exist }
-    its('group') { should eq 'prelude' }
+    its('groups') { should eq ['connector', 'prelude']}
     its('home') { should eq '/home/connector' }
     its('shell') { should eq '/sbin/nologin' }
   end
