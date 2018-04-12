@@ -10,16 +10,20 @@ test_docker_container () (
 
 set -e
 
-if ! TEMP="$(getopt -o vdm: --long docker-context-path:,only: -n 'test-docker-image' -- "$@")" ; then echo "Terminating..." >&2 ; exit 1 ; fi
+if ! TEMP="$(getopt -o vdm: --long docker-context-path:,only:,skip-build,skip-start -n 'test-docker-image' -- "$@")" ; then echo "Terminating..." >&2 ; exit 1 ; fi
 eval set -- "$TEMP"
 
 docker_context_path=
 only=
+skip_build=false
+skip_start=false
 
 while true; do
   case "$1" in
+    -b | --skip-build ) skip_build=true; shift 1 ;;
     -c | --docker-context-path ) docker_context_path="$2"; shift 2 ;;
     -o | --only ) only="$2"; shift 2 ;;
+    -s | --skip-start ) skip_start=true; shift 1 ;;
     -- ) shift; break ;;
     * ) break ;;
   esac
@@ -47,14 +51,22 @@ fi;
 if [ "$only" = "integration" ] || [ -z "$only" ]; then
   echo "Running docker-compose from $docker_context_path"
 
-  echo "Building images"
-  docker-compose --file "$docker_context_path"/docker-compose.yml build
+  if [ "$skip_build" = true ] ; then
+    echo "Skipping image building phase"
+  else
+    echo "Building images"
+    docker-compose --file "$docker_context_path"/docker-compose.yml build
+  fi
 
-  echo "Starting services"
-  docker-compose --file "$docker_context_path"/docker-compose.yml up -d --force-recreate
+  if [ "$skip_start" = true ] ; then
+    echo "Skipping container start phase"
+  else
+    echo "Starting services"
+    docker-compose --file "$docker_context_path"/docker-compose.yml up -d --force-recreate
 
-  echo "Waiting for containers to start"
-  sleep 60
+    echo "Waiting for containers to start"
+    sleep 60
+  fi
 
   echo "Running tests on containers"
   test_path_prefix="test/inspec/docker"
