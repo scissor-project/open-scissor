@@ -17,50 +17,53 @@ jobs:
       script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
     - stage: lint docker shell scripts
       script: test/test-docker-images.sh --docker-context-path=docker --only=lint-dockerfile
-    - stage:   build images
-      script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - stage: build images
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="zookeeper"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script:
+        - docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push scissorproject/openscissor
       env:
         - IMAGE_NAME="kafka"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="flume"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="semantics"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="logstash"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="logstash24"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="datasource24"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="d-streamon-master"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="d-streamon-slave"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prelude-manager-db"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prelude-manager"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="event-correlator"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="prewikka"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="kafka-idmef-converter"
-    - script:  docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="kafka-prelude-connector"
     - stage: run integration tests
