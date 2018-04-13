@@ -9,10 +9,6 @@ control "prewikka" do
     it { should eq 'fedora' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'prewikka.scissor-project.com' }
-  end
-
   packages = [
     'httpd',
     'iproute',

@@ -8,11 +8,7 @@ control "event-correlator" do
   describe os[:family] do
     it { should eq 'redhat' }
   end
-
-  describe sys_info do
-    its('hostname') { should eq 'event-correlator.scissor-project.com' }
-  end
-
+  
   packages = [
     'epel-release',
     'git',

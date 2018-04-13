@@ -5,10 +5,6 @@ control "prelude-manager-db" do
   title "prelude-manager-db container check"
   desc "This control checks if the container is compliant"
 
-  describe sys_info do
-    its('hostname') { should eq 'prelude-manager-db.scissor-project.com' }
-  end
-
   ipv4_bind_all = '0.0.0.0'
   ipv6_bind_all = '::'
   ports = [

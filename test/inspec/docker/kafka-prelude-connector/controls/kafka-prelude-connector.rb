@@ -9,10 +9,6 @@ control "kafka-prelude-connector" do
     it { should eq 'redhat' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'kafka-prelude-connector.scissor-project.com' }
-  end
-
   packages = [
     'epel-release',
     'iproute',
