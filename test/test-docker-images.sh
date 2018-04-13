@@ -86,7 +86,7 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
   echo "Waiting for containers to start"
   SCRIPT=$(readlink -f "$0")
   SCRIPT_PATH=$(dirname "$SCRIPT")
-  # shellcheck source=./wait-for-docker-init.sh
+  # shellcheck source=/dev/null
   . "$SCRIPT_PATH"/wait-for-docker-init.sh
   waitUntilServiceIsReady dStreamonMasterIsReady d-streamon-master "$docker_context_path"/"$docker_compose_file_name"
   waitUntilServiceIsReady dStreamonSlaveIsReady d-streamon-slave "$docker_context_path"/"$docker_compose_file_name"
