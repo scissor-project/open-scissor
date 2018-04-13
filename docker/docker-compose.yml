@@ -3,7 +3,6 @@ services:
   zookeeper:
     build: ./zookeeper
     container_name: scissorproject-zookeeper
-    domainname: scissor-project.com
     hostname: zookeeper
     image: scissorproject/openscissor:zookeeper-latest
     ports:
@@ -13,7 +12,6 @@ services:
     container_name: scissorproject-kafka
     depends_on:
       - zookeeper
-    domainname: scissor-project.com
     environment:
       ADVERTISED_HOST: kafka
       ADVERTISED_PORT: 9092
@@ -30,7 +28,6 @@ services:
     depends_on:
       - kafka
       - zookeeper
-    domainname: scissor-project.com
     hostname: flume
     image: scissorproject/openscissor:flume-latest
     ports:
@@ -46,7 +43,6 @@ services:
     container_name: scissorproject-semantics
     depends_on:
       - flume
-    domainname: scissor-project.com
     hostname: semantics
     image: scissorproject/openscissor:semantics-latest
     ports:
@@ -59,8 +55,6 @@ services:
     depends_on:
       - datasource24
       - flume
-      # - streamon
-    domainname: scissor-project.com
     hostname: logstash
     image: scissorproject/openscissor:logstash-latest
     ports:
@@ -71,7 +65,6 @@ services:
     container_name: scissorproject-logstash24
     depends_on:
       - flume
-    domainname: scissor-project.com
     hostname: logstash24
     image: scissorproject/openscissor:logstash24-latest
     ports:
@@ -82,13 +75,11 @@ services:
   datasource24:
     build: ./datasource24
     container_name: scissorproject-datasource24
-    domainname: scissor-project.com
     hostname: datasource24
     image: scissorproject/openscissor:datasource24-latest
   d-streamon-master:
     build: ./d-streamon-master
     container_name: scissorproject-d-streamon-master
-    domainname: scissor-project.com
     hostname: d-streamon-master
     image: scissorproject/openscissor:d-streamon-master-latest
     ports:
@@ -99,12 +90,10 @@ services:
   d-streamon-slave:
     build: ./d-streamon-slave
     container_name: scissorproject-d-streamon-slave
-    domainname: scissor-project.com
     hostname: d-streamon-slave
     image: scissorproject/openscissor:d-streamon-slave-latest
   prelude-manager-db:
     container_name: scissorproject-prelude-manager-db
-    domainname: scissor-project.com
     environment:
       MYSQL_ROOT_PASSWORD: root
     hostname: prelude-manager-db
@@ -116,7 +105,6 @@ services:
     container_name: scissorproject-prelude-manager
     depends_on:
       - prelude-manager-db
-    domainname: scissor-project.com
     hostname: prelude-manager
     image: scissorproject/openscissor:prelude-manager-latest
     ports:
@@ -127,7 +115,6 @@ services:
     container_name: scissorproject-event-correlator
     depends_on:
       - prelude-manager
-    domainname: scissor-project.com
     hostname: event-correlator
     image: scissorproject/openscissor:event-correlator-latest
   prewikka:
@@ -136,7 +123,6 @@ services:
     depends_on:
       - prelude-manager
       - prelude-manager-db
-    domainname: scissor-project.com
     hostname: prewikka
     image: scissorproject/openscissor:prewikka-latest
     ports:
@@ -146,7 +132,6 @@ services:
     container_name: scissorproject-kafka-idmef-converter
     depends_on:
       - kafka
-    domainname: scissor-project.com
     hostname: kafka-idmef-converter
     image: scissorproject/openscissor:kafka-idmef-converter-latest
   raw-data-analyzer:
@@ -163,6 +148,5 @@ services:
     depends_on:
       - kafka
       - prelude-manager
-    domainname: scissor-project.com
     hostname: kafka-prelude-connector
     image: scissorproject/openscissor:kafka-prelude-connector-latest
