@@ -81,10 +81,15 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
   else
     echo "Starting services"
     docker-compose --file "$docker_context_path"/"$docker_compose_file_name" up -d --force-recreate --no-build
-
-    echo "Waiting for containers to start"
-    sleep 60
   fi
+
+  echo "Waiting for containers to start"
+  SCRIPT=$(readlink -f "$0")
+  SCRIPT_PATH=$(dirname "$SCRIPT")
+  # shellcheck source=./wait-for-docker-init.sh
+  . "$SCRIPT_PATH"/wait-for-docker-init.sh
+  waitUntilServiceIsReady dStreamonMasterIsReady d-streamon-master "$docker_context_path"/"$docker_compose_file_name"
+  waitUntilServiceIsReady dStreamonSlaveIsReady d-streamon-slave "$docker_context_path"/"$docker_compose_file_name"
 
   echo "Running tests on containers"
   test_path_prefix="test/inspec/docker"
