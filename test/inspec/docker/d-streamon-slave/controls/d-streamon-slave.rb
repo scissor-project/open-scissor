@@ -9,10 +9,6 @@ control "d-streamon-slave" do
     it { should eq 'debian' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'd-streamon-slave.scissor-project.com' }
-  end
-
   packages = [
     'libboost-dev',
     'libpcap-dev',

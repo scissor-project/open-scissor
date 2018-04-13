@@ -9,10 +9,6 @@ control "kafka-idmef-converter" do
     it { should eq 'redhat' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'kafka-idmef-converter.scissor-project.com' }
-  end
-
   packages = [
     'epel-release',
     'iproute',

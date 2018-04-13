@@ -9,11 +9,7 @@ control "flume" do
     it { should eq 'debian' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'flume.scissor-project.com' }
-  end
-
-  packages = [
+ packages = [
     'default-jre',
     'flume-ng',
     'flume-ng-agent',

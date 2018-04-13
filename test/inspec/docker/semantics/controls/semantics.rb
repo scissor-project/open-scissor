@@ -9,10 +9,6 @@ control "semantics" do
     it { should eq 'debian' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'semantics.scissor-project.com' }
-  end
-
   packages = [
     'default-jre',
     'flume-ng',

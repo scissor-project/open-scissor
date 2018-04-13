@@ -9,10 +9,6 @@ control "prelude-manager" do
     it { should eq 'fedora' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'prelude-manager.scissor-project.com' }
-  end
-
   packages = [
     'iproute',
     'libpreludedb',

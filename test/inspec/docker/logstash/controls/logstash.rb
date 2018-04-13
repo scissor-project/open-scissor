@@ -9,10 +9,6 @@ control "logstash" do
     it { should eq 'debian' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'logstash.scissor-project.com' }
-  end
-
   packages = [
     'default-jre',
     'iproute2',

@@ -9,10 +9,6 @@ control "d-streamon-master" do
     it { should eq 'debian' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'd-streamon-master.scissor-project.com' }
-  end
-
   packages = [
     'ansible',
     'build-essential',

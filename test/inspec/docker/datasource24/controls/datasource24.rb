@@ -9,10 +9,6 @@ control "datasource24" do
     it { should eq 'debian' }
   end
 
-  describe sys_info do
-    its('hostname') { should eq 'datasource24.scissor-project.com' }
-  end
-
   packages = [
     'default-jre',
     'filebeat',
