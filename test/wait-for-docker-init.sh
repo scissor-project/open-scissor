@@ -3,7 +3,7 @@
 # source: https://www.marksayson.com/blog/wait-until-docker-containers-initialized/
 
 # Max query attempts before consider setup failed
-MAX_TRIES=5
+MAX_TRIES=20
 
 # Return true-like values if and only if logs
 # contain the expected "ready" line
