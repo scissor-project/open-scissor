@@ -10,10 +10,11 @@ test_docker_container () (
 
 set -e
 
-if ! TEMP="$(getopt -o vdm: --long docker-context-path:,only:,skip-build,skip-pull,skip-start -n 'test-docker-image' -- "$@")" ; then echo "Terminating..." >&2 ; exit 1 ; fi
+if ! TEMP="$(getopt -o vdm: --long docker-context-path:,max_tries:,only:,skip-build,skip-pull,skip-start -n 'test-docker-image' -- "$@")" ; then echo "Terminating..." >&2 ; exit 1 ; fi
 eval set -- "$TEMP"
 
 docker_context_path=
+max_tries=50
 only=
 skip_build=false
 skip_pull=false
@@ -23,6 +24,7 @@ while true; do
   case "$1" in
     -b | --skip-build ) skip_build=true; shift 1 ;;
     -c | --docker-context-path ) docker_context_path="$2"; shift 2 ;;
+    -m | --max-tries ) max_tries="$2"; shift 2 ;;
     -o | --only ) only="$2"; shift 2 ;;
     -p | --skip-pull ) skip_pull=true; shift 1 ;;
     -s | --skip-start ) skip_start=true; shift 1 ;;
@@ -88,8 +90,8 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
   SCRIPT_PATH=$(dirname "$SCRIPT")
   # shellcheck source=/dev/null
   . "$SCRIPT_PATH"/wait-for-docker-init.sh
-  waitUntilServiceIsReady dStreamonMasterIsReady d-streamon-master "$docker_context_path"/"$docker_compose_file_name"
-  waitUntilServiceIsReady dStreamonSlaveIsReady d-streamon-slave "$docker_context_path"/"$docker_compose_file_name"
+  waitUntilServiceIsReady dStreamonMasterIsReady d-streamon-master "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady dStreamonSlaveIsReady d-streamon-slave "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
 
   echo "Running tests on containers"
   test_path_prefix="test/inspec/docker"

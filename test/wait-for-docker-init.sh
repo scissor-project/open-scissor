@@ -2,8 +2,6 @@
 
 # source: https://www.marksayson.com/blog/wait-until-docker-containers-initialized/
 
-# Max query attempts before consider setup failed
-MAX_TRIES=20
 
 # Return true-like values if and only if logs
 # contain the expected "ready" line
@@ -20,6 +18,8 @@ dStreamonSlaveIsReady () {
 
 waitUntilServiceIsReady () {
   attempt=1
+  # Max query attempts before consider setup failed
+  MAX_TRIES="$4"
   while [ "$attempt" -le "$MAX_TRIES" ]; do
     if "$@"; then
       echo "$2 container is up!"
