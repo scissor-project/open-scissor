@@ -81,6 +81,7 @@ jobs:
       env:
         - IMAGE_NAME="kafka-prelude-connector"
     - stage: run integration tests
+      after_failure: docker-compose --file docker/docker-compose.yml logs
       before_install:
         - gem install inspec -v 2.1.30
         - sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
