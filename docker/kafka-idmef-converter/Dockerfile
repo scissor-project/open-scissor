@@ -38,7 +38,7 @@ RUN \
   && yum install -y \
     hostname-3.13-3.el7 \
     iproute-3.10.0-87.el7 \
-    kafka-idmef-converter-0.2.4 \
+    kafka-idmef-converter-0.2.5 \
     net-tools-2.0-0.22.20131004git.el7 \
     nmap-ncat-6.40-7.el7 \
     procps-ng-3.3.10-16.el7 \
