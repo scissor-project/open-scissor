@@ -45,6 +45,7 @@ RUN \
     prelude-tools-3.1.0-1.el7 \
     procps-ng-3.3.10-16.el7 \
     python-libprelude-3.1.0-1.el7 \
+	python2-pip-8.1.2-5.el7 \
     python-setuptools-0.9.8-7.el7 \
     wget-1.14-15.el7_4.1 \
   && yum clean all \
@@ -63,6 +64,7 @@ WORKDIR /opt
 RUN git clone https://github.com/scissor-project/prelude-correlator.git
 
 WORKDIR /opt/prelude-correlator
+RUN pip install setuptools==39.0.1 --upgrade
 RUN python setup.py install
 
 ENV PRELUDE_PROFILE prelude-correlator
