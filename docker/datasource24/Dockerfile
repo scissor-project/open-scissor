@@ -20,7 +20,7 @@ RUN \
     libapr1=1.5.2-3 \
     libapr1-dev=1.5.2-3 \
     libdbi1=0.9.0-4 \
-    libperl5.22=5.22.1-9ubuntu0.2 \
+    libperl5.22=5.22.1-9ubuntu0.3 \
     libzmq1=2.2.0+dfsg-7 \
     libzmq-dev=2.2.0+dfsg-7 \
     python-zmq=15.2.0-0ubuntu4 \
