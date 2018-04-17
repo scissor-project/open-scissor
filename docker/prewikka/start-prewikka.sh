@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Wait for mariadb to start
-sleep 30
+echo "Wait for mariadb to start"
+while ! nc prelude-manager-db 3306 </dev/null; do echo "Wating 10 secs..."; sleep 10; done
 
 mysql -u root --password="root" -h"prelude-manager-db" -P"3306" << EOF
 DELETE FROM mysql.user WHERE User='';
