@@ -83,7 +83,7 @@ jobs:
     - stage: run integration tests
       after_failure: docker-compose --file docker/docker-compose.yml logs
       before_install:
-        - gem install inspec -v 2.1.30
+        - gem install inspec -v 2.1.43
         - sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
       script: test/test-docker-images.sh --docker-context-path=./docker --only=integration --skip-build
 
