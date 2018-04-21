@@ -49,11 +49,11 @@ RUN \
 	  python2-pip-8.1.2-6.el7 \
     python-setuptools-0.9.8-7.el7 \
     wget-1.14-15.el7_4.1 \
-  && wget https://nmap.org/dist/$NETCAT_FILE_NAME \
-  && yum install -y $NETCAT_FILE_NAME \
+  && wget https://nmap.org/dist/"$NETCAT_FILE_NAME" \
+  && yum install -y "$NETCAT_FILE_NAME" \
   && yum clean all \
 	&& rm -rf /var/cache/yum \
-  && rm $NETCAT_FILE_NAME
+  && rm "$NETCAT_FILE_NAME"
 
 ENV SCISSOR_LOG_DIR /var/log/scissor
 RUN mkdir -p "$SCISSOR_LOG_DIR"
