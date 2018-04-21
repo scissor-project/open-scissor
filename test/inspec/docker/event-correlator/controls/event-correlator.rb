@@ -8,14 +8,14 @@ control "event-correlator" do
   describe os[:family] do
     it { should eq 'redhat' }
   end
-  
+
   packages = [
     'epel-release',
     'git',
     'iproute',
     'libprelude-devel',
     'net-tools',
-    'nmap-ncat',
+    'ncat',
     'prelude-tools',
     'python-setuptools',
     'wget'
@@ -29,6 +29,10 @@ control "event-correlator" do
 
   describe directory('/opt/prelude-correlator') do
     it { should exist }
+  end
+
+  describe os_env('NETCAT_FILE_NAME') do
+    its('content') { should eq 'ncat-7.70-1.x86_64.rpm' }
   end
 
   describe os_env('PRELUDE_PROFILE') do

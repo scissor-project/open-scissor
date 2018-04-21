@@ -14,8 +14,9 @@ control "kafka-idmef-converter" do
     'iproute',
     'kafka-idmef-converter',
     'net-tools',
-    'nmap-ncat',
-    'python2-pip'
+    'ncat',
+    'python2-pip',
+    'wget'
   ]
 
   packages.each do |item|
@@ -56,6 +57,10 @@ control "kafka-idmef-converter" do
 
   describe os_env('PASSWORD') do
     its('content') { should eq '48c9AyFfU8' }
+  end
+
+  describe os_env('NETCAT_FILE_NAME') do
+    its('content') { should eq 'ncat-7.70-1.x86_64.rpm' }
   end
 
   prelude_gpg_key_contents = '/root/RPM-GPG-KEY-Prelude-IDS'

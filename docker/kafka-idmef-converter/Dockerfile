@@ -32,6 +32,8 @@ RUN rpm --import "$PRELUDE_GPG_KEY"
 COPY yum-config/epel.repo /etc/yum.repos.d/epel.repo
 COPY yum-config/scissor.repo /etc/yum.repos.d/scissor.repo
 
+ENV NETCAT_FILE_NAME ncat-7.70-1.x86_64.rpm
+
 RUN \
   yum check-update \
   ; yum install -y epel-release-7-9 \
@@ -40,11 +42,14 @@ RUN \
     iproute-3.10.0-87.el7 \
     kafka-idmef-converter-0.2.5 \
     net-tools-2.0-0.22.20131004git.el7 \
-    nmap-ncat-6.40-7.el7 \
     procps-ng-3.3.10-16.el7 \
     python2-pip-8.1.2-6.el7 \
+    wget-1.14-15.el7_4.1 \
+  && wget https://nmap.org/dist/$NETCAT_FILE_NAME \
+  && yum install -y $NETCAT_FILE_NAME \
   && yum clean all \
-	&& rm -rf /var/cache/yum
+	&& rm -rf /var/cache/yum \
+  && rm $NETCAT_FILE_NAME
 
 ENV SCISSOR_LOG_DIR /var/log/scissor
 RUN mkdir -p "$SCISSOR_LOG_DIR"
