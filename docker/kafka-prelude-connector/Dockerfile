@@ -43,7 +43,7 @@ RUN \
     nmap-ncat-6.40-7.el7 \
     prelude-tools-3.1.0-1.el7 \
     procps-ng-3.3.10-16.el7 \
-    python2-pip-8.1.2-5.el7 \
+    python2-pip-8.1.2-6.el7 \
   && yum clean all \
 	&& rm -rf /var/cache/yum
 
