@@ -2,7 +2,7 @@
 
 # Wait for prelude-registrator to start
 echo "Waiting for prelude-registrator to be ready on port 5553"
-while ! nc prelude-manager 5553 </dev/null; do echo "Wating 10 secs..."; sleep 10; done
+while ! ncat -vvz prelude-manager 5553; do echo "Wating 10 secs..."; sleep 10; done
 
 prelude-admin register "$PRELUDE_PROFILE" "idmef:rw" prelude-manager --uid prelude-correlator --gid prelude --passwd "password"
 

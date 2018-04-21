@@ -14,9 +14,10 @@ control "kafka-prelude-connector" do
     'iproute',
     'kafka-prelude-connector',
     'net-tools',
-    'nmap-ncat',
+    'ncat',
     'prelude-tools',
-    'python2-pip'
+    'python2-pip',
+    'wget'
   ]
 
   packages.each do |item|
