@@ -2,6 +2,9 @@
 
 flume_configuration_path="$FLUME_CONFIG_PATH/conf"
 
+echo "Waiting for kafka"
+while ! nc -vvz kafka 9092; do echo "Wating 10 secs..."; sleep 10; done
+
 echo "Starting flume agents. Configuration path: $flume_configuration_path, output path: $SCISSOR_LOG_DIR"
 flume-ng agent -c "$flume_configuration_path"/ingest/ -f "$flume_configuration_path"/ingest/ingest.conf -n ingest > "$SCISSOR_LOG_DIR"/ingest.out 2>&1 &
 flume-ng agent -c "$flume_configuration_path"/filter/ -f "$flume_configuration_path"/filter/filter.conf -n filter > "$SCISSOR_LOG_DIR"/filter.out 2>&1 &
