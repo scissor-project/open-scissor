@@ -16,6 +16,10 @@ dStreamonSlaveIsReady () {
   docker-compose --file "$2" logs "$1" | grep -q "...done."
 }
 
+preludeManagerIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "Created profile 'prelude-manager'"
+}
+
 waitUntilServiceIsReady () {
   attempt=1
   # Max query attempts before consider setup failed

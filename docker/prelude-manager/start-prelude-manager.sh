@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Wait for mariadb to start"
+echo "Wait for prelude-manager-db to start"
 while ! nc -vvz prelude-manager-db 3306; do echo "Wating 10 secs..."; sleep 10; done
 
 mysql -u root --password="root" -h"prelude-manager-db" -P"3306" << EOF
