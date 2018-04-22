@@ -77,7 +77,8 @@ jobs:
       script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="raw-data-analyzer"
-    - script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
+    - after_success: test/tag-push-docker.sh
+      script: docker-compose --file docker/docker-compose.yml build $IMAGE_NAME
       env:
         - IMAGE_NAME="kafka-prelude-connector"
     - stage: run integration tests

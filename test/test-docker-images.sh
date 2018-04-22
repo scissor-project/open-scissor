@@ -92,6 +92,7 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
   . "$SCRIPT_PATH"/wait-for-docker-init.sh
   waitUntilServiceIsReady dStreamonMasterIsReady d-streamon-master "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
   waitUntilServiceIsReady dStreamonSlaveIsReady d-streamon-slave "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady preludeManagerIsReady prelude-manager "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
 
   echo "Running tests on containers"
   test_path_prefix="test/inspec/docker"
