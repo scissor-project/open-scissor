@@ -90,9 +90,21 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
   SCRIPT_PATH=$(dirname "$SCRIPT")
   # shellcheck source=/dev/null
   . "$SCRIPT_PATH"/wait-for-docker-init.sh
+  waitUntilServiceIsReady datasource24IsReady datasource24 "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
   waitUntilServiceIsReady dStreamonMasterIsReady d-streamon-master "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
   waitUntilServiceIsReady dStreamonSlaveIsReady d-streamon-slave "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady eventCorrelatorIsReady event-correlator "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady flumeIsReady flume "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady kafkaIdmefConverterReady kafka-idmef-converter "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady kafkaIsReady kafka "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady kafkaPreludeConnectorIsReady kafka-prelude-connector "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady logstashIsReady logstash "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady logstashIsReady logstash24 "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
   waitUntilServiceIsReady preludeManagerIsReady prelude-manager "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady prewikkaIsReady prewikka "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady rawDataAnalyzerIsReady raw-data-analyzer "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady semanticsIsReady semantics "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
+  waitUntilServiceIsReady zookeeperIsReady zookeeper "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
 
   echo "Running tests on containers"
   test_path_prefix="test/inspec/docker"
