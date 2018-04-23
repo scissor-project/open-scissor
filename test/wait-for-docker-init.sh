@@ -63,7 +63,7 @@ prewikka_is_ready () {
 }
 
 raw_data_analyzer_is_ready () {
-  docker-compose --file "$2" logs "$1" | grep -q "Writing to topic IDMEF"
+  docker-compose --file "$2" logs "$1" | grep -q "Ncat: Connected"
 }
 
 semantics_is_ready () {
