@@ -5,6 +5,11 @@
 
 # Return true-like values if and only if logs
 # contain the expected "ready" line
+
+datasource24IsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "...done."
+}
+
 dStreamonMasterIsReady () {
   docker-compose --file "$2" logs "$1" | grep -q "Zmq Proxy ready" \
   && docker-compose --file "$2" logs "$1" | grep -q "D-streamon listening on port 9999" \
@@ -16,9 +21,53 @@ dStreamonSlaveIsReady () {
   docker-compose --file "$2" logs "$1" | grep -q "...done."
 }
 
+eventCorrelatorIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "Successful registration to prelude-manager"
+}
+
+flumeIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "New I/O server boss" \
+  && docker-compose --file "$2" logs "$1" | grep -q "New I/O worker"
+}
+
+kafkaIdmefConverterReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "Ncat: Connected to"
+}
+
+kafkaIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "Auto creation of topic"
+}
+
+kafkaPreludeConnectorIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "Successful registration to prelude-manager"
+}
+
+logstashIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "logstash started."
+}
+
 preludeManagerIsReady () {
   docker-compose --file "$2" logs "$1" | grep -q "Created profile 'prelude-manager'"
 }
+
+prewikkaIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "resuming normal operations"
+}
+
+rawDataAnalyzerIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "Writing to topic IDMEF"
+}
+
+semanticsIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "enrich_semantics.conf" \
+  && docker-compose --file "$2" logs "$1" | grep -q "xform_semantics.conf"
+}
+
+zookeeperIsReady () {
+  docker-compose --file "$2" logs "$1" | grep -q "State change: CONNECTED"
+}
+
+
 
 waitUntilServiceIsReady () {
   attempt=1

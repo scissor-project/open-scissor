@@ -1,5 +1,10 @@
 #!/bin/sh
 
+echo "Waiting for external dependencies to start"
+while ! nc -vvz logstash 8892; do echo "Wating 10 secs..."; sleep 10; done
+while ! nc -vvz kafka 9092; do echo "Wating 10 secs..."; sleep 10; done
+while ! nc -vvz zookeeper 2181; do echo "Wating 10 secs..."; sleep 10; done
+
 systemctl enable filebeat.service
 service filebeat restart
 
