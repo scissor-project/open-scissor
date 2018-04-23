@@ -85,26 +85,10 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
     docker-compose --file "$docker_context_path"/"$docker_compose_file_name" up -d --force-recreate --no-build
   fi
 
-  echo "Waiting for containers to start"
   SCRIPT=$(readlink -f "$0")
   SCRIPT_PATH=$(dirname "$SCRIPT")
   # shellcheck source=/dev/null
   . "$SCRIPT_PATH"/wait-for-docker-init.sh
-  waitUntilServiceIsReady datasource24IsReady datasource24 "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady dStreamonMasterIsReady d-streamon-master "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady dStreamonSlaveIsReady d-streamon-slave "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady eventCorrelatorIsReady event-correlator "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady flumeIsReady flume "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady kafkaIdmefConverterReady kafka-idmef-converter "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady kafkaIsReady kafka "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady kafkaPreludeConnectorIsReady kafka-prelude-connector "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady logstashIsReady logstash "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady logstashIsReady logstash24 "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady preludeManagerIsReady prelude-manager "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady prewikkaIsReady prewikka "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady rawDataAnalyzerIsReady raw-data-analyzer "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady semanticsIsReady semantics "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
-  waitUntilServiceIsReady zookeeperIsReady zookeeper "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
 
   echo "Running tests on containers"
   test_path_prefix="test/inspec/docker"
@@ -112,6 +96,9 @@ if [ "$only" = "integration" ] || [ -z "$only" ]; then
     container_full_name="$(docker inspect --format='{{.Name}}' "$container_id" | tr --delete "/")"
     container_name_prefix="scissorproject-"
     container_name="${container_full_name#"$container_name_prefix"}"
+    wait_method_name="$(echo "$container_name" | tr - _)"_is_ready
+    echo "Waiting for $container_name to start"
+    wait_until_service_is_ready "$wait_method_name" "$container_name" "$docker_context_path"/"$docker_compose_file_name" "$max_tries"
     test_docker_container "$container_full_name" "$container_name" "$test_path_prefix/$container_name"
   done
 

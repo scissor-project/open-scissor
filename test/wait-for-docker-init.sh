@@ -6,70 +6,76 @@
 # Return true-like values if and only if logs
 # contain the expected "ready" line
 
-datasource24IsReady () {
+datasource24_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "...done."
 }
 
-dStreamonMasterIsReady () {
+d_streamon_master_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "Zmq Proxy ready" \
   && docker-compose --file "$2" logs "$1" | grep -q "D-streamon listening on port 9999" \
   && docker-compose --file "$2" logs "$1" | grep -q "Finished 'watch' after" \
   && docker-compose --file "$2" logs "$1" | grep -q "Running Swagger Editor API server. You can make GET and PUT calls to"
 }
 
-dStreamonSlaveIsReady () {
+d_streamon_slave_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "...done."
 }
 
-eventCorrelatorIsReady () {
+event_correlator_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "Successful registration to prelude-manager"
 }
 
-flumeIsReady () {
+flume_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "New I/O server boss" \
   && docker-compose --file "$2" logs "$1" | grep -q "New I/O worker"
 }
 
-kafkaIdmefConverterReady () {
+kafka_idmef_converter_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "Ncat: Connected to"
 }
 
-kafkaIsReady () {
+kafka_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "Auto creation of topic"
 }
 
-kafkaPreludeConnectorIsReady () {
+kafka_prelude_connector_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "Successful registration to prelude-manager"
 }
 
-logstashIsReady () {
+logstash_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "logstash started."
 }
 
-preludeManagerIsReady () {
+logstash24_is_ready () {
+  docker-compose --file "$2" logs "$1" | grep -q "logstash started."
+}
+
+prelude_manager_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "Created profile 'prelude-manager'"
 }
 
-prewikkaIsReady () {
+prelude_manager_db_is_ready () {
+  docker-compose --file "$2" logs "$1" | grep -q "mysqld: ready for connections"
+}
+
+prewikka_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "resuming normal operations"
 }
 
-rawDataAnalyzerIsReady () {
+raw_data_analyzer_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "Writing to topic IDMEF"
 }
 
-semanticsIsReady () {
+semantics_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "enrich_semantics.conf" \
   && docker-compose --file "$2" logs "$1" | grep -q "xform_semantics.conf"
 }
 
-zookeeperIsReady () {
+zookeeper_is_ready () {
   docker-compose --file "$2" logs "$1" | grep -q "State change: CONNECTED"
 }
 
-
-
-waitUntilServiceIsReady () {
+wait_until_service_is_ready () {
   attempt=1
   # Max query attempts before consider setup failed
   MAX_TRIES="$4"
