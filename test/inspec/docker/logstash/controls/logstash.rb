@@ -25,16 +25,6 @@ control "logstash" do
     end
   end
 
-  describe host('d-streamon-master', port: '5570', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('flume', port: '44444', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
   describe file('/etc/apt/sources.list') do
     it { should exist }
     it { should be_file }

@@ -139,16 +139,6 @@ control "kafka-prelude-connector" do
     its('entries.length') { should eq 1 }
   end
 
-  describe host('kafka', port: '9092', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('prelude-manager', port: '5553', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
   describe user('connector') do
     it { should exist }
     its('groups') { should eq ['connector', 'prelude']}

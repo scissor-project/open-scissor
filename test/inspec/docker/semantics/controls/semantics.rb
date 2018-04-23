@@ -25,16 +25,6 @@ control "semantics" do
     end
   end
 
-  describe host('flume', port: '10000', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('flume', port: '20000', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
   describe file('/etc/apt/sources.list.d/cloudera.list') do
     it { should exist }
     it { should be_file }

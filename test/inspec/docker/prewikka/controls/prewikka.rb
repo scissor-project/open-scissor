@@ -85,11 +85,6 @@ control "prewikka" do
     its('home') { should eq '/home/prewikka' }
   end
 
-  describe host('prelude-manager-db', port: '3306', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
   ipv4_bind_all = '0.0.0.0'
   ipv4_localhost = '127.0.0.1'
 

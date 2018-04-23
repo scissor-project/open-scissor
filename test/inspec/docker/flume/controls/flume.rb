@@ -25,26 +25,6 @@ control "flume" do
     end
   end
 
-  describe host('kafka', port: '9092', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('zookeeper', port: '2181', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('semantics', port: '20000', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('semantics', port: '30000', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
   describe file('/etc/apt/sources.list.d/cloudera.list') do
     it { should exist }
     it { should be_file }

@@ -132,11 +132,6 @@ control "event-correlator" do
     its('entries.length') { should eq 1 }
   end
 
-  # describe host('prelude-manager', port: '5553', protocol: 'tcp') do
-  #   it { should be_reachable }
-  #   it { should be_resolvable }
-  # end
-
   describe group('prelude') do
     it { should exist }
   end

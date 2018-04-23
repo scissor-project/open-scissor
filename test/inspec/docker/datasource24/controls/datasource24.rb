@@ -131,19 +131,4 @@ control "datasource24" do
     it { should exist }
     its('entries.length') { should eq 1 }
   end
-
-  describe host('logstash', port: '8892', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('kafka', port: '9092', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
-  describe host('zookeeper', port: '2181', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
 end

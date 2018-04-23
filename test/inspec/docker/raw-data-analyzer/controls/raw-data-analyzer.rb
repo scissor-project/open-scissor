@@ -140,9 +140,4 @@ control "raw-data-analyzer" do
     it { should exist }
     its('entries.length') { should eq 1 }
   end
-
-  describe host('kafka', port: '9092', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
 end
