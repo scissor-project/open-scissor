@@ -18,7 +18,7 @@ The goal of this project is to have a fully functional virtualized environment u
 
 1. Install the dependencies
 1. Clone this repository
-1. Run `docker-compose up` from the cloned repository directory
+1. Run `docker-compose up` from the `docker` directory
 
 # Components
 
@@ -81,8 +81,8 @@ We used a virtual machine managed with Vagrant to bootstrap the development envi
 
 #### Dependencies
 
-- [Vagrant](https://www.vagrantup.com) 2.0.1+
-- [VirtualBox](https://www.virtualbox.org/) 5.1.30+
+- [Vagrant](https://www.vagrantup.com) 2.0.4+
+- [VirtualBox](https://www.virtualbox.org/) 5.2.8+
 
 #### Running the Development Box
 Run `vagrant up` from the root of the project. Vagrant will download and run a VirtualBox VM with all the needed development tools configured and ready to be used. See https://github.com/ferrarimarco/open-development-environment-devbox for more info.
@@ -91,12 +91,14 @@ Run `vagrant up` from the root of the project. Vagrant will download and run a V
 
 If you prefer a manual setup to the development box described above, here are the necessary dependencies:
 - Runtime dependencies listed above
-- [InSpec](https://www.inspec.io) 1.50.1+
+- [InSpec](https://www.inspec.io) 2.1.43+
 
 ### Running the Test Suite
-Run `test/test-docker-images.sh --docker-context-path=docker/` from the root of the project. This script will:
+Run `test/test-docker-images.sh --only=integration --docker-context-path=docker --skip-build --skip-pull --skip-start` from the root of the project. This script will:
 
-1. Lint Dockerfiles and shell scripts
-1. Build each image
-1. Start all the containers
-1. Test all the containers for compliance
+1. Lint Dockerfiles (to run just this step use the `--only=lint-dockerfile` switch)
+1. Lint shell scripts (to run just this step use the `--only=lint-shell` switch)
+1. Run integration tests (to run just this step use the `--only=integration` switch)
+  1. Build each image (skippable with `--skip-build` switch) OR pull each image from Docker Hub (useful for CI, skippable with `--skip-pull` switch)
+  1. (Re)start all the containers (skippable with `--skip-start` switch)
+  1. Test all the containers for compliance
