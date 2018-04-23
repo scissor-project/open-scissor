@@ -4,20 +4,14 @@ Have you read OpenSCISSOR Code of Conduct? By filing an Issue, you are expected 
 
 -->
 
-### Prerequisites
-
-* [ ] Put an X between the brackets on this line if you have done all of the following:
-    * Checked that your issue isn't already filed: https://github.com/scissor-project/open-scissor/issues
-
 ### Description
 
 [Description of the issue]
 
 ### Host Environment
 - Host operating system and version:
-- Vagrant version (output of `vagrant --version`):
-- Hypervisor version:
 - Docker version (output of `docker --version`):
+- Docker Compose version (output of `docker-compose --version`):
 
 ### Output
 
