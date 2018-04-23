@@ -73,11 +73,6 @@ control "kafka" do
     its('content') { should eq zookeeper_host_port }
   end
 
-  describe host(zookeeper_host, port: zookeeper_port, protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
   describe file('/opt/kafka/config/server.properties') do
     it { should exist }
     it { should be_file }

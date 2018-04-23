@@ -91,11 +91,6 @@ control "prelude-manager" do
     its('entries.length') { should eq 1 }
   end
 
-  describe host('prelude-manager-db', port: '3306', protocol: 'tcp') do
-    it { should be_reachable }
-    it { should be_resolvable }
-  end
-
   ipv4_bind_all = '0.0.0.0'
   ipv4_localhost = '127.0.0.1'
 
